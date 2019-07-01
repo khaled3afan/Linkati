@@ -94,7 +94,7 @@
 								</div>
 								<input id="username" type="text" placeholder="{{ __('@username') }}"
 								       class="form-control @error('username') is-invalid @enderror" name="username"
-								       value="{{ old('name') }}" required autocomplete="name">
+								       value="{{ old('username') }}" required autocomplete="name">
 							</div>
 
 							@error('username')

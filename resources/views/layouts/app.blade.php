@@ -30,6 +30,28 @@
 			</button>
 
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				@auth
+					<ul class="navbar-nav ml-auto">
+						<li class="nav-item dropdown">
+							<a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+							   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+								{{ __('Profiles') }}
+								<span class="caret"></span>
+							</a>
+
+							<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+								@foreach(auth()->user()->profiles as $profile)
+									<a class="dropdown-item" href="{{ route('profiles.edit', $profile) }}">
+										{{ $profile->name }}
+									</a>
+								@endforeach
+								<a class="dropdown-item bg-light" href="{{ route('profiles.edit', $profile) }}">
+									{{ __('New Profile') }}
+								</a>
+							</div>
+						</li>
+					</ul>
+				@endauth
 				<ul class="navbar-nav mr-auto">
 					<!-- Authentication Links -->
 					@guest
