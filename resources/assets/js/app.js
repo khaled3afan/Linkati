@@ -19,7 +19,17 @@ window.Vue = require('vue');
 // const files = require.context('./', true, /\.vue$/i);
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default));
 
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+// Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+
+import Toasted from 'vue-toasted';
+
+Vue.use(Toasted);
+Vue.toasted.register('error', message => message, {
+    position: 'bottom-center',
+    duration: 1000
+});
+
+Vue.component('edit-profile', require('./components/profile/edit.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

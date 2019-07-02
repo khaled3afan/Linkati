@@ -70,8 +70,8 @@
 
 							@error('email')
 							<span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
+                                    <strong>{{ $message }}</strong>
+                                </span>
 							@enderror
 						</div>
 
@@ -94,13 +94,13 @@
 								</div>
 								<input id="username" type="text" placeholder="{{ __('@username') }}"
 								       class="form-control @error('username') is-invalid @enderror" name="username"
-								       value="{{ old('username') }}" required autocomplete="name">
+								       value="{{ old('username') }}" required autocomplete="username">
 							</div>
 
 							@error('username')
 							<span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
+                                    <strong>{{ $message }}</strong>
+                                </span>
 							@enderror
 						</div>
 					</div>

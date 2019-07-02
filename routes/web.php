@@ -11,6 +11,8 @@
 |
 */
 
+use Illuminate\Support\Facades\Route;
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -18,4 +20,16 @@ Route::get('/', function () {
 Auth::routes(['verify' => true]);
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('{profile}', 'HomeController@index')->name('profiles.edit');
+Route::get('{profile}', 'ProfileController@index')->name('profiles.edit');
+
+
+Route::middleware('auth')->group(function () {
+    // view
+    Route::get('{profile}', 'ProfileController@show')->name('profiles.show');
+    Route::get('{profile}/edit', 'ProfileController@edit')->name('profiles.edit');
+
+    // api
+    Route::group(['prefix' => 'api/profile'], function () {
+        Route::put('/update', 'ProfileController@update');
+    });
+});

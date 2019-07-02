@@ -30,7 +30,8 @@ class ProfileController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -41,18 +42,25 @@ class ProfileController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Profile  $profile
+     * @param  \App\Profile $profile
+     *
      * @return \Illuminate\Http\Response
      */
     public function show(Profile $profile)
     {
-        //
+        if ($profile->user_id == auth()->id()) {
+            return view('profiles.edit', compact('profile'));
+//            return redirect()->route('profiles.edit', $profile);
+        }
+
+        return view('profiles.show', compact('profile'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Profile  $profile
+     * @param  \App\Profile $profile
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit(Profile $profile)
@@ -63,19 +71,30 @@ class ProfileController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Profile  $profile
+     * @param  \Illuminate\Http\Request $request
+     * @param  \App\Profile             $profile
+     *
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Profile $profile)
+    public function update(Request $request)
     {
-        //
+        $this->validate($request, [
+            'name' => ['required', 'string', 'max:255'],
+//            'email' => ['required', 'email', 'max:255', 'unique:users,email,' . $request->user()->id],
+        ]);
+
+        $profile = $request->user()->profiles()->where('id', $request->id)->first();
+        $profile->name = $request->name;
+        $profile->save();
+
+        return $profile;
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Profile  $profile
+     * @param  \App\Profile $profile
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy(Profile $profile)

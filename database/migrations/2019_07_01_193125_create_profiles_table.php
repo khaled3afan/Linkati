@@ -16,9 +16,13 @@ class CreateProfilesTable extends Migration
         Schema::create('profiles', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedInteger('user_id');
-            $table->string('name');
-            $table->string('username');
+            $table->string('name')->nullable();
+            $table->string('username')->unique()->index();
+            $table->string('location')->nullable();
+            $table->text('bio')->nullable();
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
