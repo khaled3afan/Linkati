@@ -72,9 +72,9 @@ class ProfileController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request $request
-     * @param  \App\Profile             $profile
      *
      * @return \Illuminate\Http\Response
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function update(Request $request)
     {
@@ -83,7 +83,12 @@ class ProfileController extends Controller
 //            'email' => ['required', 'email', 'max:255', 'unique:users,email,' . $request->user()->id],
         ]);
 
-        $profile = $request->user()->profiles()->where('id', $request->id)->first();
+        $profile = $request->user()->profiles()->where('id', $request->id)->firstOrFail();
+
+        if ( ! empty($request->avatar)) {
+            $profile->addMediaFromBase64($request->avatar)->toMediaCollection('avatar');
+        }
+
         $profile->name = $request->name;
         $profile->save();
 

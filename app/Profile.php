@@ -23,6 +23,10 @@ class Profile extends Model implements HasMedia
         'username',
     ];
 
+    protected $appends = [
+        'avatar_url',
+    ];
+
     /**
      * Get the route key for the model.
      *

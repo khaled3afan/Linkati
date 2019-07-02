@@ -25,6 +25,10 @@
 	        'domain' => url('/'),
 	        'auth' => auth()->user(),
         ]) !!};
+
+		@if(isset($profile))
+            window.Linkati.profile = {!! $profile !!};
+		@endif
 	</script>
 </head>
 <body class="text-right">

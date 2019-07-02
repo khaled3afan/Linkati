@@ -34,7 +34,7 @@
   --breakpoint-md: 768px;
   --breakpoint-lg: 992px;
   --breakpoint-xl: 1200px;
-  --font-family-sans-serif: "Graphik Arabic", "GraphikArabic", sans-serif;
+  --font-family-sans-serif: "GraphikArabic", sans-serif;
   --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 
@@ -66,7 +66,7 @@ section {
 
 body {
   margin: 0;
-  font-family: "Graphik Arabic", "GraphikArabic", sans-serif;
+  font-family: "GraphikArabic", sans-serif;
   font-size: 0.9rem;
   font-weight: 400;
   line-height: 1.6;
@@ -6460,7 +6460,7 @@ a.close.disabled {
   z-index: 1070;
   display: block;
   margin: 0;
-  font-family: "Graphik Arabic", "GraphikArabic", sans-serif;
+  font-family: "GraphikArabic", sans-serif;
   font-style: normal;
   font-weight: 400;
   line-height: 1.6;
@@ -6585,7 +6585,7 @@ a.close.disabled {
   z-index: 1060;
   display: block;
   max-width: 276px;
-  font-family: "Graphik Arabic", "GraphikArabic", sans-serif;
+  font-family: "GraphikArabic", sans-serif;
   font-style: normal;
   font-weight: 400;
   line-height: 1.6;
@@ -11100,5 +11100,33 @@ a.text-dark:focus {
     color: inherit;
     border-color: #dee2e6;
   }
+}
+
+@font-face {
+  font-family: "GraphikArabic";
+  src: url(/fonts/GraphikArabic-Bold.eot?39dd7bfc9bd0104293726743b46fc321) format("embedded-opentype"), url(/fonts/GraphikArabic-Bold.otf?b7d450aa1309feb90c22724c464ef3fd) format("opentype"), url(/fonts/GraphikArabic-Bold.woff?e3e577a05710cf2863d136b64ff856e2) format("woff"), url(/fonts/GraphikArabic-Bold.ttf?e3ff469859e9524a40b112c036b650e2) format("truetype"), url(/fonts/GraphikArabic-Bold.svg?267d356e0d7d007217a4bccb53b8d42a) format("svg");
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "GraphikArabic";
+  src: url(/fonts/GraphikArabic-SemiBold.eot?97598b9a566c3650c313e99559a9b123) format("embedded-opentype"), url(/fonts/GraphikArabic-SemiBold.otf?6e1f9b6020e7faa3bdd6cd85c01b5d0c) format("opentype"), url(/fonts/GraphikArabic-SemiBold.woff?3370ca3c8c15a6beaf0c6fb980d8a8e3) format("woff"), url(/fonts/GraphikArabic-SemiBold.ttf?df58a2f2d1fcbcc57aa90cfc2564aebe) format("truetype"), url(/fonts/GraphikArabic-SemiBold.svg?282f54c46b4f8957611024540deaa66e) format("svg");
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "GraphikArabic";
+  src: url(/fonts/GraphikArabic-Medium.eot?58b897610b95e9888b20516daf691a94) format("embedded-opentype"), url(/fonts/GraphikArabic-Medium.otf?98e53ee02d534ac0d26194ee3af484ff) format("opentype"), url(/fonts/GraphikArabic-Medium.woff?09c3d764fc430a441cc3c60e06231836) format("woff"), url(/fonts/GraphikArabic-Medium.ttf?0eb5582a46e597d20ee8fb21ddde039d) format("truetype"), url(/fonts/GraphikArabic-Medium.svg?ed8a179a2c181ee58b419626a0c5350d) format("svg");
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "GraphikArabic";
+  src: url(/fonts/GraphikArabic-Regular.eot?be6ed7251d77a5cb855a8d2fe64a3650) format("embedded-opentype"), url(/fonts/GraphikArabic-Regular.otf?1c774acc44320feb92aa9477e57d4518) format("opentype"), url(/fonts/GraphikArabic-Regular.woff?694fc82000caa8fee83e134017624a4b) format("woff"), url(/fonts/GraphikArabic-Regular.ttf?b2d528d4eb4a0f2737560c4571400453) format("truetype"), url(/fonts/GraphikArabic-Regular.svg?f07e4f2a1f138eab8ffdfa33f6c922e1) format("svg");
+  font-weight: 400;
+  font-style: normal;
 }
 

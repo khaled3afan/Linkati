@@ -25,11 +25,12 @@ import Toasted from 'vue-toasted';
 
 Vue.use(Toasted);
 Vue.toasted.register('error', message => message, {
-    position: 'bottom-center',
+    position: 'bottom-right',
     duration: 1000
 });
 
 Vue.component('edit-profile', require('./components/profile/edit.vue').default);
+Vue.component('profile-card', require('./components/profile/show.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -39,4 +40,15 @@ Vue.component('edit-profile', require('./components/profile/edit.vue').default);
 
 const app = new Vue({
     el: '#app',
+    data: {
+        profile: {}
+    },
+    mounted() {
+        this.getProfile();
+    },
+    methods: {
+        getProfile() {
+            this.profile = window.Linkati.profile;
+        }
+    }
 });
