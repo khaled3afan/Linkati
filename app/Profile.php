@@ -21,6 +21,8 @@ class Profile extends Model implements HasMedia
         'user_id',
         'name',
         'username',
+        'location',
+        'bio',
     ];
 
     protected $appends = [
@@ -45,6 +47,14 @@ class Profile extends Model implements HasMedia
         if ($this->hasMedia('avatar')) {
             return $this->getFirstMedia('avatar')->getUrl('cropped');
         }
+    }
+
+    /**
+     * Get the profile's links.
+     */
+    public function links()
+    {
+        return $this->hasMany(Link::class);
     }
 
     /**

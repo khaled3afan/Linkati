@@ -2,7 +2,7 @@
 
 @section('content')
 	<div class="container">
-		<div class="row">
+		<div class="row justify-content-center">
 			<div class="col-12 mb-5">
 				<div class="col-md-5 mx-auto">
 					<div class="input-group">
@@ -17,8 +17,34 @@
 				</div>
 			</div>
 
-			<div class="col-3">
-				<nav class="nav flex-column nav-pills" id="v-pills-tab">
+			<div class="col-md-3">
+				<div class="card">
+					<ul class="list-group list-group-flush p-0">
+						<li class="list-group-item py-1 pr-0 font-weight-500">
+							<a class="nav-link active" data-toggle="pill" href="#profile-preview">
+								{{ __('Preview') }}
+							</a>
+						</li>
+						<li class="list-group-item py-1 pr-0 font-weight-500">
+							<a class="nav-link" data-toggle="pill" href="#profile-edit">
+								{{ __('Edit Profile') }}
+							</a>
+						</li>
+						<li class="list-group-item py-1 pr-0 font-weight-500">
+							<a class="nav-link" data-toggle="pill" href="#profile-links">
+								{{ __('My Links') }}
+							</a>
+						</li>
+						<li class="list-group-item py-1 pr-0 font-weight-500">
+							<a class="nav-link" data-toggle="pill" href="#profile-customize">
+								{{ __('Customize') }}
+							</a>
+						</li>
+					</ul>
+				</div>
+
+				{{--
+				<nav class="nav flex-column nav-pills bg-white border rounded" id="v-pills-tab">
 					<a class="nav-link active" data-toggle="pill" href="#profile-preview">
 						{{ __('Preview') }}
 					</a>
@@ -29,8 +55,9 @@
 						{{ __('Customize') }}
 					</a>
 				</nav>
+				--}}
 			</div>
-			<div class="col-9">
+			<div class="col-md-7">
 				<div class="tab-content" id="v-pills-tabContent">
 					<div class="tab-pane fade show active" id="profile-preview">
 						<div class="col-md-5 mx-auto">
@@ -39,6 +66,9 @@
 					</div>
 					<div class="tab-pane fade" id="profile-edit">
 						<edit-profile :profile="profile"></edit-profile>
+					</div>
+					<div class="tab-pane fade" id="profile-links">
+						<edit-links :profile="profile"></edit-links>
 					</div>
 					<div class="tab-pane fade" id="profile-customize">
 						Edit

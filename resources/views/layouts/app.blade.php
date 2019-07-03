@@ -33,7 +33,7 @@
 </head>
 <body class="text-right">
 <div id="app">
-	<nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+	<nav class="navbar navbar-expand-md navbar-light bg-white border-bottom _shadow-sm">
 		<div class="container">
 			<a class="navbar-brand" href="{{ url('/') }}">
 				<img src="/images/logo.png" width="170px" alt="{{ config('app.name', 'Laravel') }}">

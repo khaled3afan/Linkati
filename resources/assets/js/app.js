@@ -30,6 +30,7 @@ Vue.toasted.register('error', message => message, {
 });
 
 Vue.component('edit-profile', require('./components/profile/edit.vue').default);
+Vue.component('edit-links', require('./components/profile/edit-links.vue').default);
 Vue.component('profile-card', require('./components/profile/show.vue').default);
 
 /**

@@ -1,9 +1,9 @@
 // Body
-$body-bg: #f8fafc;
+$body-bg: #fafafa;
 
 // Typography
 $font-family-sans-serif: 'GraphikArabic', sans-serif;
-$font-size-base: .9rem;
+$font-size-base: 1rem;
 $line-height-base: 1.6;
 
 // Colors
@@ -18,5 +18,10 @@ $green: #38c172;
 $teal: #4dc0b5;
 $cyan: #6cb2eb;
 
-$primary: #322965;
-$headings-color: #121212;
+$primary: #121212;
+$secondary: #322965;
+$headings-color: $primary;
+
+// Card
+$card-border-color: #dbdbdb;
+$border-color: #dbdbdb;

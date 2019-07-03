@@ -4,3 +4,38 @@
 @import '~bootstrap/scss/bootstrap';
 // Fonts
 @import 'fonts';
+
+.edit-avatar {
+  label {
+    cursor: pointer;
+
+    strong {
+      background-color: #000;
+      border-radius: 100%;
+      display: block;
+      position: absolute;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      transition: all .3s ease;
+    }
+
+    &:hover {
+      strong {
+        opacity: .7;
+      }
+    }
+  }
+
+}
+
+.list-group {
+  .nav-link {
+    border-right: 2px solid transparent;
+
+    &.active {
+      border-color: $primary;
+    }
+  }
+}
