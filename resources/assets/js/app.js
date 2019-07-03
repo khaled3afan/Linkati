@@ -39,6 +39,14 @@ Vue.component('profile-card', require('./components/profile/show.vue').default);
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
+import Vuex from 'vuex';
+
+const store = new Vuex.Store({
+    state: {
+        profile: {}
+    },
+});
+
 const app = new Vue({
     el: '#app',
     data: {

@@ -59,13 +59,22 @@ class ProfileController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Profile $profile
+     * @param Request $request
      *
      * @return \Illuminate\Http\Response
      */
-    public function edit(Profile $profile)
+    public function edit(Request $request)
     {
-        //
+        $request->validate([
+            'id' => ['required']
+        ]);
+
+        $profile = Profile::findOrFail($request->id);
+
+        return response()->json([
+            'status' => 200,
+            'data' => $profile
+        ]);
     }
 
     /**
@@ -92,7 +101,10 @@ class ProfileController extends Controller
         $profile->name = $request->name;
         $profile->save();
 
-        return $profile;
+        return response()->json([
+            'status' => 200,
+            'data' => $profile
+        ]);
     }
 
     /**

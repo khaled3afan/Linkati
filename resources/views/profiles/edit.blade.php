@@ -65,7 +65,7 @@
 						</div>
 					</div>
 					<div class="tab-pane fade" id="profile-edit">
-						<edit-profile :profile="profile"></edit-profile>
+						<edit-profile :profile_id="{{ $profile->id }}"></edit-profile>
 					</div>
 					<div class="tab-pane fade" id="profile-links">
 						<edit-links :profile="profile"></edit-links>

@@ -7,7 +7,8 @@
 			<div class="media">
 				<div class="edit-avatar text-center ml-4 mt-1">
 					<label class="position-relative">
-						<img :src="profile.avatar_url" class="rounded-circle" width="140px" :alt="profile.name">
+						<img :src="profile.avatar_url" width="140px"
+						     class="rounded-circle" :alt="profile.name">
 						<input class="d-none" type="file" :class="{'is-invalid': errors.avatar}"
 						       accept="image/jpeg, image/png"
 						       v-on:change="onFileChange">
@@ -57,15 +58,31 @@
 <script>
     export default {
         props: [
-            'profile'
+            'profile_id'
         ],
         data() {
             return {
+                profile: {},
                 errors: {},
                 submiting: false,
             }
         },
+        mounted() {
+            this.getProfile();
+        },
         methods: {
+            getProfile() {
+                // this.profile = window.Linkati.profile;
+                axios.get('/api/profile/edit', {
+                    params: {
+                        id: this.profile_id
+                    }
+                }).then(response => {
+                    this.profile = response.data.data;
+                }).catch(error => {
+                    this.errors = error.response.data.errors;
+                });
+            },
             onFileChange(e) {
                 let files = e.target.files || e.dataTransfer.files;
                 if (!files.length)
@@ -86,7 +103,8 @@
                     .then(response => {
                         this.errors = {};
                         this.submiting = false;
-                        this.$toasted.global.error('Profile updated!');
+                        this.$toasted.global.error('تم حفظ البيانات!');
+                        this.profile = response.data.data;
                     })
                     .catch(error => {
                         this.errors = error.response.data.errors;
