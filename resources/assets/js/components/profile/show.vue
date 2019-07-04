@@ -24,9 +24,12 @@
 </template>
 
 <script>
+    import {mapState} from 'vuex';
+
     export default {
-        props: [
-            'profile'
-        ],
+        computed: mapState(['profile']),
+        // props: [
+        //     'profile'
+        // ],
     }
 </script>

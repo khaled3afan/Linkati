@@ -1840,6 +1840,7 @@ module.exports = {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vuedraggable__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuedraggable */ "./node_modules/vuedraggable/dist/vuedraggable.common.js");
 /* harmony import */ var vuedraggable__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vuedraggable__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 //
 //
 //
@@ -1907,8 +1908,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['profile'],
+  computed: Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapState"])(['profile']),
+  // props: [
+  //     'profile'
+  // ],
   components: {
     draggable: vuedraggable__WEBPACK_IMPORTED_MODULE_0___default.a
   },
@@ -1972,6 +1977,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 //
 //
 //
@@ -2029,17 +2035,23 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['profile_id'],
+  computed: Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])(['profile']),
   data: function data() {
     return {
-      profile: {},
+      // profile: {},
       errors: {},
       submiting: false
     };
   },
   mounted: function mounted() {
-    this.getProfile();
+    // if (window.Linkati.profile) {
+    //     this.$store.commit('setProfile', window.Linkati.profile);
+    // }
+    // console.log(this.profile);
+    this.getProfile(); // console.log(this.profile);
   },
   methods: {
     getProfile: function getProfile() {
@@ -2051,7 +2063,7 @@ __webpack_require__.r(__webpack_exports__);
           id: this.profile_id
         }
       }).then(function (response) {
-        _this.profile = response.data.data;
+        _this.$store.commit('setProfile', response.data.data);
       })["catch"](function (error) {
         _this.errors = error.response.data.errors;
       });
@@ -2081,7 +2093,7 @@ __webpack_require__.r(__webpack_exports__);
 
         _this2.$toasted.global.error('تم حفظ البيانات!');
 
-        _this2.profile = response.data.data;
+        _this2.$store.commit('setProfile', response.data.data);
       })["catch"](function (error) {
         _this2.errors = error.response.data.errors;
         _this2.submiting = false;
@@ -2101,6 +2113,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 //
 //
 //
@@ -2126,8 +2139,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['profile']
+  computed: Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])(['profile']) // props: [
+  //     'profile'
+  // ],
+
 });
 
 /***/ }),
@@ -40130,7 +40147,7 @@ var render = function() {
               staticClass: "rounded-circle",
               attrs: {
                 src: _vm.profile.avatar_url,
-                width: "140px",
+                width: "130px",
                 alt: _vm.profile.name
               }
             }),
@@ -56877,9 +56894,10 @@ module.exports = function(module) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var vue_toasted__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-toasted */ "./node_modules/vue-toasted/dist/vue-toasted.min.js");
-/* harmony import */ var vue_toasted__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue_toasted__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./store */ "./resources/assets/js/store.js");
+/* harmony import */ var vue_toasted__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue-toasted */ "./node_modules/vue-toasted/dist/vue-toasted.min.js");
+/* harmony import */ var vue_toasted__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vue_toasted__WEBPACK_IMPORTED_MODULE_2__);
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -56888,6 +56906,17 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__(/*! ./bootstrap */ "./resources/assets/js/bootstrap.js");
 
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
+
+Vue.use(vuex__WEBPACK_IMPORTED_MODULE_0__["default"]);
+
+
+Vue.use(vue_toasted__WEBPACK_IMPORTED_MODULE_2___default.a);
+Vue.toasted.register('error', function (message) {
+  return message;
+}, {
+  position: 'bottom-right',
+  duration: 1000
+});
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -56899,14 +56928,6 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default));
 // Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 
-
-Vue.use(vue_toasted__WEBPACK_IMPORTED_MODULE_0___default.a);
-Vue.toasted.register('error', function (message) {
-  return message;
-}, {
-  position: 'bottom-right',
-  duration: 1000
-});
 Vue.component('edit-profile', __webpack_require__(/*! ./components/profile/edit.vue */ "./resources/assets/js/components/profile/edit.vue")["default"]);
 Vue.component('edit-links', __webpack_require__(/*! ./components/profile/edit-links.vue */ "./resources/assets/js/components/profile/edit-links.vue")["default"]);
 Vue.component('profile-card', __webpack_require__(/*! ./components/profile/show.vue */ "./resources/assets/js/components/profile/show.vue")["default"]);
@@ -56916,25 +56937,17 @@ Vue.component('profile-card', __webpack_require__(/*! ./components/profile/show.
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-
-var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
-  state: {
-    profile: {}
-  }
-});
 var app = new Vue({
   el: '#app',
-  data: {
-    profile: {}
+  data: {// profile: {}
   },
-  mounted: function mounted() {
-    this.getProfile();
+  mounted: function mounted() {// this.getProfile();
   },
-  methods: {
-    getProfile: function getProfile() {
-      this.profile = window.Linkati.profile;
-    }
-  }
+  methods: {// getProfile() {
+    //     this.profile = window.Linkati.profile;
+    // }
+  },
+  store: new vuex__WEBPACK_IMPORTED_MODULE_0__["default"].Store(_store__WEBPACK_IMPORTED_MODULE_1__["default"])
 });
 
 /***/ }),
@@ -57201,6 +57214,52 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_show_vue_vue_type_template_id_60c387ba___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
+
+/***/ }),
+
+/***/ "./resources/assets/js/store.js":
+/*!**************************************!*\
+  !*** ./resources/assets/js/store.js ***!
+  \**************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ({
+  state: {
+    profile: {}
+  },
+  actions: {
+    LOAD_USER_PROFILE: function LOAD_USER_PROFILE(_ref) {
+      var commit = _ref.commit;
+      axios.get('/api/profile/edit').then(function (response) {
+        commit('SET_USER_PROFILE', {
+          profile: response.data
+        });
+      }, function (err) {
+        console.log(err);
+      });
+    },
+    UPDATE_USER_PROFILE: function UPDATE_USER_PROFILE(store, _ref2) {
+      var commit = _ref2.commit;
+      axios.put('/api/profile/update', {
+        profile: store.state.profile
+      }).then(function (response) {
+        commit('SET_USER_PROFILE', {
+          profile: response.data
+        });
+      }, function (err) {
+        console.log(err);
+      });
+    }
+  },
+  mutations: {
+    setProfile: function setProfile(state, payload) {
+      state.profile = payload;
+    }
+  }
+});
 
 /***/ }),
 

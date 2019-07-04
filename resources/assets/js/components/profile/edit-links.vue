@@ -66,11 +66,13 @@
 
 <script>
     import draggable from 'vuedraggable';
+    import {mapState} from 'vuex';
 
     export default {
-        props: [
-            'profile'
-        ],
+        computed: mapState(['profile']),
+        // props: [
+        //     'profile'
+        // ],
         components: {
             draggable,
         },

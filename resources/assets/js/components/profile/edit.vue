@@ -7,7 +7,7 @@
 			<div class="media">
 				<div class="edit-avatar text-center ml-4 mt-1">
 					<label class="position-relative">
-						<img :src="profile.avatar_url" width="140px"
+						<img :src="profile.avatar_url" width="130px"
 						     class="rounded-circle" :alt="profile.name">
 						<input class="d-none" type="file" :class="{'is-invalid': errors.avatar}"
 						       accept="image/jpeg, image/png"
@@ -56,19 +56,27 @@
 </template>
 
 <script>
+    import {mapState} from 'vuex';
+
     export default {
         props: [
             'profile_id'
         ],
+        computed: mapState(['profile']),
         data() {
             return {
-                profile: {},
+                // profile: {},
                 errors: {},
                 submiting: false,
             }
         },
         mounted() {
+            // if (window.Linkati.profile) {
+            //     this.$store.commit('setProfile', window.Linkati.profile);
+            // }
+            // console.log(this.profile);
             this.getProfile();
+            // console.log(this.profile);
         },
         methods: {
             getProfile() {
@@ -78,7 +86,7 @@
                         id: this.profile_id
                     }
                 }).then(response => {
-                    this.profile = response.data.data;
+                    this.$store.commit('setProfile', response.data.data);
                 }).catch(error => {
                     this.errors = error.response.data.errors;
                 });
@@ -104,7 +112,7 @@
                         this.errors = {};
                         this.submiting = false;
                         this.$toasted.global.error('تم حفظ البيانات!');
-                        this.profile = response.data.data;
+                        this.$store.commit('setProfile', response.data.data);
                     })
                     .catch(error => {
                         this.errors = error.response.data.errors;

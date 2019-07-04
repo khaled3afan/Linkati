@@ -4,7 +4,7 @@
 	<div class="container">
 		<div class="row justify-content-center">
 			<div class="col-12 mb-5">
-				<div class="col-md-5 mx-auto">
+				<div class="col-md-5 mx-auto ">
 					<div class="input-group">
 						<div class="input-group-append">
 							<span class="input-group-text">
@@ -42,33 +42,19 @@
 						</li>
 					</ul>
 				</div>
-
-				{{--
-				<nav class="nav flex-column nav-pills bg-white border rounded" id="v-pills-tab">
-					<a class="nav-link active" data-toggle="pill" href="#profile-preview">
-						{{ __('Preview') }}
-					</a>
-					<a class="nav-link" data-toggle="pill" href="#profile-edit">
-						{{ __('Edit') }}
-					</a>
-					<a class="nav-link" data-toggle="pill" href="#profile-customize">
-						{{ __('Customize') }}
-					</a>
-				</nav>
-				--}}
 			</div>
 			<div class="col-md-7">
 				<div class="tab-content" id="v-pills-tabContent">
 					<div class="tab-pane fade show active" id="profile-preview">
 						<div class="col-md-5 mx-auto">
-							<profile-card :profile="profile"></profile-card>
+							<profile-card></profile-card>
 						</div>
 					</div>
 					<div class="tab-pane fade" id="profile-edit">
 						<edit-profile :profile_id="{{ $profile->id }}"></edit-profile>
 					</div>
 					<div class="tab-pane fade" id="profile-links">
-						<edit-links :profile="profile"></edit-links>
+						<edit-links></edit-links>
 					</div>
 					<div class="tab-pane fade" id="profile-customize">
 						Edit

@@ -7,6 +7,19 @@
 require('./bootstrap');
 
 window.Vue = require('vue');
+import Vuex from 'vuex';
+
+Vue.use(Vuex);
+
+import store from './store';
+
+import Toasted from 'vue-toasted';
+
+Vue.use(Toasted);
+Vue.toasted.register('error', message => message, {
+    position: 'bottom-right',
+    duration: 1000
+});
 
 /**
  * The following block of code may be used to automatically register your
@@ -21,14 +34,6 @@ window.Vue = require('vue');
 
 // Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 
-import Toasted from 'vue-toasted';
-
-Vue.use(Toasted);
-Vue.toasted.register('error', message => message, {
-    position: 'bottom-right',
-    duration: 1000
-});
-
 Vue.component('edit-profile', require('./components/profile/edit.vue').default);
 Vue.component('edit-links', require('./components/profile/edit-links.vue').default);
 Vue.component('profile-card', require('./components/profile/show.vue').default);
@@ -39,25 +44,18 @@ Vue.component('profile-card', require('./components/profile/show.vue').default);
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-import Vuex from 'vuex';
-
-const store = new Vuex.Store({
-    state: {
-        profile: {}
-    },
-});
-
 const app = new Vue({
     el: '#app',
     data: {
-        profile: {}
+        // profile: {}
     },
     mounted() {
-        this.getProfile();
+        // this.getProfile();
     },
     methods: {
-        getProfile() {
-            this.profile = window.Linkati.profile;
-        }
-    }
+        // getProfile() {
+        //     this.profile = window.Linkati.profile;
+        // }
+    },
+    store: new Vuex.Store(store),
 });
