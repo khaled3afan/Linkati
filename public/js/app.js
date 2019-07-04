@@ -1905,6 +1905,8 @@ __webpack_require__.r(__webpack_exports__);
         _this.$store.commit('setProfile', response.data.data);
 
         _this.$toasted.global.error(response.data.message);
+
+        $('#add-new-link').collapse('hide');
       })["catch"](function (error) {
         _this.errors = error.response.data.errors;
         _this.submiting = false;
@@ -2000,34 +2002,46 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
-    deleteLink: function deleteLink(id, idx) {
+    resort: function resort(event) {
       var _this = this;
 
-      this.submiting = true;
-      axios["delete"]('/api/' + this.profile.username + '/links/' + id).then(function (response) {
-        _this.errors = {};
-        _this.submiting = false;
-
-        _this.profile.links.splice(idx, 1);
-
+      axios.put('/api/' + this.profile.username + '/links/' + this.profile.links[event.newIndex].id + '/resort', {
+        links: this.profile.links
+      }).then(function (response) {
         _this.$toasted.global.error(response.data.message);
       })["catch"](function (error) {
         _this.errors = error.response.data.errors;
         _this.submiting = false;
       });
     },
-    updateLink: function updateLink() {
+    deleteLink: function deleteLink(id, idx) {
       var _this2 = this;
 
       this.submiting = true;
-      axios.put('/api/profile/update', this.profile).then(function (response) {
+      axios["delete"]('/api/' + this.profile.username + '/links/' + id).then(function (response) {
         _this2.errors = {};
         _this2.submiting = false;
 
-        _this2.$toasted.global.error('Profile updated!');
+        _this2.profile.links.splice(idx, 1);
+
+        _this2.$toasted.global.error(response.data.message);
       })["catch"](function (error) {
         _this2.errors = error.response.data.errors;
         _this2.submiting = false;
+      });
+    },
+    updateLink: function updateLink(id, link) {
+      var _this3 = this;
+
+      this.submiting = true;
+      axios.put('/api/' + this.profile.username + '/links/' + id, link).then(function (response) {
+        _this3.errors = {};
+        _this3.submiting = false;
+
+        _this3.$toasted.global.error('Profile updated!');
+      })["catch"](function (error) {
+        _this3.errors = error.response.data.errors;
+        _this3.submiting = false;
       });
     }
   }
@@ -40009,7 +40023,7 @@ var render = function() {
               class: { "is-invalid": _vm.errors.name },
               attrs: {
                 type: "text",
-                placeholder: "العنوان الظاهر على الزر",
+                placeholder: "تويتر",
                 name: "name",
                 required: ""
               },
@@ -40049,7 +40063,7 @@ var render = function() {
                 type: "url",
                 name: "url",
                 dir: "ltr",
-                placeholder: "لينك الزر",
+                placeholder: "https://twitter.com/hussam3bd",
                 required: ""
               },
               domProps: { value: _vm.link.url },
@@ -40156,7 +40170,8 @@ var render = function() {
           "draggable",
           {
             staticClass: "list-group pr-0 mt-4",
-            attrs: { tag: "ul", list: _vm.profile.links, handle: ".handle" }
+            attrs: { tag: "ul", list: _vm.profile.links, handle: ".handle" },
+            on: { sort: _vm.resort }
           },
           _vm._l(_vm.profile.links, function(link, idx) {
             return _c("li", { key: link.id, staticClass: "list-group-item" }, [

@@ -11,7 +11,7 @@
 							العنوان
 							<small class="text-danger">*</small>
 						</label>
-						<input type="text" v-model="link.name" placeholder="العنوان الظاهر على الزر" name="name"
+						<input type="text" v-model="link.name" placeholder="تويتر" name="name"
 						       class="form-control" :class="{'is-invalid': errors.name}" required>
 						<div class="invalid-feedback" v-if="errors.name">{{errors.name[0]}}</div>
 					</div>
@@ -20,7 +20,7 @@
 							الرابط
 							<small class="text-danger">*</small>
 						</label>
-						<input type="url" name="url" dir="ltr" v-model="link.url" placeholder="لينك الزر"
+						<input type="url" name="url" dir="ltr" v-model="link.url" placeholder="https://twitter.com/hussam3bd"
 						       class="form-control" :class="{'is-invalid': errors.url}" required>
 						<div class="invalid-feedback" v-if="errors.url">{{errors.url[0]}}</div>
 					</div>
@@ -62,6 +62,7 @@
                     this.link = {};
                     this.$store.commit('setProfile', response.data.data);
                     this.$toasted.global.error(response.data.message);
+                    $('#add-new-link').collapse('hide')
                 }).catch(error => {
                     this.errors = error.response.data.errors;
                     this.submiting = false;

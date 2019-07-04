@@ -6,7 +6,7 @@
 		<div class="card-body">
 			<create-link></create-link>
 
-			<draggable tag="ul" :list="profile.links" class="list-group pr-0 mt-4" handle=".handle">
+			<draggable tag="ul" :list="profile.links" class="list-group pr-0 mt-4" handle=".handle" @sort="resort">
 				<li class="list-group-item"
 				    v-for="(link, idx) in profile.links"
 				    :key="link.id">
@@ -73,6 +73,16 @@
             }
         },
         methods: {
+            resort(event) {
+                axios.put('/api/' + this.profile.username + '/links/' + this.profile.links[event.newIndex].id + '/resort', {
+                    links: this.profile.links
+                }).then(response => {
+                    this.$toasted.global.error(response.data.message);
+                }).catch(error => {
+                    this.errors = error.response.data.errors;
+                    this.submiting = false;
+                });
+            },
             deleteLink(id, idx) {
                 this.submiting = true;
                 axios.delete('/api/' + this.profile.username + '/links/' + id)
@@ -87,9 +97,9 @@
                         this.submiting = false;
                     });
             },
-            updateLink() {
+            updateLink(id, link) {
                 this.submiting = true;
-                axios.put('/api/profile/update', this.profile)
+                axios.put('/api/' + this.profile.username + '/links/' + id, link)
                     .then(response => {
                         this.errors = {};
                         this.submiting = false;

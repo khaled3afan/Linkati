@@ -30,7 +30,7 @@ class Profile extends Model implements HasMedia
     ];
 
     protected $with = [
-      'links'
+        'links'
     ];
 
     /**
@@ -56,11 +56,11 @@ class Profile extends Model implements HasMedia
     }
 
     /**
-     * Get the profile's links.
+     * Get all of the profile's links.
      */
     public function links()
     {
-        return $this->hasMany(Link::class);
+        return $this->morphMany(Link::class, 'linkable')->oldest('order');
     }
 
     /**

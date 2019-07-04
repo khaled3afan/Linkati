@@ -33,30 +33,66 @@ class LinkController extends Controller
      *
      * @param  \Illuminate\Http\Request $request
      *
+     * @param Profile                   $profile
+     *
      * @return \Illuminate\Http\Response
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function store(Request $request)
+    public function store(Request $request, Profile $profile)
     {
-//        dd($request->all());
         $this->validate($request, [
             'profile_id' => 'required',
             'name' => 'required',
             'url' => 'required|url',
         ]);
 
-        $profile = $request->user()->profiles()->where('id', $request->profile_id)->firstOrFail();
+        if (auth()->id() != $profile->user_id) {
+            return abort(403);
+        }
 
         $profile->links()->save(new Link([
+            'user_id' => $profile->user_id,
             'name' => $request->name,
             'url' => $request->url,
             'order' => optional($profile->links()->latest()->first())->order + 1,
-            'type' => 0,
+            'type' => Link::TYPE_NORMAL,
         ]));
 
         return response()->json([
             'status' => 200,
             'message' => __('Link Created!'),
+            'data' => $profile->fresh()
+        ]);
+    }
+
+    /**
+     * @param Request $request
+     * @param Profile $profile
+     * @param Link    $link
+     *
+     * @return \Illuminate\Http\JsonResponse|void
+     */
+    public function resort(Request $request, Profile $profile, Link $link)
+    {
+        if (auth()->id() != $profile->user_id) {
+            return abort(403);
+        }
+
+        $request->validate([
+            'links' => 'required'
+        ]);
+
+        foreach ($request->links as $sort => $link) {
+            $link = Link::find($link['id']);
+            if ($link && $link->user_id == auth()->id()) {
+                $link->order = $sort;
+                $link->save();
+            }
+        }
+
+        return response()->json([
+            'status' => 200,
+            'message' => __('Link Resorted!'),
             'data' => $profile->fresh()
         ]);
     }
@@ -89,13 +125,18 @@ class LinkController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request $request
-     * @param  \App\Link                $link
+     * @param Profile                   $profile
+     * @param Link                      $link
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Link $link)
+    public function update(Request $request, Profile $profile, Link $link)
     {
-        //
+        if (auth()->id() != $profile->user_id) {
+            return abort(403);
+        }
+
+        dd($request->all());
     }
 
     /**
@@ -110,7 +151,7 @@ class LinkController extends Controller
     public function destroy(Profile $profile, Link $link)
     {
         if (auth()->id() != $profile->user_id) {
-            abort(403);
+            return abort(403);
         }
 
         if ($link->delete()) {

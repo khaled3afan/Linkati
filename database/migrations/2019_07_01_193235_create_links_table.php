@@ -15,15 +15,17 @@ class CreateLinksTable extends Migration
     {
         Schema::create('links', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('profile_id');
+            $table->unsignedBigInteger('user_id');
+            $table->morphs('linkable');
             $table->string('name');
             $table->string('url');
-            $table->integer('type');
+            $table->integer('type')->default(0);
             $table->integer('order')->default(0);
             $table->integer('clicks')->default(0);
+
             $table->timestamps();
 
-            $table->foreign('profile_id')->references('id')->on('profiles')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

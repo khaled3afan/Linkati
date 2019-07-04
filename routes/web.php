@@ -26,5 +26,7 @@ Route::middleware('auth')->group(function () {
         Route::put('/update', 'ProfileController@update');
         Route::put('/links/create', 'LinkController@store');
         Route::delete('/links/{link}', 'LinkController@destroy');
+        Route::put('/links/{link}', 'LinkController@update');
+        Route::put('/links/{link}/resort', 'LinkController@resort');
     });
 });
