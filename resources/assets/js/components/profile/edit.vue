@@ -1,17 +1,16 @@
 <template>
 	<div class="card">
 		<div class="card-header font-weight-600">
-			تعديل بيانات الحساب
+			تعديل الملف الشخصي
 		</div>
 		<div class="card-body">
 			<div class="media">
 				<div class="edit-avatar text-center ml-4 mt-1">
 					<label class="position-relative">
-						<img :src="profile.avatar_url" width="130px"
-						     class="rounded-circle" :alt="profile.name">
+						<img :src="profile.avatar_url" :alt="profile.name"
+						     class="rounded-circle" width="120px">
 						<input class="d-none" type="file" :class="{'is-invalid': errors.avatar}"
-						       accept="image/jpeg, image/png"
-						       v-on:change="onFileChange">
+						       accept="image/jpeg, image/png" v-on:change="onFileChange">
 						<strong class="d-flex align-items-center align-content-center text-white h4">
 							<i class="fas fa-camera-retro mx-auto"></i>
 						</strong>
@@ -21,14 +20,21 @@
 
 				<form class="media-body" @submit="updateProfile">
 					<div class="form-group">
-						<label class="font-weight-600">الاسم الظاهر</label>
-						<input class="form-control" :class="{'is-invalid': errors.name}" type="text" v-model="profile.name">
+						<label class="font-weight-600">
+							الاسم الظاهر
+							<small class="text-danger">*</small>
+						</label>
+						<input class="form-control" :class="{'is-invalid': errors.name}" type="text"
+						       v-model="profile.name" required>
 						<div class="invalid-feedback" v-if="errors.name">{{errors.name[0]}}</div>
 					</div>
 					<div class="form-group">
-						<label class="font-weight-600">اسم المستخدم</label>
+						<label class="font-weight-600">
+							اسم المستخدم
+							<small class="text-danger">*</small>
+						</label>
 						<input class="form-control" :class="{'is-invalid': errors.username}" type="text"
-						       v-model="profile.username">
+						       v-model="profile.username" required>
 						<div class="invalid-feedback" v-if="errors.username">{{errors.username[0]}}</div>
 					</div>
 					<div class="form-group">
@@ -71,21 +77,20 @@
             }
         },
         mounted() {
-            // if (window.Linkati.profile) {
-            //     this.$store.commit('setProfile', window.Linkati.profile);
-            // }
+            if (window.Linkati.profile) {
+                this.$store.commit('setProfile', window.Linkati.profile);
+            }
             // console.log(this.profile);
             this.getProfile();
             // console.log(this.profile);
         },
         methods: {
             getProfile() {
-                // this.profile = window.Linkati.profile;
-                axios.get('/api/profile/edit', {
-                    params: {
-                        id: this.profile_id
-                    }
-                }).then(response => {
+                if (window.Linkati.profile) {
+                    this.$store.commit('setProfile', window.Linkati.profile);
+                }
+
+                axios.get('/api/' + this.profile.username + '/edit').then(response => {
                     this.$store.commit('setProfile', response.data.data);
                 }).catch(error => {
                     this.errors = error.response.data.errors;
@@ -107,11 +112,11 @@
             },
             updateProfile() {
                 this.submiting = true;
-                axios.put('/api/profile/update', this.profile)
+                axios.put('/api/' + this.profile.username + '/update', this.profile)
                     .then(response => {
                         this.errors = {};
                         this.submiting = false;
-                        this.$toasted.global.error('تم حفظ البيانات!');
+                        this.$toasted.global.error(response.data.message);
                         this.$store.commit('setProfile', response.data.data);
                     })
                     .catch(error => {

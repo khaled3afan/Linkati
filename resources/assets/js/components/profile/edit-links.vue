@@ -4,62 +4,54 @@
 			تخصيص الروابط
 		</div>
 		<div class="card-body">
-			<a class="btn btn-secondary btn-lg w-100" data-toggle="collapse" href="#add-new-link">
-				أضف رابط جديد
-			</a>
+			<create-link></create-link>
 
-			<div class="collapse" id="add-new-link">
-				<div class="card">
-					<div class="card-body">
-						<div class="form-group">
-							<label>العنوان</label>
-							<input type="text" name="name" class="form-control" required>
-						</div>
-						<div class="form-group">
-							<label>الرابط</label>
-							<input type="url" class="form-control" required>
-						</div>
-					</div>
-					<div class="card-footer">
-						<button class="btn btn-primary">حفظ</button>
-						<button class="btn btn-danger float-left">حذف</button>
-					</div>
-				</div>
-			</div>
-
-			<draggable tag="ul" :list="list" class="list-group pr-0 mt-4" handle=".handle">
-				<li
-						class="list-group-item"
-						v-for="(element, idx) in list"
-						:key="element.id">
-					<a class="btn btn-primary btn-lg w-100 text-right" data-toggle="collapse" :href="'#link-'+ element.id">
+			<draggable tag="ul" :list="profile.links" class="list-group pr-0 mt-4" handle=".handle">
+				<li class="list-group-item"
+				    v-for="(link, idx) in profile.links"
+				    :key="link.id">
+					<a class="btn btn-primary btn-lg w-100 text-right" data-toggle="collapse" :href="'#link-'+ link.id">
 						<i class="fas fa-sort handle" style="padding: 20px;margin: -8px -16px -8px 0;"></i>
-						<!--<i class="fas fa-grip-vertical"></i>-->
-						<!--<i class="fas fa-arrows-alt"></i>-->
-						<span>{{ element.name }}</span>
+						<span>{{ link.name }}</span>
 					</a>
-					<div class="collapse" :id="'link-'+ element.id">
+					<div class="collapse" :id="'link-'+ link.id">
 						<div class="card">
 							<div class="card-body">
 								<div class="form-group">
-									<label>الاسم</label>
-									<input type="text" name="name" class="form-control" v-model="element.name">
+									<label class="font-weight-600">
+										العنوان
+										<small class="text-danger">*</small>
+									</label>
+									<input type="text" v-model="link.name" placeholder="العنوان الظاهر على الزر" name="name"
+									       class="form-control" :class="{'is-invalid': errors.name}" required>
+									<div class="invalid-feedback" v-if="errors.name">{{errors.name[0]}}</div>
 								</div>
 								<div class="form-group">
-									<label>الرابط</label>
-									<input type="url" class="form-control" v-model="element.url">
+									<label class="font-weight-600">
+										الرابط
+										<small class="text-danger">*</small>
+									</label>
+									<input type="url" name="url" dir="ltr" v-model="link.url" placeholder="لينك الزر"
+									       class="form-control" :class="{'is-invalid': errors.url}" required>
+									<div class="invalid-feedback" v-if="errors.url">{{errors.url[0]}}</div>
 								</div>
 							</div>
 							<div class="card-footer">
-								<button class="btn btn-primary" @click="removeAt(idx)">حفظ</button>
-								<button class="btn btn-danger float-left" @click="removeAt(idx)">حذف</button>
+								<button class="btn btn-outline-danger" @click="deleteLink(link.id, idx)" :disabled="submiting">
+									<i class="fas fa-spinner fa-spin" v-if="submiting"></i>
+									حذف اللينك
+								</button>
+								<button class="btn btn-secondary float-left" @click="updateLink(link.id, link)" :disabled="submiting">
+									<i class="fas fa-spinner fa-spin" v-if="submiting"></i>
+									حفظ التعديلات
+								</button>
 							</div>
 						</div>
 					</div>
 				</li>
 			</draggable>
 
-			<pre dir="ltr" class="text-left bg-light p-4 d-none">{{list}}</pre>
+			<pre dir="ltr" class="text-left bg-light p-4">{{profile.links}}</pre>
 		</div>
 	</div>
 </template>
@@ -70,9 +62,6 @@
 
     export default {
         computed: mapState(['profile']),
-        // props: [
-        //     'profile'
-        // ],
         components: {
             draggable,
         },
@@ -80,23 +69,25 @@
             return {
                 errors: {},
                 submiting: false,
-                list: [
-                    {name: "John", text: "", id: 0},
-                    {name: "Joao", text: "", id: 1},
-                    {name: "Jean", text: "", id: 2}
-                ],
                 dragging: false
             }
         },
         methods: {
-            removeAt(idx) {
-                this.list.splice(idx, 1);
+            deleteLink(id, idx) {
+                this.submiting = true;
+                axios.delete('/api/' + this.profile.username + '/links/' + id)
+                    .then(response => {
+                        this.errors = {};
+                        this.submiting = false;
+                        this.profile.links.splice(idx, 1);
+                        this.$toasted.global.error(response.data.message);
+                    })
+                    .catch(error => {
+                        this.errors = error.response.data.errors;
+                        this.submiting = false;
+                    });
             },
-            add: function () {
-                id++;
-                this.list.push({name: "Juan " + id, id, text: ""});
-            },
-            updateProfile() {
+            updateLink() {
                 this.submiting = true;
                 axios.put('/api/profile/update', this.profile)
                     .then(response => {

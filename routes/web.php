@@ -21,8 +21,10 @@ Route::get('{profile}', 'ProfileController@show')->name('profiles.show');
 
 Route::middleware('auth')->group(function () {
     // api
-    Route::group(['prefix' => 'api/profile'], function () {
+    Route::group(['prefix' => 'api/{profile}'], function () {
         Route::get('/edit', 'ProfileController@edit');
         Route::put('/update', 'ProfileController@update');
+        Route::put('/links/create', 'LinkController@store');
+        Route::delete('/links/{link}', 'LinkController@destroy');
     });
 });

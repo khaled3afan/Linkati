@@ -29,6 +29,10 @@ class Profile extends Model implements HasMedia
         'avatar_url',
     ];
 
+    protected $with = [
+      'links'
+    ];
+
     /**
      * Get the route key for the model.
      *
@@ -47,6 +51,8 @@ class Profile extends Model implements HasMedia
         if ($this->hasMedia('avatar')) {
             return $this->getFirstMedia('avatar')->getUrl('cropped');
         }
+
+        return asset('/images/avatar.png');
     }
 
     /**

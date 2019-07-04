@@ -39,3 +39,16 @@
     }
   }
 }
+
+#profile-links {
+  a[data-toggle="collapse"][aria-expanded="true"] {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  > .card .card {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-top: none;
+  }
+}

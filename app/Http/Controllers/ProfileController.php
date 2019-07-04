@@ -59,18 +59,12 @@ class ProfileController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param Request $request
+     * @param Profile $profile
      *
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request)
+    public function edit(Profile $profile)
     {
-        $request->validate([
-            'id' => ['required']
-        ]);
-
-        $profile = Profile::findOrFail($request->id);
-
         return response()->json([
             'status' => 200,
             'data' => $profile
@@ -81,28 +75,41 @@ class ProfileController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request $request
+     * @param Profile                   $profile
      *
      * @return \Illuminate\Http\Response
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function update(Request $request)
+    public function update(Request $request, Profile $profile)
     {
         $this->validate($request, [
             'name' => ['required', 'string', 'max:255'],
-//            'email' => ['required', 'email', 'max:255', 'unique:users,email,' . $request->user()->id],
+            'username' => [
+                'required',
+                'string',
+                'min:3',
+                'max:255',
+                'unique:profiles,username,' . $request->user()->id
+            ],
         ]);
 
-        $profile = $request->user()->profiles()->where('id', $request->id)->firstOrFail();
+        if (auth()->id() != $profile->user_id) {
+            return abort(403);
+        }
 
         if ( ! empty($request->avatar)) {
             $profile->addMediaFromBase64($request->avatar)->toMediaCollection('avatar');
         }
 
         $profile->name = $request->name;
+        $profile->username = $request->username;
+        $profile->location = $request->location;
+        $profile->bio = $request->bio;
         $profile->save();
 
         return response()->json([
             'status' => 200,
+            'message' => __('Your Profile Has Been Updated!'),
             'data' => $profile
         ]);
     }

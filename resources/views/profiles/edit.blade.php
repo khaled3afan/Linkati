@@ -4,7 +4,7 @@
 	<div class="container">
 		<div class="row justify-content-center">
 			<div class="col-12 mb-5">
-				<div class="col-md-5 mx-auto ">
+				<div class="col-md-5 mx-auto">
 					<div class="input-group">
 						<div class="input-group-append">
 							<span class="input-group-text">
@@ -46,7 +46,7 @@
 			<div class="col-md-7">
 				<div class="tab-content" id="v-pills-tabContent">
 					<div class="tab-pane fade show active" id="profile-preview">
-						<div class="col-md-5 mx-auto">
+						<div class="col-md-8 mx-auto">
 							<profile-card></profile-card>
 						</div>
 					</div>
