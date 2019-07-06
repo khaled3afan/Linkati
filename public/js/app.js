@@ -1987,6 +1987,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2017,28 +2018,33 @@ __webpack_require__.r(__webpack_exports__);
     deleteLink: function deleteLink(id, idx) {
       var _this2 = this;
 
-      this.submiting = true;
-      axios["delete"]('/api/' + this.profile.username + '/links/' + id).then(function (response) {
-        _this2.errors = {};
-        _this2.submiting = false;
+      if (confirm('هل انت متاكد؟')) {
+        this.submiting = true;
+        axios["delete"]('/api/' + this.profile.username + '/links/' + id).then(function (response) {
+          _this2.errors = {};
+          _this2.submiting = false;
+          $('#link-' + id).collapse('hide');
 
-        _this2.profile.links.splice(idx, 1);
+          _this2.profile.links.splice(idx, 1);
 
-        _this2.$toasted.global.error(response.data.message);
-      })["catch"](function (error) {
-        _this2.errors = error.response.data.errors;
-        _this2.submiting = false;
-      });
+          _this2.$toasted.global.error(response.data.message);
+        })["catch"](function (error) {
+          _this2.errors = error.response.data.errors;
+          _this2.submiting = false;
+        });
+      }
     },
-    updateLink: function updateLink(id, link) {
+    updateLink: function updateLink(link) {
       var _this3 = this;
 
       this.submiting = true;
-      axios.put('/api/' + this.profile.username + '/links/' + id, link).then(function (response) {
+      axios.put('/api/' + this.profile.username + '/links/' + link.id, link).then(function (response) {
         _this3.errors = {};
         _this3.submiting = false;
 
-        _this3.$toasted.global.error('Profile updated!');
+        _this3.$toasted.global.error(response.data.message);
+
+        _this3.$store.commit('setProfile', response.data.data);
       })["catch"](function (error) {
         _this3.errors = error.response.data.errors;
         _this3.submiting = false;
@@ -2058,7 +2064,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 //
 //
 //
@@ -2122,39 +2127,23 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['profile_id'],
-  computed: Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])(['profile']),
   data: function data() {
     return {
-      // profile: {},
+      profile: {},
       errors: {},
       submiting: false
     };
   },
   mounted: function mounted() {
-    if (window.Linkati.profile) {
-      this.$store.commit('setProfile', window.Linkati.profile);
-    } // console.log(this.profile);
-
-
-    this.getProfile(); // console.log(this.profile);
+    this.$nextTick(function () {
+      // Get Profile
+      this.profile = _.cloneDeep(this.$store.state.profile);
+    });
   },
   methods: {
-    getProfile: function getProfile() {
-      var _this = this;
-
-      if (window.Linkati.profile) {
-        this.$store.commit('setProfile', window.Linkati.profile);
-      }
-
-      axios.get('/api/' + this.profile.username + '/edit').then(function (response) {
-        _this.$store.commit('setProfile', response.data.data);
-      })["catch"](function (error) {
-        _this.errors = error.response.data.errors;
-      });
-    },
     onFileChange: function onFileChange(e) {
       var files = e.target.files || e.dataTransfer.files;
       if (!files.length) return;
@@ -2166,24 +2155,27 @@ __webpack_require__.r(__webpack_exports__);
 
       reader.onload = function (e) {
         vm.profile.avatar = e.target.result;
+        vm.profile.avatar_url = e.target.result;
       };
 
       reader.readAsDataURL(file);
     },
     updateProfile: function updateProfile() {
-      var _this2 = this;
+      var _this = this;
 
       this.submiting = true;
-      axios.put('/api/' + this.profile.username + '/update', this.profile).then(function (response) {
-        _this2.errors = {};
-        _this2.submiting = false;
+      axios.put('/api/' + this.$store.state.profile.username + '/update', this.profile).then(function (response) {
+        _this.errors = {};
+        _this.submiting = false;
 
-        _this2.$toasted.global.error(response.data.message);
+        _this.$toasted.global.error(response.data.message);
 
-        _this2.$store.commit('setProfile', response.data.data);
+        _this.$store.commit('setProfile', response.data.data);
+
+        history.pushState({}, null, window.Linkati.domain + '/' + response.data.data.username);
       })["catch"](function (error) {
-        _this2.errors = error.response.data.errors;
-        _this2.submiting = false;
+        _this.errors = error.response.data.errors;
+        _this.submiting = false;
       });
     }
   }
@@ -2201,6 +2193,7 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+//
 //
 //
 //
@@ -40029,6 +40022,15 @@ var render = function() {
               },
               domProps: { value: _vm.link.name },
               on: {
+                keypress: function($event) {
+                  if (
+                    !$event.type.indexOf("key") &&
+                    _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
+                  ) {
+                    return null
+                  }
+                  return _vm.createLink($event)
+                },
                 input: function($event) {
                   if ($event.target.composing) {
                     return
@@ -40068,6 +40070,15 @@ var render = function() {
               },
               domProps: { value: _vm.link.url },
               on: {
+                keypress: function($event) {
+                  if (
+                    !$event.type.indexOf("key") &&
+                    _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
+                  ) {
+                    return null
+                  }
+                  return _vm.createLink($event)
+                },
                 input: function($event) {
                   if ($event.target.composing) {
                     return
@@ -40174,7 +40185,7 @@ var render = function() {
             on: { sort: _vm.resort }
           },
           _vm._l(_vm.profile.links, function(link, idx) {
-            return _c("li", { key: link.id, staticClass: "list-group-item" }, [
+            return _c("li", { key: idx, staticClass: "list-group-item" }, [
               _c(
                 "a",
                 {
@@ -40189,6 +40200,8 @@ var render = function() {
                       margin: "-8px -16px -8px 0"
                     }
                   }),
+                  _vm._v(" "),
+                  _c("i", { class: link.icon }),
                   _vm._v(" "),
                   _c("span", [_vm._v(_vm._s(link.name))])
                 ]
@@ -40319,7 +40332,7 @@ var render = function() {
                           attrs: { disabled: _vm.submiting },
                           on: {
                             click: function($event) {
-                              return _vm.updateLink(link.id, link)
+                              return _vm.updateLink(link)
                             }
                           }
                         },
@@ -40387,7 +40400,8 @@ var render = function() {
               attrs: {
                 src: _vm.profile.avatar_url,
                 alt: _vm.profile.name,
-                width: "120px"
+                width: "120px",
+                height: "120px"
               }
             }),
             _vm._v(" "),
@@ -40426,9 +40440,18 @@ var render = function() {
                 ],
                 staticClass: "form-control",
                 class: { "is-invalid": _vm.errors.name },
-                attrs: { type: "text", required: "" },
+                attrs: { type: "text", name: "name", required: "" },
                 domProps: { value: _vm.profile.name },
                 on: {
+                  keypress: function($event) {
+                    if (
+                      !$event.type.indexOf("key") &&
+                      _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
+                    ) {
+                      return null
+                    }
+                    return _vm.updateProfile($event)
+                  },
                   input: function($event) {
                     if ($event.target.composing) {
                       return
@@ -40459,9 +40482,18 @@ var render = function() {
                 ],
                 staticClass: "form-control",
                 class: { "is-invalid": _vm.errors.username },
-                attrs: { type: "text", required: "" },
+                attrs: { type: "text", name: "username", required: "" },
                 domProps: { value: _vm.profile.username },
                 on: {
+                  keypress: function($event) {
+                    if (
+                      !$event.type.indexOf("key") &&
+                      _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
+                    ) {
+                      return null
+                    }
+                    return _vm.updateProfile($event)
+                  },
                   input: function($event) {
                     if ($event.target.composing) {
                       return
@@ -40494,9 +40526,22 @@ var render = function() {
                 ],
                 staticClass: "form-control",
                 class: { "is-invalid": _vm.errors.location },
-                attrs: { type: "text", placeholder: "Istanbul, Turkey" },
+                attrs: {
+                  type: "text",
+                  name: "location",
+                  placeholder: "Istanbul, Turkey"
+                },
                 domProps: { value: _vm.profile.location },
                 on: {
+                  keypress: function($event) {
+                    if (
+                      !$event.type.indexOf("key") &&
+                      _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
+                    ) {
+                      return null
+                    }
+                    return _vm.updateProfile($event)
+                  },
                   input: function($event) {
                     if ($event.target.composing) {
                       return
@@ -40659,10 +40704,13 @@ var render = function() {
           _c(
             "a",
             {
-              staticClass: "btn btn-primary w-100",
+              staticClass: "btn btn-primary w-100 text-right",
               attrs: { href: link.url, rel: "nofollow noopener noreferrer" }
             },
-            [_vm._v("\n\t\t\t\t" + _vm._s(link.name) + "\n\t\t\t")]
+            [
+              _c("i", { staticClass: "ml-2", class: link.icon }),
+              _vm._v("\n\t\t\t\t" + _vm._s(link.name) + "\n\t\t\t")
+            ]
           )
         ])
       }),
@@ -57192,15 +57240,20 @@ Vue.component('profile-card', __webpack_require__(/*! ./components/profile/show.
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
+
 var app = new Vue({
   el: '#app',
-  data: {// profile: {}
+  computed: Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])(['profile']),
+  data: {},
+  mounted: function mounted() {
+    this.getProfile();
   },
-  mounted: function mounted() {// this.getProfile();
-  },
-  methods: {// getProfile() {
-    //     this.profile = window.Linkati.profile;
-    // }
+  methods: {
+    getProfile: function getProfile() {
+      if (window.Linkati.profile) {
+        this.$store.commit('setProfile', _.cloneDeep(window.Linkati.profile));
+      }
+    }
   },
   store: new vuex__WEBPACK_IMPORTED_MODULE_0__["default"].Store(_store__WEBPACK_IMPORTED_MODULE_1__["default"])
 });

@@ -11,8 +11,7 @@
 								<i class="far fa-copy"></i>
 							</span>
 						</div>
-						<input type="text" class="form-control" dir="ltr" readonly
-						       value="{{ route('profiles.show', $profile) }}">
+						<input type="text" class="form-control" dir="ltr" :value="profile.route" readonly>
 					</div>
 				</div>
 			</div>

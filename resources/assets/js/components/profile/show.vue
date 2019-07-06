@@ -9,7 +9,8 @@
 		</div>
 		<ul class="list-group list-group-flush p-0">
 			<li class="list-group-item" v-for="(link, idx) in profile.links">
-				<a :href="link.url" class="btn btn-primary w-100" rel="nofollow noopener noreferrer">
+				<a :href="link.url" class="btn btn-primary w-100 text-right" rel="nofollow noopener noreferrer">
+					<i class="ml-2" :class="link.icon"></i>
 					{{ link.name }}
 				</a>
 			</li>

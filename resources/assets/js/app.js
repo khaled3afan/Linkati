@@ -45,18 +45,21 @@ Vue.component('profile-card', require('./components/profile/show.vue').default);
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
+import {mapState} from 'vuex';
+
 const app = new Vue({
     el: '#app',
-    data: {
-        // profile: {}
-    },
+    computed: mapState(['profile']),
+    data: {},
     mounted() {
-        // this.getProfile();
+        this.getProfile();
     },
     methods: {
-        // getProfile() {
-        //     this.profile = window.Linkati.profile;
-        // }
+        getProfile() {
+            if (window.Linkati.profile) {
+                this.$store.commit('setProfile', _.cloneDeep(window.Linkati.profile));
+            }
+        }
     },
     store: new Vuex.Store(store),
 });

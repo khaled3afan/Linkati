@@ -8,7 +8,8 @@
 				<div class="edit-avatar text-center ml-4 mt-1">
 					<label class="position-relative">
 						<img :src="profile.avatar_url" :alt="profile.name"
-						     class="rounded-circle" width="120px">
+						     class="rounded-circle" width="120px" height="120px">
+
 						<input class="d-none" type="file" :class="{'is-invalid': errors.avatar}"
 						       accept="image/jpeg, image/png" v-on:change="onFileChange">
 						<strong class="d-flex align-items-center align-content-center text-white h4">
@@ -25,7 +26,7 @@
 							<small class="text-danger">*</small>
 						</label>
 						<input class="form-control" :class="{'is-invalid': errors.name}" type="text"
-						       v-model="profile.name" required>
+						       v-model="profile.name" name="name" @keypress.enter="updateProfile" required>
 						<div class="invalid-feedback" v-if="errors.name">{{errors.name[0]}}</div>
 					</div>
 					<div class="form-group">
@@ -34,13 +35,14 @@
 							<small class="text-danger">*</small>
 						</label>
 						<input class="form-control" :class="{'is-invalid': errors.username}" type="text"
-						       v-model="profile.username" required>
+						       v-model="profile.username" name="username" @keypress.enter="updateProfile" required>
 						<div class="invalid-feedback" v-if="errors.username">{{errors.username[0]}}</div>
 					</div>
 					<div class="form-group">
 						<label class="font-weight-600">موقعك</label>
 						<input class="form-control" :class="{'is-invalid': errors.location}" type="text"
-						       v-model="profile.location" placeholder="Istanbul, Turkey">
+						       v-model="profile.location" name="location" @keypress.enter="updateProfile"
+						       placeholder="Istanbul, Turkey">
 						<div class="invalid-feedback" v-if="errors.location">{{errors.location[0]}}</div>
 					</div>
 					<div class="form-group mb-0">
@@ -62,40 +64,21 @@
 </template>
 
 <script>
-    import {mapState} from 'vuex';
-
     export default {
-        props: [
-            'profile_id'
-        ],
-        computed: mapState(['profile']),
         data() {
             return {
-                // profile: {},
+                profile: {},
                 errors: {},
                 submiting: false,
             }
         },
         mounted() {
-            if (window.Linkati.profile) {
-                this.$store.commit('setProfile', window.Linkati.profile);
-            }
-            // console.log(this.profile);
-            this.getProfile();
-            // console.log(this.profile);
+            this.$nextTick(function () {
+                // Get Profile
+                this.profile = _.cloneDeep(this.$store.state.profile);
+            });
         },
         methods: {
-            getProfile() {
-                if (window.Linkati.profile) {
-                    this.$store.commit('setProfile', window.Linkati.profile);
-                }
-
-                axios.get('/api/' + this.profile.username + '/edit').then(response => {
-                    this.$store.commit('setProfile', response.data.data);
-                }).catch(error => {
-                    this.errors = error.response.data.errors;
-                });
-            },
             onFileChange(e) {
                 let files = e.target.files || e.dataTransfer.files;
                 if (!files.length)
@@ -107,17 +90,20 @@
                 let vm = this;
                 reader.onload = (e) => {
                     vm.profile.avatar = e.target.result;
+                    vm.profile.avatar_url = e.target.result;
                 };
                 reader.readAsDataURL(file);
             },
             updateProfile() {
                 this.submiting = true;
-                axios.put('/api/' + this.profile.username + '/update', this.profile)
+                axios.put('/api/' + this.$store.state.profile.username + '/update', this.profile)
                     .then(response => {
                         this.errors = {};
                         this.submiting = false;
                         this.$toasted.global.error(response.data.message);
                         this.$store.commit('setProfile', response.data.data);
+
+                        history.pushState({}, null, window.Linkati.domain + '/' + response.data.data.username);
                     })
                     .catch(error => {
                         this.errors = error.response.data.errors;

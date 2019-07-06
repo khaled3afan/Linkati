@@ -51,4 +51,9 @@
     border-top-right-radius: 0;
     border-top: none;
   }
+
+  //.sortable-ghost
+  .sortable-chosen a.btn {
+    @extend .btn-secondary;
+  }
 }

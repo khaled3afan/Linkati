@@ -9,9 +9,10 @@
 			<draggable tag="ul" :list="profile.links" class="list-group pr-0 mt-4" handle=".handle" @sort="resort">
 				<li class="list-group-item"
 				    v-for="(link, idx) in profile.links"
-				    :key="link.id">
+				    :key="idx">
 					<a class="btn btn-primary btn-lg w-100 text-right" data-toggle="collapse" :href="'#link-'+ link.id">
 						<i class="fas fa-sort handle" style="padding: 20px;margin: -8px -16px -8px 0;"></i>
+						<i :class="link.icon"></i>
 						<span>{{ link.name }}</span>
 					</a>
 					<div class="collapse" :id="'link-'+ link.id">
@@ -41,7 +42,7 @@
 									<i class="fas fa-spinner fa-spin" v-if="submiting"></i>
 									حذف اللينك
 								</button>
-								<button class="btn btn-secondary float-left" @click="updateLink(link.id, link)" :disabled="submiting">
+								<button class="btn btn-secondary float-left" @click="updateLink(link)" :disabled="submiting">
 									<i class="fas fa-spinner fa-spin" v-if="submiting"></i>
 									حفظ التعديلات
 								</button>
@@ -84,26 +85,30 @@
                 });
             },
             deleteLink(id, idx) {
-                this.submiting = true;
-                axios.delete('/api/' + this.profile.username + '/links/' + id)
-                    .then(response => {
-                        this.errors = {};
-                        this.submiting = false;
-                        this.profile.links.splice(idx, 1);
-                        this.$toasted.global.error(response.data.message);
-                    })
-                    .catch(error => {
-                        this.errors = error.response.data.errors;
-                        this.submiting = false;
-                    });
+                if (confirm('هل انت متاكد؟')) {
+                    this.submiting = true;
+                    axios.delete('/api/' + this.profile.username + '/links/' + id)
+                        .then(response => {
+                            this.errors = {};
+                            this.submiting = false;
+                            $('#link-' + id).collapse('hide');
+                            this.profile.links.splice(idx, 1);
+                            this.$toasted.global.error(response.data.message);
+                        })
+                        .catch(error => {
+                            this.errors = error.response.data.errors;
+                            this.submiting = false;
+                        });
+                }
             },
-            updateLink(id, link) {
+            updateLink(link) {
                 this.submiting = true;
-                axios.put('/api/' + this.profile.username + '/links/' + id, link)
+                axios.put('/api/' + this.profile.username + '/links/' + link.id, link)
                     .then(response => {
                         this.errors = {};
                         this.submiting = false;
-                        this.$toasted.global.error('Profile updated!');
+                        this.$toasted.global.error(response.data.message);
+                        this.$store.commit('setProfile', response.data.data);
                     })
                     .catch(error => {
                         this.errors = error.response.data.errors;

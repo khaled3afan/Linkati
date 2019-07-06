@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Link;
-use App\Profile;
+use App\Models\Link;
+use App\Models\Profile;
 use Illuminate\Http\Request;
 
 class LinkController extends Controller
@@ -54,7 +54,7 @@ class LinkController extends Controller
             'user_id' => $profile->user_id,
             'name' => $request->name,
             'url' => $request->url,
-            'order' => optional($profile->links()->latest()->first())->order + 1,
+            'order' => optional($profile->links('desc')->first())->order + 1,
             'type' => Link::TYPE_NORMAL,
         ]));
 
@@ -136,7 +136,13 @@ class LinkController extends Controller
             return abort(403);
         }
 
-        dd($request->all());
+        $link->update($request->all());
+
+        return response()->json([
+            'status' => 200,
+            'message' => __('Link Updated!'),
+            'data' => $profile->fresh()
+        ]);
     }
 
     /**

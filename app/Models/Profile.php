@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Image\Manipulations;
@@ -27,10 +27,11 @@ class Profile extends Model implements HasMedia
 
     protected $appends = [
         'avatar_url',
+        'route',
     ];
 
     protected $with = [
-        'links'
+        'links',
     ];
 
     /**
@@ -56,11 +57,23 @@ class Profile extends Model implements HasMedia
     }
 
     /**
-     * Get all of the profile's links.
+     * @return mixed
      */
-    public function links()
+    public function getRouteAttribute()
     {
-        return $this->morphMany(Link::class, 'linkable')->oldest('order');
+        return route('profiles.show', $this);
+    }
+
+    /**
+     * Get all of the profile's links.
+     *
+     * @param string $order
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
+     */
+    public function links($order = 'asc')
+    {
+        return $this->morphMany(Link::class, 'linkable')->orderBy('order', $order);
     }
 
     /**
