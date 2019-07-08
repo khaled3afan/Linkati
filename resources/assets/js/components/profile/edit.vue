@@ -5,7 +5,7 @@
 		</div>
 		<div class="card-body">
 			<div class="media">
-				<div class="edit-avatar text-center ml-4 mt-1">
+				<div class="edit-avatar text-center mr-4 mt-1">
 					<label class="position-relative">
 						<img :src="profile.avatar_url" :alt="profile.name"
 						     class="rounded-circle" width="120px" height="120px">

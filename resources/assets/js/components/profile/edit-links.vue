@@ -52,7 +52,8 @@
 				</li>
 			</draggable>
 
-			<pre dir="ltr" class="text-left bg-light p-4">{{profile.links}}</pre>
+			<pre dir="ltr" class="text-left bg-light p-4 mt-2"
+			     v-if="env != 'production'">{{profile.links}}</pre>
 		</div>
 	</div>
 </template>
@@ -62,7 +63,7 @@
     import {mapState} from 'vuex';
 
     export default {
-        computed: mapState(['profile']),
+        computed: mapState(['profile', 'env']),
         components: {
             draggable,
         },

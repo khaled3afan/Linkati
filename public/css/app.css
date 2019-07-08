@@ -11190,3 +11190,11 @@ a.text-dark:focus {
   border-top: none;
 }
 
+.profile-footer {
+  position: absolute;
+  bottom: 8px;
+  left: 0;
+  width: 100%;
+  padding-bottom: 15px;
+}
+

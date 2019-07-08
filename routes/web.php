@@ -17,9 +17,14 @@ Auth::routes(['verify' => true]);
 
 Route::get('/', 'HomeController@index')->name('home');
 
-Route::get('{profile}', 'ProfileController@show')->name('profiles.show');
-
 Route::middleware('auth')->group(function () {
+    Route::get('account', 'UserController@edit')->name('users.edit');
+    Route::patch('account', 'UserController@update');
+
+    Route::group(['middleware' => 'verified'], function () {
+        Route::get('profile/create', 'ProfileController@create')->name('profiles.create');
+    });
+
     // api
     Route::group(['prefix' => 'api/{profile}'], function () {
         Route::get('/edit', 'ProfileController@edit');
@@ -30,3 +35,5 @@ Route::middleware('auth')->group(function () {
         Route::put('/links/{link}/resort', 'LinkController@resort');
     });
 });
+
+Route::get('{profile}', 'ProfileController@show')->name('profiles.show');

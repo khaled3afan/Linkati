@@ -19,7 +19,6 @@ class User extends Authenticatable implements MustVerifyEmail
         'name',
         'email',
         'password',
-        'username'
     ];
 
     /**
@@ -47,5 +46,34 @@ class User extends Authenticatable implements MustVerifyEmail
     public function profiles()
     {
         return $this->hasMany(Profile::class);
+    }
+
+    /**
+     * @return String
+     */
+    public function getAvatarAttribute()
+    {
+        return $this->getGravatar(100);
+    }
+
+    /**
+     * Get either a Gravatar URL or complete image tag for a specified email address.
+     *
+     * @param int    $size
+     * @param string $default
+     * @param string $r Maximum rating (inclusive) [ g | pg | r | x ]
+     *
+     * @return String containing either just a URL or a complete image tag
+     * @source http://gravatar.com/site/implement/images/php/
+     */
+    public function getGravatar($size = 90, $default = 'mm', $r = 'g')
+    {
+        $default = urlencode(asset('/images/avatar.png'));
+
+        $url = 'https://www.gravatar.com/avatar/';
+        $url .= md5(strtolower(trim($this->email)));
+        $url .= "?s=$size&d=$default&r=$r";
+
+        return $url;
     }
 }

@@ -14,6 +14,7 @@
 
 	<!-- Styles -->
 	<link href="{{ asset('css/app.css') }}" rel="stylesheet">
+	<link href="{{ asset('css/_bootstrap-rtl.css') }}" rel="stylesheet">
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/all.css">
 
 	<script>
@@ -46,7 +47,7 @@
 
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				@auth
-					<ul class="navbar-nav ml-auto">
+					<ul class="navbar-nav mr-auto">
 						<li class="nav-item dropdown">
 							<a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
 							   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -57,18 +58,25 @@
 							<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
 								@foreach(auth()->user()->profiles as $profile)
 									<a class="dropdown-item" href="{{ route('profiles.show', $profile) }}">
+										<img src="{{$profile->avatar_url}}" alt="{{$profile->name}}"
+										     class="rounded-circle mr-2" width="25px">
 										{{ $profile->name }}
 									</a>
 								@endforeach
-								<a class="dropdown-item bg-light" href="{{ route('profiles.show', $profile) }}">
+								<div class="dropdown-divider"></div>
+								<a class="dropdown-item text-success" href="{{ route('profiles.create') }}">
+									<span class="border rounded-circle text-center d-inline-block"
+									      style="width: 25px;height: 25px">
+										<i class="fa fa-plus"></i>
+									</span>
 									{{ __('New Profile') }}
 								</a>
 							</div>
 						</li>
 					</ul>
 				@endauth
-				<ul class="navbar-nav mr-auto">
-					<!-- Authentication Links -->
+
+				<ul class="navbar-nav ml-auto">
 					@guest
 						<li class="nav-item">
 							<a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
@@ -79,14 +87,33 @@
 							</li>
 						@endif
 					@else
+						<li class="nav-item">
+							<a class="nav-link" href="#referrals">
+								{{ __('Refer a Friend') }}
+							</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link text-secondary" href="#upgrade">
+								{{ __('Upgrade Now') }}
+								<small class="badge badge-danger">قريبا</small>
+							</a>
+						</li>
+
 						<li class="nav-item dropdown">
 							<a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
 							   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-								{{ __('My Account') }} <span class="caret"></span>
+								<img src="{{auth()->user()->avatar}}" alt="{{auth()->user()->name}}"
+								     class="rounded-circle" width="30">
+								<span class="caret"></span>
 							</a>
 
 							<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-								<a class="dropdown-item" href="{{ route('logout') }}"
+								<a class="dropdown-item" href="{{ route('users.edit') }}">
+									{{ __('My Account') }}
+								</a>
+
+								<div class="dropdown-divider"></div>
+								<a class="dropdown-item text-danger" href="{{ route('logout') }}"
 								   onclick="event.preventDefault();document.getElementById('logout-form').submit();">
 									{{ __('Logout') }}
 								</a>
