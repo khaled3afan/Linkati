@@ -37,11 +37,17 @@ Vue.toasted.register('error', message => message, {
 
 // Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 
+// Links
 Vue.component('create-link', require('./components/CreateLink.vue').default);
-Vue.component('edit-profile', require('./components/profile/edit.vue').default);
 Vue.component('edit-links', require('./components/profile/edit-links.vue').default);
+
+// Profiles
+Vue.component('create-profile', require('./components/profile/create.vue').default);
+Vue.component('edit-profile', require('./components/profile/edit.vue').default);
 Vue.component('profile-card', require('./components/profile/show.vue').default);
+
 Vue.component('edit-account', require('./components/EditAccount.vue').default);
+Vue.component('change-password', require('./components/ChangePassword.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -76,4 +82,8 @@ const app = new Vue({
         },
     },
     store: new Vuex.Store(store),
+});
+
+$(function () {
+    $('[data-toggle="tooltip"]').tooltip()
 });

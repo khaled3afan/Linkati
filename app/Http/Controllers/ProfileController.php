@@ -24,7 +24,7 @@ class ProfileController extends Controller
      */
     public function create()
     {
-        //
+        return view('profiles.create');
     }
 
     /**
@@ -32,11 +32,38 @@ class ProfileController extends Controller
      *
      * @param  \Illuminate\Http\Request $request
      *
-     * @return \Illuminate\Http\Response
+     * @return void
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'name' => ['required', 'string', 'max:255'],
+            'username' => [
+                'required',
+                'string',
+                'min:3',
+                'max:255',
+                'unique:profiles,username'
+            ],
+        ]);
+
+        $profile = auth()->user()->profiles()->save(new Profile([
+            'name' => $request->name,
+            'username' => $request->username,
+            'location' => $request->location,
+            'bio' => $request->bio,
+        ]));
+
+        if ( ! empty($request->avatar)) {
+            $profile->addMediaFromBase64($request->avatar)->toMediaCollection('avatar');
+        }
+
+        return response()->json([
+            'status' => 200,
+            'message' => __('Profile Created!'),
+            'data' => $profile
+        ]);
     }
 
     /**
@@ -89,7 +116,7 @@ class ProfileController extends Controller
                 'string',
                 'min:3',
                 'max:255',
-                'unique:profiles,username,' . $request->user()->id
+                'unique:profiles,username,' . $profile->id
             ],
         ]);
 
@@ -97,15 +124,15 @@ class ProfileController extends Controller
             return abort(403);
         }
 
-        if ( ! empty($request->avatar)) {
-            $profile->addMediaFromBase64($request->avatar)->toMediaCollection('avatar');
-        }
-
         $profile->name = $request->name;
         $profile->username = $request->username;
         $profile->location = $request->location;
         $profile->bio = $request->bio;
         $profile->save();
+
+        if ( ! empty($request->avatar)) {
+            $profile->addMediaFromBase64($request->avatar)->toMediaCollection('avatar');
+        }
 
         return response()->json([
             'status' => 200,

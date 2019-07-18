@@ -17,7 +17,7 @@
 	<link href="{{ asset('css/_bootstrap-rtl.css') }}" rel="stylesheet">
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/all.css">
 
-	<script>
+	<script type="text/javascript">
         window.Linkati = {!! json_encode([
 	        'csrfToken' => csrf_token(),
 	        'env' => app()->environment(),
@@ -31,8 +31,25 @@
             window.Linkati.profile = {!! $profile !!};
 		@endif
 	</script>
+
+	<script type="text/javascript">
+        window.$crisp = [];
+        window.CRISP_WEBSITE_ID = "533293d7-6508-45dc-826a-8960b3d6df02";
+        (function () {
+            d = document;
+            s = d.createElement("script");
+            s.src = "https://client.crisp.chat/l.js";
+            s.async = 1;
+            d.getElementsByTagName("head")[0].appendChild(s);
+        })();
+
+		@auth
+        $crisp.push(["set", "user:email", "{{ auth()->user()->email }}"]);
+        $crisp.push(["set", "user:nickname", "{{ auth()->user()->name }}"]);
+		@endauth
+	</script>
 </head>
-<body class="text-right">
+<body>
 <div id="app">
 	<nav class="navbar navbar-expand-md navbar-light bg-white border-bottom _shadow-sm">
 		<div class="container">
@@ -51,7 +68,8 @@
 						<li class="nav-item dropdown">
 							<a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
 							   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-								{{ isset($profile) ? $profile->name: __('Profiles') }}
+								<i class="far fa-address-card mr-2"></i>
+								{{ isset($profile) ? $profile->name : __('Profiles') }}
 								<span class="caret"></span>
 							</a>
 
@@ -59,7 +77,7 @@
 								@foreach(auth()->user()->profiles as $profile)
 									<a class="dropdown-item" href="{{ route('profiles.show', $profile) }}">
 										<img src="{{$profile->avatar_url}}" alt="{{$profile->name}}"
-										     class="rounded-circle mr-2" width="25px">
+										     class="rounded-circle mr-2" width="25px" height="25px">
 										{{ $profile->name }}
 									</a>
 								@endforeach
@@ -88,12 +106,13 @@
 						@endif
 					@else
 						<li class="nav-item">
-							<a class="nav-link" href="#referrals">
+							<a class="nav-link" href="#referrals" data-toggle="modal" data-target="#referrals">
 								{{ __('Refer a Friend') }}
 							</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link text-secondary" href="#upgrade">
+							<a class="nav-link text-secondary" href="#upgrade" data-toggle="modal"
+							   data-target="#upgrade">
 								{{ __('Upgrade Now') }}
 								<small class="badge badge-danger">قريبا</small>
 							</a>
@@ -127,6 +146,14 @@
 			</div>
 		</div>
 	</nav>
+
+	@if (session('verified'))
+		<div class="text-center">
+			<div class="alert alert-success" role="alert">
+				{{ __('Your account has been activated successfully!') }}
+			</div>
+		</div>
+	@endif
 
 	<main class="py-4">
 		@yield('content')
@@ -173,6 +200,93 @@
 			</div>
 		</div>
 	</footer>
+
+
+	<!-- Modal -->
+	@auth
+		<div class="modal fade" id="referrals" tabindex="-1" role="dialog" aria-labelledby="referralsLabel"
+		     aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="referralsLabel">دعوة صديق</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<div class="text-center">
+							<h4>شكرا لدعمك منصة لينكاتي 😻</h4>
+							<p>عندما يسجل شخص عن طريقك سوف تحصل على ميزات الحساب المدفعة مجانا لمدة شهر 😎، ما رئيك؟</p>
+						</div>
+
+						<div class="form-group">
+							<label class="font-weight-600">البريد الإلكتروني</label>
+							<input type="email" class="form-control" placeholder="سوف نرسل له دعوة" required>
+						</div>
+						<div class="form-group">
+							<label class="font-weight-600">أو عن طريق الرابط التالي</label>
+							<input type="text" dir="ltr" class="form-control" readonly disabled
+							       value="{{auth()->user()->referral_link}}">
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-text text-danger" data-dismiss="modal">اغلاق</button>
+						<button type="button" class="btn btn-primary">ادعو صديق</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="modal fade" id="upgrade" tabindex="-1" role="dialog" aria-labelledby="upgradeLabel"
+		     aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="upgradeLabel">
+							الحساب المميز
+							<small class="badge badge-danger">قريبا</small>
+						</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<div class="card mb-5 mb-lg-0">
+							<div class="card-body">
+								<h3 class="card-title text-uppercase text-center">الحساب المميز</h3>
+								<h6 class="card-price text-muted text-center">$5<span class="period">/شهرياً</span></h6>
+							</div>
+							<ul class="list-group list-group-flush p-0">
+								<li class="list-group-item">
+									<i class="fas fa-check"></i>
+									عدد غير محدود من الحسابات والمشاريع
+								</li>
+								<li class="list-group-item">
+									<i class="fas fa-check"></i>
+									احصائيات مفصلة عن الحساب والروابط
+								</li>
+								<li class="list-group-item">
+									<i class="fas fa-check"></i>
+									الربط مع Google Analytics
+								</li>
+								<li class="list-group-item">
+									<i class="fas fa-check"></i>
+									امكانية تخصيص نوع الرابط
+								</li>
+								<li class="list-group-item">
+									<i class="fas fa-check"></i>
+									<span>
+										اماكنية تخصيص مظهر الحساب بشكل كامل، والعديد من القوالب المدفوعة
+									</span>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	@endauth
 </div>
 </body>
 </html>

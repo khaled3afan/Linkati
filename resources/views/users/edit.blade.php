@@ -26,7 +26,7 @@
 						<edit-account></edit-account>
 					</div>
 					<div class="tab-pane fade" id="change-password">
-						{{--<edit-account></edit-account>--}}
+						<change-password></change-password>
 					</div>
 				</div>
 			</div>

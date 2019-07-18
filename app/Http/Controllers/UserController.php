@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Response;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Validator;
 
 class UserController extends Controller
@@ -38,7 +39,7 @@ class UserController extends Controller
         ]);
 
         if (request()->has('password')) {
-            $roles['user.password'] = 'min:6';
+            $roles['password'] = 'min:6';
         }
 
         if (request()->has('password')) {
@@ -70,128 +71,50 @@ class UserController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * @param Request $request
      *
-     * @param $username
-     *
-     * @return html|\Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
-     * @throws \Throwable
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function show($username)
+    public function changePassword(Request $request)
     {
-        $where = filter_var($username, FILTER_VALIDATE_INT) ? 'id' : 'username';
-        $user = User::verified()
-                    ->active()
-                    ->using()
-                    ->where($where, $username)
-                    ->firstOrFail();
-
-        if (auth()->check() && $user->isBlockedBy(auth()->id())) {
-            return abort(404);
-        }
-
-        if ($where == 'id') {
-            return redirect()->route('users.show', $user->username);
-        }
-
-        if (auth()->id() != $user->id || request()->has('public')) {
-            $diaries = $user->diaries()
-                            ->published()
-                            ->public()
-                            ->known()
-                            ->latest('published_at')
-                            ->paginate(9);
-        } else {
-            $diaries = $user->diaries()->completed()->latest('published_at')->paginate(9);
-        }
-
-        // $comments = $user->comments()
-        // ->whereRaw('id IN (select MAX(id) FROM comments GROUP BY commentable_id)')
-        // ->latest()
-        // ->paginate(6);
-
-        if (request()->ajax()) {
-            return $this->loadmore($diaries);
-        }
-
-        return view('users.show', compact('user', 'diaries'));
-    }
-
-    /**
-     * @param $username
-     *
-     * @return \Illuminate\Http\JsonResponse
-     * @throws \Throwable
-     */
-    public function following($username)
-    {
-        $user = User::using()->verified()->whereUsername($username)->firstOrFail();
-
-        $following = $user->following()->latest()->paginate(12);
-
-        $items = '';
-        foreach ($following as $follower) {
-            $items .= view('users.loop.following', compact('follower'))->render();
-        }
-
-        // AppLog('Show user following: @'. $user->username);
-        return response()->json([
-            'currentPage' => $following->currentPage(),
-            'lastPage' => $following->lastPage(),
-            'items' => $items,
+        $request->validate([
+            'current_password' => 'required',
+            'new_password' => 'required|string|min:6|confirmed',
+            'new_password_confirmation' => 'required',
         ]);
-    }
 
-    /**
-     * @param $username
-     *
-     * @return \Illuminate\Http\JsonResponse
-     * @throws \Throwable
-     */
-    public function followers($username)
-    {
-        $user = User::using()->verified()->whereUsername($username)->firstOrFail();
+        $user = auth()->user();
 
-        $followers = $user->followers()->latest()->paginate(12);
-
-        $items = '';
-        foreach ($followers as $follower) {
-            $items .= view('users.loop.followers', compact('follower'))->render();
-        }
-
-        // AppLog('Show user followers: @'. $user->username);
-        return response()->json([
-            'currentPage' => $followers->currentPage(),
-            'lastPage' => $followers->lastPage(),
-            'items' => $items,
-        ]);
-    }
-
-    /**
-     * @param $username
-     *
-     * @return \Illuminate\Http\JsonResponse
-     * @throws \Throwable
-     */
-    public function block($username)
-    {
-        $user = User::using()->verified()->whereUsername($username)->firstOrFail();
-
-        if ($user->id != auth()->id() && auth()->user()->block($user->id)) {
+        // The passwords matches
+        if ( ! (Hash::check($request->current_password, $user->password))) {
             return response()->json([
-                'status' => Response::HTTP_OK,
-                'type' => 'success',
-                'title' => trans('strings.great'),
-                'message' => trans('strings.user-has-been-blocked'),
-            ]);
+                'errors' => [
+                    'current_password' => [
+                        __('Your current password does not matches with the password you provided. Please try again.')
+                    ]
+                ]
+            ], 422);
         }
 
-        return response()->json([
-            'status' => Response::HTTP_FORBIDDEN,
-            'type' => 'error',
-            'title' => trans('strings.errors'),
-            'message' => trans('strings.an-error-has-been-caused'),
-        ]);
+        //Current password and new password are same
+        if (strcmp($request->current_password, $request->new_password) == 0) {
+            return response()->json([
+                'errors' => [
+                    'new_password' => [
+                        __('New Password cannot be same as your current password. Please choose a different password.')
+                    ]
+                ]
+            ], 422);
+        }
 
+        //Change Password
+        $user->password = bcrypt($request->new_password);
+        $user->save();
+
+        return response()->json([
+            'status' => 200,
+            'message' => __('Password changed successfully!'),
+            'data' => $user,
+        ]);
     }
 }

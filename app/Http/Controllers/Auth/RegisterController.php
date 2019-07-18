@@ -54,7 +54,7 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'name' => ['required', 'string', 'min:3', 'max:60'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'username' => ['required', 'string', 'max:255', 'unique:users'],
+            'username' => ['required', 'string', 'max:255', 'unique:profiles'],
             'password' => ['required', 'string', 'min:8'],
         ]);
     }
@@ -68,11 +68,15 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        $cookie = \Cookie::get('referral');
+        $referred_by = $cookie ? \Hashids::decode($cookie)[0] : null;
+
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
-            'username' => $data['username'],
+//            'username' => $data['username'],
             'password' => Hash::make($data['password']),
+            'referred_by' => $referred_by
         ]);
     }
 

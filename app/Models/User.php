@@ -19,6 +19,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'name',
         'email',
         'password',
+        'referred_by'
     ];
 
     /**
@@ -41,11 +42,11 @@ class User extends Authenticatable implements MustVerifyEmail
     ];
 
     /**
-     * Get the profiles for the user.
+     * @return string
      */
-    public function profiles()
+    public function getReferralLinkAttribute()
     {
-        return $this->hasMany(Profile::class);
+        return url('/') . '?ref=' . \Hashids::encode($this->id);
     }
 
     /**
@@ -75,5 +76,23 @@ class User extends Authenticatable implements MustVerifyEmail
         $url .= "?s=$size&d=$default&r=$r";
 
         return $url;
+    }
+
+    /**
+     * Get the profiles for the user.
+     */
+    public function profiles()
+    {
+        return $this->hasMany(Profile::class);
+    }
+
+    public function referrer()
+    {
+        return $this->hasOne(User::class, 'id', 'referred_by');
+    }
+
+    public function referrals()
+    {
+        return $this->hasMany(User::class, 'referred_by', 'id');
     }
 }

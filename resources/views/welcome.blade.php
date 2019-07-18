@@ -88,13 +88,13 @@
 						</div>
 
 						<div class="form-group">
-							<div class="input-group mb-2" dir="ltr">
-								<div class="input-group-prepend">
-									<div class="input-group-text">linkati.me/</div>
-								</div>
-								<input id="username" type="text" placeholder="{{ __('@username') }}"
+							<div class="input-group mb-2">
+								<input id="username" type="text" placeholder="{{ __('Username') }}"
 								       class="form-control @error('username') is-invalid @enderror" name="username"
-								       value="{{ old('username') }}" required autocomplete="username">
+								       value="{{ old('username') }}" required autocomplete="username" dir="ltr">
+								<div class="input-group-prepend">
+									<div class="input-group-text" dir="ltr">linkati.me/</div>
+								</div>
 							</div>
 
 							@error('username')
@@ -106,7 +106,7 @@
 					</div>
 
 					<div class="card-footer text-center">
-						<button type="submit" class="btn btn-primary">
+						<button type="submit" class="btn btn-secondary">
 							{{ __('Register') }}
 						</button>
 					</div>

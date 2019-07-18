@@ -5,10 +5,11 @@
 		<div class="row justify-content-center">
 			<div class="col-12 mb-5">
 				<div class="col-md-5 mx-auto">
-					<div class="input-group"
+					<div class="input-group cursor-pointer"
 					     v-clipboard:success="copied"
 					     v-clipboard:copy="profile.route">
-						<div class="input-group-append">
+						<div class="input-group-append" data-toggle="tooltip" data-placement="bottom"
+						     title="{{ __('Copy') }}">
 							<span class="input-group-text">
 								<i class="far fa-copy"></i>
 							</span>

@@ -43,12 +43,6 @@
                 submiting: false,
             }
         },
-        mounted() {
-            this.$nextTick(function () {
-                // Get Profile
-                this.profile = _.cloneDeep(this.$store.state.profile);
-            });
-        },
         methods: {
             updateAccount() {
                 this.submiting = true;
@@ -57,9 +51,7 @@
                         this.errors = {};
                         this.submiting = false;
                         this.$toasted.global.error(response.data.message);
-                        this.$store.commit('setProfile', response.data.data);
-
-                        history.pushState({}, null, window.Linkati.domain + '/' + response.data.data.username);
+                        this.$store.commit('setUser', response.data.data);
                     })
                     .catch(error => {
                         this.errors = error.response.data.errors;

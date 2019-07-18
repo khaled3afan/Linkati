@@ -21,5 +21,12 @@
   "New Profile": "حساب جديد",
   "Change Password": "تعديل كلمة المرور",
   "Upgrade Now": "الحساب المميز",
-  "Refer a Friend": "دعوة صديق"
+  "Refer a Friend": "دعوة صديق",
+  "Copy": "نسخ",
+  "Verify Your Email Address": "يجب عليك تفعيل البريد الإلكتروني",
+  "A fresh verification link has been sent to your email address.": "تم إرسال رابط تحقق جديد إلى عنوان بريدك الإلكتروني.",
+  "Before proceeding, please check your email for a verification link.": "قبل المتابعة، يرجى التحقق من بريدك الإلكتروني لمعرفة رابط تفعيل الحساب.",
+  "If you did not receive the email": "في حال لم تصلك رسالة التفعيل",
+  "click here to request another": "اضغط هنا لارسال رابط جديد",
+  "Your account has been activated successfully!": "تم تفعيل حسابك بنجاح!"
 }

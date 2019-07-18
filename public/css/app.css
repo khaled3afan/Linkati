@@ -11150,6 +11150,10 @@ a.text-dark:focus {
   font-weight: 600;
 }
 
+.cursor-pointer {
+  cursor: pointer;
+}
+
 .edit-avatar label {
   cursor: pointer;
 }
