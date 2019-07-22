@@ -16,11 +16,7 @@
 			</li>
 		</ul>
 
-		<div class="card-footer">
-			<a class="navbar-brand" href="/">
-				<img src="/images/logo.png" width="90px">
-			</a>
-		</div>
+		{{theme.name}}
 	</div>
 </template>
 
@@ -28,9 +24,18 @@
     import {mapState} from 'vuex';
 
     export default {
-        computed: mapState(['profile']),
-        // props: [
-        //     'profile'
-        // ],
+        computed: mapState(['profile', 'themes']),
+        data() {
+            return {
+                theme: {},
+            }
+        },
+        methods: {
+            selectedTheme: function () {
+                return this.theme = this.themes.filter(function (theme) {
+                    return theme.selected
+                })
+            }
+        }
     }
 </script>

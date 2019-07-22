@@ -17,6 +17,10 @@ Auth::routes(['verify' => true]);
 
 Route::get('/', 'HomeController@index')->name('home');
 
+Route::get('about', 'HomeController@index');
+Route::get('privacy', 'HomeController@index');
+Route::get('terms', 'HomeController@index');
+
 Route::middleware('auth')->group(function () {
     Route::get('account', 'UserController@edit')->name('users.edit');
     Route::patch('account', 'UserController@update');

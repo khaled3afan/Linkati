@@ -62,7 +62,7 @@
 						<edit-links></edit-links>
 					</div>
 					<div class="tab-pane fade" id="profile-customize">
-						Edit
+						<customize-profile></customize-profile>
 					</div>
 				</div>
 			</div>

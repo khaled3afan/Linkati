@@ -53,10 +53,12 @@
 						<div class="card-body">
 							<h4 class="card-title font-weight-600 mb-2">{{ $profile->name }}</h4>
 							<small class="text-muted d-block" dir="ltr">{{ '@'.$profile->username }}</small>
-							<span class="d-block mb-2">
-								<i class="fas fa-map-marker-alt"></i>
-								{{ $profile->location }}
-							</span>
+							@if($profile->location)
+								<span class="d-block mb-2">
+									<i class="fas fa-map-marker-alt"></i>
+									{{ $profile->location }}
+								</span>
+							@endif
 
 							<p class="card-text">{{ $profile->bio }}</p>
 

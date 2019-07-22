@@ -37,6 +37,8 @@ Vue.toasted.register('error', message => message, {
 
 // Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 
+Vue.component('theme', require('./components/Theme.vue').default);
+
 // Links
 Vue.component('create-link', require('./components/CreateLink.vue').default);
 Vue.component('edit-links', require('./components/profile/edit-links.vue').default);
@@ -44,6 +46,7 @@ Vue.component('edit-links', require('./components/profile/edit-links.vue').defau
 // Profiles
 Vue.component('create-profile', require('./components/profile/create.vue').default);
 Vue.component('edit-profile', require('./components/profile/edit.vue').default);
+Vue.component('customize-profile', require('./components/profile/customize.vue').default);
 Vue.component('profile-card', require('./components/profile/show.vue').default);
 
 Vue.component('edit-account', require('./components/EditAccount.vue').default);
