@@ -61,7 +61,7 @@
                     this.submiting = false;
                     this.link = {};
                     this.$store.commit('setProfile', response.data.data);
-                    this.$toasted.global.error(response.data.message);
+                    this.$toasted.success(response.data.message);
                     $('#add-new-link').collapse('hide');
                 }).catch(error => {
                     this.errors = error.response.data.errors;

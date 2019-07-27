@@ -1,0 +1,25 @@
+[
+  {
+    "is_pro": false,
+    "name": "كلاسكي",
+    "key": "classic",
+    "thumbnail": "/images/themes/Classic.png",
+    "settings": {
+      "button": "btn btn-dark"
+    }
+  },
+  {
+    "is_pro": false,
+    "name": "ازرق",
+    "key": "blue",
+    "thumbnail": "/images/themes/Blue.png",
+    "settings": null
+  },
+  {
+    "is_pro": false,
+    "name": "دارك",
+    "key": "dark",
+    "thumbnail": "/images/themes/Dark.png",
+    "settings": null
+  }
+]

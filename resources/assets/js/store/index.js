@@ -3,32 +3,12 @@ export default {
         user: {},
         profile: {},
         env: 'local',
-        themes: [
-            {
-                'id': 1,
-                'is_pro': false,
-                'selected': true,
-                'name': 'كلاسكي',
-                'key': 'classic',
-                'thumbnail': '/images/themes/Classic.png'
-            },
-            {
-                'id': 2,
-                'is_pro': false,
-                'selected': false,
-                'name': 'ازرق',
-                'key': 'blue',
-                'thumbnail': '/images/themes/Blue.png'
-            },
-            {
-                'id': 3,
-                'is_pro': false,
-                'selected': false,
-                'name': 'دارك',
-                'key': 'Dark',
-                'thumbnail': '/images/themes/Dark.png'
-            },
-        ],
+        themes: {},
+    },
+    getters: {
+        selectedTheme: state => {
+            return state.themes.filter(theme => theme.selected);
+        }
     },
     mutations: {
         setUser(state, payload) {
@@ -40,5 +20,31 @@ export default {
         setEnv(state, payload) {
             state.env = payload;
         },
+        setThemes(state, payload) {
+            state.themes = payload;
+        },
+    },
+    actions: {
+        getUser({commit, state}, payload) {
+            if (window.Linkati.auth) {
+                commit('setUser', _.cloneDeep(window.Linkati.auth));
+            }
+        },
+        getProfile({commit, state}, payload) {
+            if (window.Linkati.profile) {
+                commit('setProfile', _.cloneDeep(window.Linkati.profile));
+            }
+        },
+        getThemes({commit, state}, payload) {
+            if (window.Linkati.themes) {
+                let themes = _.cloneDeep(window.Linkati.themes);
+
+                themes.forEach(function (theme, index) {
+                    theme.selected = theme.key == state.profile.theme.key;
+                });
+
+                commit('setThemes', themes);
+            }
+        }
     }
 }

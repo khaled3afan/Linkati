@@ -16,6 +16,7 @@ class CreateProfilesTable extends Migration
         Schema::create('profiles', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id')->index();
+            $table->unsignedBigInteger('theme_id')->index();
             $table->string('name')->nullable();
             $table->string('username')->unique()->index();
             $table->string('location')->nullable();
@@ -24,6 +25,7 @@ class CreateProfilesTable extends Migration
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('theme_id')->references('id')->on('themes');
         });
     }
 

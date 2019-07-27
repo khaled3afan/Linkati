@@ -106,9 +106,27 @@ class ProfileController extends Controller
      *
      * @return \Illuminate\Http\Response
      * @throws \Illuminate\Validation\ValidationException
+     * @throws \Spatie\MediaLibrary\Exceptions\FileCannotBeAdded
+     * @throws \Spatie\MediaLibrary\Exceptions\FileCannotBeAdded\InvalidBase64Data
      */
     public function update(Request $request, Profile $profile)
     {
+        // todo: replace this with authorize()
+        if (auth()->id() != $profile->user_id) {
+            return abort(403);
+        }
+
+        if ($request->has('chosenThem')) {
+            $profile->theme_id = $request->input('chosenThem.id');
+            $profile->save();
+
+            return response()->json([
+                'status' => 200,
+                'message' => __('Your Profile Has Been Updated!'),
+                'data' => $profile->fresh()
+            ]);
+        }
+
         $this->validate($request, [
             'name' => ['required', 'string', 'max:255'],
             'username' => [
@@ -119,10 +137,6 @@ class ProfileController extends Controller
                 'unique:profiles,username,' . $profile->id
             ],
         ]);
-
-        if (auth()->id() != $profile->user_id) {
-            return abort(403);
-        }
 
         $profile->name = $request->name;
         $profile->username = $request->username;

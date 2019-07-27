@@ -15,12 +15,8 @@ Vue.use(VueClipboard);
 
 Vue.use(Vuex);
 
-import store from './store/index';
-
-
-Vue.use(Toasted);
-Vue.toasted.register('error', message => message, {
-    position: 'bottom-right',
+Vue.use(Toasted, {
+    position: 'top-center',
     duration: 1000
 });
 
@@ -58,31 +54,30 @@ Vue.component('change-password', require('./components/ChangePassword.vue').defa
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-import {mapState} from 'vuex';
+import store from './store/index';
+import {mapState, mapActions} from 'vuex';
 
 const app = new Vue({
     el: '#app',
-    computed: mapState(['user', 'profile', 'env']),
+    computed: {
+        ...mapState(['user', 'profile', 'env']),
+    },
     data: {},
-    mounted() {
+    created() {
         this.getUser();
         this.getProfile();
+        this.getThemes();
         this.$store.commit('setEnv', window.Linkati.env);
     },
     methods: {
-        getUser() {
-            if (window.Linkati.auth) {
-                this.$store.commit('setUser', _.cloneDeep(window.Linkati.auth));
-            }
-        },
-        getProfile() {
-            if (window.Linkati.profile) {
-                this.$store.commit('setProfile', _.cloneDeep(window.Linkati.profile));
-            }
-        },
         copied: function (e) {
-            this.$toasted.global.error('تم النسخ!');
+            this.$toasted.success('تم النسخ!');
         },
+        ...mapActions([
+            'getUser',
+            'getProfile',
+            'getThemes',
+        ])
     },
     store: new Vuex.Store(store),
 });

@@ -1,13 +1,12 @@
 <template>
-	<div class="card">
+	<div class="card themes">
 		<div class="card-header font-weight-600">
 			القوالب
 		</div>
 		<div class="card-body">
 			<div class="row">
-				<div class="col-md-4" v-for="(theme, idx) in themes"
-				     :key="idx"
-				     @click="selcetTheme(idx)">
+				<div class="col-md-4" v-for="(theme, idx) in themes" :key="idx"
+				     @click="selcetTheme(idx, theme)" :class="{'disabled': theme.selected}">
 					<theme :theme="theme"></theme>
 				</div>
 			</div>
@@ -19,43 +18,36 @@
     import {mapState} from 'vuex';
 
     export default {
-        computed: mapState(['themes']),
+        computed: mapState(["themes", "profile"]),
         data() {
             return {
-                profile: {},
                 errors: {},
                 submiting: false,
             }
         },
-        mounted() {
-            this.$nextTick(function () {
-                // Get Profile
-                this.profile = _.cloneDeep(this.$store.state.profile);
-            });
-        },
         methods: {
-            selcetTheme(idx) {
+            selcetTheme(idx, theme) {
                 this.themes.forEach(function (theme, index) {
                     theme.selected = false;
                 });
 
                 this.themes[idx].selected = !this.themes[idx].selected;
+                this.profile.theme = theme;
+                this.updateTheme(theme);
             },
-            updateTheme() {
+            updateTheme(theme) {
                 this.submiting = true;
-                axios.put('/api/' + this.$store.state.profile.username + '/themes/update', this.profile)
-                    .then(response => {
-                        this.errors = {};
-                        this.submiting = false;
-                        this.$toasted.global.error(response.data.message);
-                        this.$store.commit('setProfile', response.data.data);
-
-                        history.pushState({}, null, window.Linkati.domain + '/' + response.data.data.username);
-                    })
-                    .catch(error => {
-                        this.errors = error.response.data.errors;
-                        this.submiting = false;
-                    });
+                axios.put('/api/' + this.profile.username + '/theme/update', {
+                    chosenThem: theme
+                }).then(response => {
+                    this.errors = {};
+                    this.submiting = false;
+                    this.$toasted.success(response.data.message);
+                    this.$store.commit('setProfile', response.data.data);
+                }).catch(error => {
+                    this.errors = error.response.data.errors;
+                    this.submiting = false;
+                });
             }
         }
     }

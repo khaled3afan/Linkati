@@ -19,6 +19,7 @@ class Profile extends Model implements HasMedia
      */
     protected $fillable = [
         'user_id',
+        'theme_id',
         'name',
         'username',
         'location',
@@ -32,6 +33,7 @@ class Profile extends Model implements HasMedia
 
     protected $with = [
         'links',
+        'theme',
     ];
 
     /**
@@ -74,6 +76,18 @@ class Profile extends Model implements HasMedia
     public function links($order = 'asc')
     {
         return $this->morphMany(Link::class, 'linkable')->orderBy('order', $order);
+    }
+
+    /**
+     * Get profile theme.
+     *
+     * @param string $order
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
+     */
+    public function theme()
+    {
+        return $this->belongsTo(Theme::class);
     }
 
     /**

@@ -82,7 +82,7 @@
 
 	<footer class="profile-footer text-center">
 		<a class="m-auto" href="{{ url('/') }}" title="{{ config('app.name') }}">
-			<img src="{{ asset('/images/logo.png') }}" alt="{{ config('app.name') }}" width="90px">
+			<img src="{{ asset('/images/logo.png') }}" alt="{{ config('app.name') }}" width="150px">
 		</a>
 	</footer>
 </div>

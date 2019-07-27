@@ -1906,7 +1906,7 @@ __webpack_require__.r(__webpack_exports__);
         _this.submiting = false;
         _this.password = {};
 
-        _this.$toasted.global.error(response.data.message);
+        _this.$toasted.success(response.data.message);
       })["catch"](function (error) {
         console.log(error.response.data.errors);
         _this.errors = error.response.data.errors;
@@ -1993,7 +1993,7 @@ __webpack_require__.r(__webpack_exports__);
 
         _this.$store.commit('setProfile', response.data.data);
 
-        _this.$toasted.global.error(response.data.message);
+        _this.$toasted.success(response.data.message);
 
         $('#add-new-link').collapse('hide');
       })["catch"](function (error) {
@@ -2068,7 +2068,7 @@ __webpack_require__.r(__webpack_exports__);
         _this.errors = {};
         _this.submiting = false;
 
-        _this.$toasted.global.error(response.data.message);
+        _this.$toasted.success(response.data.message);
 
         _this.$store.commit('setUser', response.data.data);
       })["catch"](function (error) {
@@ -2103,9 +2103,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['theme'],
-  methods: {}
+  props: ['theme']
 });
 
 /***/ }),
@@ -2223,7 +2225,7 @@ __webpack_require__.r(__webpack_exports__);
         _this.errors = {};
         _this.submiting = false;
 
-        _this.$toasted.global.error(response.data.message);
+        _this.$toasted.success(response.data.message);
 
         window.location = window.Linkati.domain + '/' + response.data.data.username;
         window.location.href = window.Linkati.domain + '/' + response.data.data.username;
@@ -2263,43 +2265,37 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  computed: Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])(['themes']),
+  computed: Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])(["themes", "profile"]),
   data: function data() {
     return {
-      profile: {},
       errors: {},
       submiting: false
     };
   },
-  mounted: function mounted() {
-    this.$nextTick(function () {
-      // Get Profile
-      this.profile = _.cloneDeep(this.$store.state.profile);
-    });
-  },
   methods: {
-    selcetTheme: function selcetTheme(idx) {
+    selcetTheme: function selcetTheme(idx, theme) {
       this.themes.forEach(function (theme, index) {
         theme.selected = false;
       });
       this.themes[idx].selected = !this.themes[idx].selected;
+      this.profile.theme = theme;
+      this.updateTheme(theme);
     },
-    updateTheme: function updateTheme() {
+    updateTheme: function updateTheme(theme) {
       var _this = this;
 
       this.submiting = true;
-      axios.put('/api/' + this.$store.state.profile.username + '/themes/update', this.profile).then(function (response) {
+      axios.put('/api/' + this.profile.username + '/theme/update', {
+        chosenThem: theme
+      }).then(function (response) {
         _this.errors = {};
         _this.submiting = false;
 
-        _this.$toasted.global.error(response.data.message);
+        _this.$toasted.success(response.data.message);
 
         _this.$store.commit('setProfile', response.data.data);
-
-        history.pushState({}, null, window.Linkati.domain + '/' + response.data.data.username);
       })["catch"](function (error) {
         _this.errors = error.response.data.errors;
         _this.submiting = false;
@@ -2403,7 +2399,7 @@ __webpack_require__.r(__webpack_exports__);
       axios.put('/api/' + this.profile.username + '/links/' + this.profile.links[event.newIndex].id + '/resort', {
         links: this.profile.links
       }).then(function (response) {
-        _this.$toasted.global.error(response.data.message);
+        _this.$toasted.success(response.data.message);
       })["catch"](function (error) {
         _this.errors = error.response.data.errors;
         _this.submiting = false;
@@ -2421,7 +2417,7 @@ __webpack_require__.r(__webpack_exports__);
 
           _this2.profile.links.splice(idx, 1);
 
-          _this2.$toasted.global.error(response.data.message);
+          _this2.$toasted.success(response.data.message);
         })["catch"](function (error) {
           _this2.errors = error.response.data.errors;
           _this2.submiting = false;
@@ -2436,7 +2432,7 @@ __webpack_require__.r(__webpack_exports__);
         _this3.errors = {};
         _this3.submiting = false;
 
-        _this3.$toasted.global.error(response.data.message);
+        _this3.$toasted.success(response.data.message);
 
         _this3.$store.commit('setProfile', response.data.data);
       })["catch"](function (error) {
@@ -2562,7 +2558,7 @@ __webpack_require__.r(__webpack_exports__);
         _this.errors = {};
         _this.submiting = false;
 
-        _this.$toasted.global.error(response.data.message);
+        _this.$toasted.success(response.data.message);
 
         _this.$store.commit('setProfile', response.data.data);
 
@@ -2608,22 +2604,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  computed: Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])(['profile', 'themes']),
-  data: function data() {
-    return {
-      theme: {}
-    };
-  },
-  methods: {
-    selectedTheme: function selectedTheme() {
-      return this.theme = this.themes.filter(function (theme) {
-        return theme.selected;
-      });
-    }
-  }
+  computed: Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])(["profile"])
 });
 
 /***/ }),
@@ -41040,25 +41023,33 @@ var render = function() {
   return _c(
     "div",
     {
-      staticClass: "card text-center overflow-hidden",
-      class: { "theme-pro": _vm.theme.is_pro }
+      staticClass: "card text-center overflow-hidden theme",
+      class: {
+        "theme-pro": _vm.theme.is_pro,
+        "theme-selected": _vm.theme.selected
+      }
     },
     [
-      _c("img", {
-        staticClass: "img-fluid",
-        attrs: { src: _vm.theme.thumbnail, alt: _vm.theme.name }
-      }),
-      _vm._v(" "),
       _vm.theme.selected
         ? _c(
             "span",
-            { staticClass: "rounded-circle btn btn-success position-absolute" },
+            {
+              staticClass:
+                "rounded-circle btn btn-success position-absolute theme-checked"
+            },
             [_c("i", { staticClass: "fas fa-check" })]
           )
         : _vm._e(),
       _vm._v(" "),
-      _c("div", { staticClass: "card-footer font-weight-600" }, [
-        _vm._v("\n\t\t" + _vm._s(_vm.theme.name) + "\n\t")
+      _c("div", { staticClass: "theme-content" }, [
+        _c("img", {
+          staticClass: "img-fluid",
+          attrs: { src: _vm.theme.thumbnail, alt: _vm.theme.name }
+        }),
+        _vm._v(" "),
+        _c("div", { staticClass: "card-footer font-weight-600" }, [
+          _vm._v("\n\t\t\t" + _vm._s(_vm.theme.name) + "\n\t\t")
+        ])
       ])
     ]
   )
@@ -41382,7 +41373,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "card" }, [
+  return _c("div", { staticClass: "card themes" }, [
     _c("div", { staticClass: "card-header font-weight-600" }, [
       _vm._v("\n\t\tالقوالب\n\t")
     ]),
@@ -41397,9 +41388,10 @@ var render = function() {
             {
               key: idx,
               staticClass: "col-md-4",
+              class: { disabled: theme.selected },
               on: {
                 click: function($event) {
-                  return _vm.selcetTheme(idx)
+                  return _vm.selcetTheme(idx, theme)
                 }
               }
             },
@@ -41977,7 +41969,9 @@ var render = function() {
           _c(
             "a",
             {
-              staticClass: "btn btn-primary w-100 text-right",
+              key: idx,
+              staticClass: "w-100 text-right btn-lg",
+              class: _vm.profile.theme.settings.button,
               attrs: { href: link.url, rel: "nofollow noopener noreferrer" }
             },
             [
@@ -41988,8 +41982,7 @@ var render = function() {
         ])
       }),
       0
-    ),
-    _vm._v("\n\n\t" + _vm._s(_vm.theme.name) + "\n")
+    )
   ])
 }
 var staticRenderFns = []
@@ -58463,6 +58456,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue_toasted__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue-toasted */ "./node_modules/vue-toasted/dist/vue-toasted.min.js");
 /* harmony import */ var vue_toasted__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vue_toasted__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _store_index__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./store/index */ "./resources/assets/js/store/index.js");
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -58476,12 +58473,8 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 
 Vue.use(vue_clipboard2__WEBPACK_IMPORTED_MODULE_1___default.a);
 Vue.use(vuex__WEBPACK_IMPORTED_MODULE_0__["default"]);
-
-Vue.use(vue_toasted__WEBPACK_IMPORTED_MODULE_2___default.a);
-Vue.toasted.register('error', function (message) {
-  return message;
-}, {
-  position: 'bottom-right',
+Vue.use(vue_toasted__WEBPACK_IMPORTED_MODULE_2___default.a, {
+  position: 'top-center',
   duration: 1000
 });
 /**
@@ -58513,30 +58506,22 @@ Vue.component('change-password', __webpack_require__(/*! ./components/ChangePass
  */
 
 
+
 var app = new Vue({
   el: '#app',
-  computed: Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])(['user', 'profile', 'env']),
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])(['user', 'profile', 'env'])),
   data: {},
-  mounted: function mounted() {
+  created: function created() {
     this.getUser();
     this.getProfile();
+    this.getThemes();
     this.$store.commit('setEnv', window.Linkati.env);
   },
-  methods: {
-    getUser: function getUser() {
-      if (window.Linkati.auth) {
-        this.$store.commit('setUser', _.cloneDeep(window.Linkati.auth));
-      }
-    },
-    getProfile: function getProfile() {
-      if (window.Linkati.profile) {
-        this.$store.commit('setProfile', _.cloneDeep(window.Linkati.profile));
-      }
-    },
+  methods: _objectSpread({
     copied: function copied(e) {
-      this.$toasted.global.error('تم النسخ!');
+      this.$toasted.success('تم النسخ!');
     }
-  },
+  }, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])(['getUser', 'getProfile', 'getThemes'])),
   store: new vuex__WEBPACK_IMPORTED_MODULE_0__["default"].Store(_store_index__WEBPACK_IMPORTED_MODULE_3__["default"])
 });
 $(function () {
@@ -59238,28 +59223,14 @@ __webpack_require__.r(__webpack_exports__);
     user: {},
     profile: {},
     env: 'local',
-    themes: [{
-      'id': 1,
-      'is_pro': false,
-      'selected': true,
-      'name': 'كلاسكي',
-      'key': 'classic',
-      'thumbnail': '/images/themes/Classic.png'
-    }, {
-      'id': 2,
-      'is_pro': false,
-      'selected': false,
-      'name': 'ازرق',
-      'key': 'blue',
-      'thumbnail': '/images/themes/Blue.png'
-    }, {
-      'id': 3,
-      'is_pro': false,
-      'selected': false,
-      'name': 'دارك',
-      'key': 'Dark',
-      'thumbnail': '/images/themes/Dark.png'
-    }]
+    themes: {}
+  },
+  getters: {
+    selectedTheme: function selectedTheme(state) {
+      return state.themes.filter(function (theme) {
+        return theme.selected;
+      });
+    }
   },
   mutations: {
     setUser: function setUser(state, payload) {
@@ -59270,6 +59241,40 @@ __webpack_require__.r(__webpack_exports__);
     },
     setEnv: function setEnv(state, payload) {
       state.env = payload;
+    },
+    setThemes: function setThemes(state, payload) {
+      state.themes = payload;
+    }
+  },
+  actions: {
+    getUser: function getUser(_ref, payload) {
+      var commit = _ref.commit,
+          state = _ref.state;
+
+      if (window.Linkati.auth) {
+        commit('setUser', _.cloneDeep(window.Linkati.auth));
+      }
+    },
+    getProfile: function getProfile(_ref2, payload) {
+      var commit = _ref2.commit,
+          state = _ref2.state;
+
+      if (window.Linkati.profile) {
+        commit('setProfile', _.cloneDeep(window.Linkati.profile));
+      }
+    },
+    getThemes: function getThemes(_ref3, payload) {
+      var commit = _ref3.commit,
+          state = _ref3.state;
+
+      if (window.Linkati.themes) {
+        var themes = _.cloneDeep(window.Linkati.themes);
+
+        themes.forEach(function (theme, index) {
+          theme.selected = theme.key == state.profile.theme.key;
+        });
+        commit('setThemes', themes);
+      }
     }
   }
 });

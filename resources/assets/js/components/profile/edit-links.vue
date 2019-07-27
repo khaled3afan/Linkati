@@ -79,7 +79,7 @@
                 axios.put('/api/' + this.profile.username + '/links/' + this.profile.links[event.newIndex].id + '/resort', {
                     links: this.profile.links
                 }).then(response => {
-                    this.$toasted.global.error(response.data.message);
+                    this.$toasted.success(response.data.message);
                 }).catch(error => {
                     this.errors = error.response.data.errors;
                     this.submiting = false;
@@ -94,7 +94,7 @@
                             this.submiting = false;
                             $('#link-' + id).collapse('hide');
                             this.profile.links.splice(idx, 1);
-                            this.$toasted.global.error(response.data.message);
+                            this.$toasted.success(response.data.message);
                         })
                         .catch(error => {
                             this.errors = error.response.data.errors;
@@ -108,7 +108,7 @@
                     .then(response => {
                         this.errors = {};
                         this.submiting = false;
-                        this.$toasted.global.error(response.data.message);
+                        this.$toasted.success(response.data.message);
                         this.$store.commit('setProfile', response.data.data);
                     })
                     .catch(error => {

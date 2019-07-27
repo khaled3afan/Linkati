@@ -65,7 +65,7 @@
                         this.errors = {};
                         this.submiting = false;
                         this.password = {};
-                        this.$toasted.global.error(response.data.message);
+                        this.$toasted.success(response.data.message);
                     })
                     .catch(error => {
                         console.log(error.response.data.errors);

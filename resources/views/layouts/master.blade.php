@@ -62,6 +62,8 @@
 
 		@if(isset($profile))
             window.Linkati.profile = {!! $profile !!};
+
+        window.Linkati.themes = {!! \App\Models\Theme::all() !!};
 		@endif
 	</script>
 

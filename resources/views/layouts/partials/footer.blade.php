@@ -4,9 +4,9 @@
 			<div class="col-md-6">
 				<div class="row">
 					<nav class="nav">
-						<a class="nav-item nav-link" href="#!">عن لينكاتي</a>
-						<a class="nav-item nav-link" href="#!">سياسة الخصوصية</a>
-						<a class="nav-item nav-link" href="#!">شروط الاستخدام</a>
+						<a class="nav-item nav-link" href="{{ route('pages.about') }}">عن لينكاتي</a>
+						<a class="nav-item nav-link" href="{{ route('pages.privacy') }}">سياسة الخصوصية</a>
+						<a class="nav-item nav-link" href="{{ route('pages.terms') }}">شروط الاستخدام</a>
 					</nav>
 				</div>
 

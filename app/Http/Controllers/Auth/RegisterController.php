@@ -77,6 +77,11 @@ class RegisterController extends Controller
 //            'username' => $data['username'],
             'password' => Hash::make($data['password']),
             'referred_by' => $referred_by,
+            'settings' => [
+                'email' => [
+                    'newsletter' => true
+                ]
+            ]
         ]);
     }
 

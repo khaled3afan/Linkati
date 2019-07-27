@@ -14,12 +14,14 @@
 use Illuminate\Support\Facades\Route;
 
 Auth::routes(['verify' => true]);
+Route::get('social/{provider}', 'Auth\SocialiteController@redirectToProvider')->name('auth.social');
+Route::get('social/{provider}/callback', 'Auth\SocialiteController@handleProviderCallback');
 
 Route::get('/', 'HomeController@index')->name('home');
 
-Route::get('about', 'HomeController@index');
-Route::get('privacy', 'HomeController@index');
-Route::get('terms', 'HomeController@index');
+Route::get('about', 'HomeController@index')->name('pages.about');
+Route::get('privacy', 'HomeController@index')->name('pages.privacy');
+Route::get('terms', 'HomeController@index')->name('pages.terms');
 
 Route::middleware('auth')->group(function () {
     Route::get('account', 'UserController@edit')->name('users.edit');
@@ -36,15 +38,13 @@ Route::middleware('auth')->group(function () {
         Route::put('/update', 'ProfileController@update');
         Route::post('/create', 'ProfileController@store');
 
+        Route::put('theme/update', 'ProfileController@update');
+
         Route::put('/links/create', 'LinkController@store');
         Route::delete('/links/{link}', 'LinkController@destroy');
         Route::put('/links/{link}', 'LinkController@update');
         Route::put('/links/{link}/resort', 'LinkController@resort');
     });
-});
-
-Route::get('/cookie', function () {
-    return Cookie::get('referral');
 });
 
 Route::get('{profile}', 'ProfileController@show')->name('profiles.show');

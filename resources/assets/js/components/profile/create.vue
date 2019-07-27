@@ -100,7 +100,7 @@
                     .then(response => {
                         this.errors = {};
                         this.submiting = false;
-                        this.$toasted.global.error(response.data.message);
+                        this.$toasted.success(response.data.message);
 
                         window.location = window.Linkati.domain + '/' + response.data.data.username;
                         window.location.href = window.Linkati.domain + '/' + response.data.data.username;

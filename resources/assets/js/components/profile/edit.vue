@@ -100,7 +100,7 @@
                     .then(response => {
                         this.errors = {};
                         this.submiting = false;
-                        this.$toasted.global.error(response.data.message);
+                        this.$toasted.success(response.data.message);
                         this.$store.commit('setProfile', response.data.data);
 
                         history.pushState({}, null, window.Linkati.domain + '/' + response.data.data.username);
