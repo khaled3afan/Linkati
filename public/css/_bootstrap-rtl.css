@@ -42,16 +42,16 @@ th {
 }
 
 .btn-group > .btn:first-child:not(:last-child):not(.dropdown-toggle) {
-  border-radius: 0 0.25rem 0.25rem 0;
+  border-radius: 0 4rem 4rem 0;
 }
 
 .btn-group > .btn:last-child:not(:first-child),
 .btn-group > .dropdown-toggle:not(:first-child) {
-  border-radius: 0.25rem 0 0 0.25rem;
+  border-radius: 4rem 0 0 4rem;
 }
 
 .btn-group > .btn-group:last-child:not(:first-child) > .btn:first-child {
-  border-radius: 0.25rem 0 0 0.25rem;
+  border-radius: 4rem 0 0 4rem;
 }
 
 .custom-control-label::after,

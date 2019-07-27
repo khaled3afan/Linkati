@@ -1,9 +1,5 @@
-// Body
-//$body-bg: #EAEFF3;
-$body-bg: #fafafa;
-
 // Typography
-$font-family-sans-serif: 'GraphikArabic', sans-serif;
+$font-family-sans-serif: 'DiodrumArabic', sans-serif;
 $font-size-base: 1rem;
 $line-height-base: 1.6;
 
@@ -19,22 +15,25 @@ $green: #38c172;
 $teal: #4dc0b5;
 $cyan: #6cb2eb;
 
-$primary: #121212;
-//$secondary: #322965;
-$secondary: #00C569;
-$secondary: #0069ff;
-$secondary: #15cd72;
-$headings-color: $primary;
+$primary: #082471;
+$secondary: #F96156;
+$headings-color: #101B3A;
+$pragraphs-color: #777D8E;
+$pink: #F0C9C8;
+$pink-dark: #FBE2D9;
+$gray: #F0F1F6;
+$gray-light: #F7F8FA;
 
-//$primary: #9795E3;
-//$secondary: #CA97EB;
-//$success: #7EDB8F;
-//$info: $cyan !default;
-//$warning: $yellow !default;
-//$danger: #F96D74;
-//$light: #EAEFF3;
-//$dark: #2A2A44;
+$danger: #F96D74;
+$success: #7EDB8F;
+
+$body-bg: $gray-light;
 
 // Card
-$card-border-color: #dbdbdb;
-$border-color: #dbdbdb;
+$card-border-color: rgba($pragraphs-color, .3);
+$border-color: rgba($pragraphs-color, .3);
+
+//
+$btn-border-radius: 4rem;
+//$btn-padding-y
+$btn-padding-x: 1.25rem;
