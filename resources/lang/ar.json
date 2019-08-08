@@ -4,6 +4,7 @@
   "Now, you just need one link!": "الآن ما تحتاجه هو رابط واحد فقط",
   "Create your account for free.": "انشئ حسابك الان بشكل مجاني",
   "Sign up with Instagram": "سجل عبر انستجرام",
+  "Sign up with Twitter": "سجل عبر تويتر",
   "Too Many Links?": "صاحب روابط كثيرة؟",
   "Famous?": "مشهور؟",
   "Designer Or Creator?": "مبدع او مصمم؟",
@@ -28,5 +29,12 @@
   "Before proceeding, please check your email for a verification link.": "قبل المتابعة، يرجى التحقق من بريدك الإلكتروني لمعرفة رابط تفعيل الحساب.",
   "If you did not receive the email": "في حال لم تصلك رسالة التفعيل",
   "click here to request another": "اضغط هنا لارسال رابط جديد",
-  "Your account has been activated successfully!": "تم تفعيل حسابك بنجاح!"
+  "Your account has been activated successfully!": "تم تفعيل حسابك بنجاح!",
+  "Projects": "المشاريع",
+  "Works": "الاعمال",
+  "My Works": "أعمالي",
+  "Name": "الاسم",
+  "Password": "كلمة المرور",
+  "E-Mail Address": "البريد الإلكتروني",
+  "Username": "اسم المستخدم"
 }

@@ -2050,6 +2050,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   computed: Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])(['user']),
@@ -2583,6 +2594,9 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+//
+//
+//
 //
 //
 //
@@ -40958,6 +40972,64 @@ var render = function() {
               _vm._v(_vm._s(_vm.errors.email[0]))
             ])
           : _vm._e()
+      ]),
+      _vm._v(" "),
+      _c("hr"),
+      _vm._v(" "),
+      _c("div", [
+        _c("label", { staticClass: "mb-0" }, [
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.user.settings.email.newsletter,
+                expression: "user.settings.email.newsletter"
+              }
+            ],
+            attrs: { type: "checkbox" },
+            domProps: {
+              checked: Array.isArray(_vm.user.settings.email.newsletter)
+                ? _vm._i(_vm.user.settings.email.newsletter, null) > -1
+                : _vm.user.settings.email.newsletter
+            },
+            on: {
+              change: function($event) {
+                var $$a = _vm.user.settings.email.newsletter,
+                  $$el = $event.target,
+                  $$c = $$el.checked ? true : false
+                if (Array.isArray($$a)) {
+                  var $$v = null,
+                    $$i = _vm._i($$a, $$v)
+                  if ($$el.checked) {
+                    $$i < 0 &&
+                      _vm.$set(
+                        _vm.user.settings.email,
+                        "newsletter",
+                        $$a.concat([$$v])
+                      )
+                  } else {
+                    $$i > -1 &&
+                      _vm.$set(
+                        _vm.user.settings.email,
+                        "newsletter",
+                        $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                      )
+                  }
+                } else {
+                  _vm.$set(_vm.user.settings.email, "newsletter", $$c)
+                }
+              }
+            }
+          }),
+          _vm._v(" "),
+          _c("span", { staticClass: "font-weight-600" }, [
+            _vm._v("النشرة البريدية")
+          ]),
+          _vm._v(
+            "\n\t\t\t\t-\n\t\t\t\tأخبار وتحديثات منصة لينكاتي، اعدك لن تكون مزعجة!\n\t\t\t"
+          )
+        ])
       ])
     ]),
     _vm._v(" "),
@@ -41023,7 +41095,7 @@ var render = function() {
   return _c(
     "div",
     {
-      staticClass: "card text-center overflow-hidden theme",
+      staticClass: "card text-center overflow-hidden theme mb-4",
       class: {
         "theme-pro": _vm.theme.is_pro,
         "theme-selected": _vm.theme.selected
@@ -41378,7 +41450,7 @@ var render = function() {
       _vm._v("\n\t\tالقوالب\n\t")
     ]),
     _vm._v(" "),
-    _c("div", { staticClass: "card-body" }, [
+    _c("div", { staticClass: "card-body pb-0" }, [
       _c(
         "div",
         { staticClass: "row" },
@@ -41461,7 +41533,7 @@ var render = function() {
                     }
                   }),
                   _vm._v(" "),
-                  _c("i", { class: link.icon }),
+                  _c("i", { staticClass: "mr-2", class: link.icon }),
                   _vm._v(" "),
                   _c("span", [_vm._v(_vm._s(link.name))])
                 ]
@@ -41937,53 +42009,76 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "card text-center pt-4" }, [
-    _c("img", {
-      staticClass: "rounded-circle mx-auto",
-      attrs: { src: _vm.profile.avatar_url, width: "90", alt: _vm.profile.name }
-    }),
-    _vm._v(" "),
-    _c("div", { staticClass: "card-body" }, [
-      _c("h4", { staticClass: "card-title font-weight-600 mb-2" }, [
-        _vm._v(_vm._s(_vm.profile.name))
+  return _c(
+    "div",
+    {
+      staticClass: "card text-center pt-4 pb-2 border-0",
+      class: "theme--" + _vm.profile.theme.key
+    },
+    [
+      _c("img", {
+        staticClass: "rounded-circle mx-auto",
+        attrs: {
+          src: _vm.profile.avatar_url,
+          width: "90",
+          height: "90",
+          alt: _vm.profile.name
+        }
+      }),
+      _vm._v(" "),
+      _c("div", { staticClass: "card-body" }, [
+        _c("h4", { staticClass: "card-title font-weight-600 mb-2" }, [
+          _vm._v(_vm._s(_vm.profile.name))
+        ]),
+        _vm._v(" "),
+        _c(
+          "small",
+          { staticClass: "text-muted d-block", attrs: { dir: "ltr" } },
+          [_vm._v("@" + _vm._s(_vm.profile.username))]
+        ),
+        _vm._v(" "),
+        _vm.profile.location
+          ? _c("p", { staticClass: "card-text mb-1 font-weight-600" }, [
+              _c("i", { staticClass: "fas fa-map-marker-alt" }),
+              _vm._v("\n\t\t\t" + _vm._s(_vm.profile.location) + "\n\t\t")
+            ])
+          : _vm._e(),
+        _vm._v(" "),
+        _vm.profile.bio
+          ? _c("p", { staticClass: "card-text mb-0" }, [
+              _vm._v(_vm._s(_vm.profile.bio))
+            ])
+          : _vm._e()
       ]),
       _vm._v(" "),
       _c(
-        "small",
-        { staticClass: "text-muted d-block", attrs: { dir: "ltr" } },
-        [_vm._v("@" + _vm._s(_vm.profile.username))]
-      ),
-      _vm._v(" "),
-      _c("p", { staticClass: "card-text" }, [
-        _vm._v(_vm._s(_vm.profile.location))
-      ]),
-      _vm._v(" "),
-      _c("p", { staticClass: "card-text" }, [_vm._v(_vm._s(_vm.profile.bio))])
-    ]),
-    _vm._v(" "),
-    _c(
-      "ul",
-      { staticClass: "list-group list-group-flush p-0" },
-      _vm._l(_vm.profile.links, function(link, idx) {
-        return _c("li", { staticClass: "list-group-item" }, [
-          _c(
-            "a",
-            {
-              key: idx,
-              staticClass: "w-100 text-right btn-lg",
-              class: _vm.profile.theme.settings.button,
-              attrs: { href: link.url, rel: "nofollow noopener noreferrer" }
-            },
+        "ul",
+        { staticClass: "list-group list-group-flush p-0" },
+        _vm._l(_vm.profile.links, function(link, idx) {
+          return _c(
+            "li",
+            { staticClass: "list-group-item bg-transparent border-0" },
             [
-              _c("i", { staticClass: "ml-2", class: link.icon }),
-              _vm._v("\n\t\t\t\t" + _vm._s(link.name) + "\n\t\t\t")
+              _c(
+                "a",
+                {
+                  key: idx,
+                  staticClass: "w-100 text-right btn-lg",
+                  class: _vm.profile.theme.settings.button,
+                  attrs: { href: link.url, rel: "nofollow noopener noreferrer" }
+                },
+                [
+                  _c("i", { staticClass: "mr-2", class: link.icon }),
+                  _vm._v("\n\t\t\t\t" + _vm._s(link.name) + "\n\t\t\t")
+                ]
+              )
             ]
           )
-        ])
-      }),
-      0
-    )
-  ])
+        }),
+        0
+      )
+    ]
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -59227,9 +59322,11 @@ __webpack_require__.r(__webpack_exports__);
   },
   getters: {
     selectedTheme: function selectedTheme(state) {
-      return state.themes.filter(function (theme) {
-        return theme.selected;
-      });
+      if (state.themes.length) {
+        return state.themes.filter(function (theme) {
+          return theme.selected;
+        });
+      }
     }
   },
   mutations: {

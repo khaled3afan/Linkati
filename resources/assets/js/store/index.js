@@ -7,7 +7,9 @@ export default {
     },
     getters: {
         selectedTheme: state => {
-            return state.themes.filter(theme => theme.selected);
+            if (state.themes.length) {
+                return state.themes.filter(theme => theme.selected);
+            }
         }
     },
     mutations: {

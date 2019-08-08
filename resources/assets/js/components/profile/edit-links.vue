@@ -12,7 +12,7 @@
 				    :key="idx">
 					<a class="btn btn-primary btn-lg w-100 text-right" data-toggle="collapse" :href="'#link-'+ link.id">
 						<i class="fas fa-sort handle" style="padding: 20px;margin: -8px -16px -8px 0;"></i>
-						<i :class="link.icon"></i>
+						<i class="mr-2" :class="link.icon"></i>
 						<span>{{ link.name }}</span>
 					</a>
 					<div class="collapse" :id="'link-'+ link.id">

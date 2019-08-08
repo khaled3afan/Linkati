@@ -5,12 +5,30 @@
 // Fonts
 @import 'fonts';
 
+
+// helpers
 .cursor-pointer {
   cursor: pointer;
 }
 
 .disabled {
   pointer-events: none;
+}
+
+.mh-100vh {
+  min-height: 100vh;
+}
+
+.btn-twitter {
+  @extend .btn-primary;
+  background-color: $twitter;
+  border-color: $twitter;
+}
+
+.btn-instagram {
+  @extend .btn-primary;
+  background-color: $instagram;
+  border-color: $instagram;
 }
 
 .edit-avatar {
@@ -74,6 +92,12 @@
   padding-bottom: 15px;
 }
 
+
+.btn-black {
+  @extend .btn-dark;
+  background-color: #101B3A;
+}
+
 .theme {
   &-selected {
     .theme-content {
@@ -93,5 +117,71 @@
     bottom: 0;
     padding: 0;
     z-index: 2;
+  }
+
+  &--dark, &--blue {
+    color: #fff;
+
+    .card-title {
+      color: #fff;
+    }
+
+    .text-muted {
+      color: rgba(#fff, .45) !important;
+    }
+
+    .btn {
+      border: transparent;
+    }
+  }
+
+  &--blue {
+    background-image: linear-gradient(134deg, #005EFF 0%, #00A8FF 100%);
+
+    .btn {
+      background-color: rgba(#000, .25);
+
+      &:hover {
+        background-color: rgba(#000, .35);
+      }
+    }
+  }
+
+  &--dark {
+    background-image: linear-gradient(134deg, #000B1E 0%, #011154 100%);
+
+    .btn {
+      background-color: rgba(#fff, .12);
+
+      &:hover {
+        background-color: rgba(#fff, .25);
+      }
+    }
+  }
+
+  &--sweet-pink {
+    @extend .theme--blue;
+
+    background-color: #FAACA8;
+    background-image: linear-gradient(19deg, #FAACA8 0%, #DDD6F3 100%);
+  }
+}
+
+.page-content {
+  line-height: 2.2em;
+
+  h1 {
+    font-weight: 600;
+    margin-bottom: 30px;
+  }
+
+  h3 {
+    margin-bottom: 20px;
+  }
+
+  blockquote {
+    border-right: 5px solid #cecece;
+    border-left: 0;
+    padding-right: 20px;
   }
 }

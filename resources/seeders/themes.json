@@ -5,7 +5,7 @@
     "key": "classic",
     "thumbnail": "/images/themes/Classic.png",
     "settings": {
-      "button": "btn btn-dark"
+      "button": "btn btn-black"
     }
   },
   {
@@ -13,13 +13,26 @@
     "name": "ازرق",
     "key": "blue",
     "thumbnail": "/images/themes/Blue.png",
-    "settings": null
+    "settings": {
+      "button": "btn btn-dark"
+    }
   },
   {
     "is_pro": false,
     "name": "دارك",
     "key": "dark",
     "thumbnail": "/images/themes/Dark.png",
-    "settings": null
+    "settings": {
+      "button": "btn btn-dark"
+    }
+  },
+  {
+    "is_pro": false,
+    "name": "سوويت بينك",
+    "key": "sweet-pink",
+    "thumbnail": "/images/themes/Sweet-Pink.png",
+    "settings": {
+      "button": "btn btn-dark"
+    }
   }
 ]

@@ -1,5 +1,5 @@
 <template>
-	<div class="card text-center overflow-hidden theme"
+	<div class="card text-center overflow-hidden theme mb-4"
 	     :class="{'theme-pro': theme.is_pro, 'theme-selected': theme.selected}">
 		<span class="rounded-circle btn btn-success position-absolute theme-checked" v-if="theme.selected">
 			<i class="fas fa-check"></i>

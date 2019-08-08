@@ -3,7 +3,7 @@
 		<div class="card-header font-weight-600">
 			القوالب
 		</div>
-		<div class="card-body">
+		<div class="card-body pb-0">
 			<div class="row">
 				<div class="col-md-4" v-for="(theme, idx) in themes" :key="idx"
 				     @click="selcetTheme(idx, theme)" :class="{'disabled': theme.selected}">

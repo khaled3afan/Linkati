@@ -38,21 +38,6 @@ class UserController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,' . $user->id],
         ]);
 
-        if (request()->has('password')) {
-            $roles['password'] = 'min:6';
-        }
-
-        if (request()->has('password')) {
-//            $user_data['password'] = bcrypt($user_data['password']);
-        } else {
-//            $user_data['password'] = $user->password;
-        }
-
-        $notifications = [
-            'newsletter' => (boolean)request()->has('notifications.newsletter'),
-        ];
-
-//        $profile_data['notifications'] = json_encode($notifications);
 
         if ($user->email != $request->email) {
             $user->sendEmailVerificationNotification();
@@ -61,6 +46,7 @@ class UserController extends Controller
         $user->update([
             'name' => $request->name,
             'email' => $request->email,
+            'settings' => $request->settings,
         ]);
 
         return response()->json([

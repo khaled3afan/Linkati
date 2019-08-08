@@ -16,15 +16,16 @@ class ThemesTableSeeder extends Seeder
         $themes = json_decode(file_get_contents($path), true);
 
         foreach ($themes as $data) {
-            $theme = Theme::create([
-                'name' => $data['name'],
-                'key' => $data['key'],
-                'settings' => $data['settings'],
-                'is_pro' => $data['is_pro'],
-            ]);
+            if ( ! Theme::where('key', $data['key'])->exists()) {
+                $theme = Theme::create([
+                    'name' => $data['name'],
+                    'key' => $data['key'],
+                    'settings' => $data['settings'],
+                    'is_pro' => $data['is_pro'],
+                ]);
 
-//            resource_path("assets{$data['thumbnail']}")
-            $theme->addMediaFromUrl(url($data['thumbnail']))->toMediaCollection('thumbnail');
+                $theme->addMediaFromUrl(url($data['thumbnail']))->toMediaCollection('thumbnail');
+            }
         }
     }
 }

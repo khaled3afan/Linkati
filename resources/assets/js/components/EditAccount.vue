@@ -22,6 +22,17 @@
 				       v-model="user.email" name="email" @keypress.enter="updateAccount" required>
 				<div class="invalid-feedback" v-if="errors.email">{{errors.email[0]}}</div>
 			</div>
+			<hr>
+
+			<div>
+				<label class="mb-0">
+					<input type="checkbox" v-model="user.settings.email.newsletter">
+					<span class="font-weight-600">النشرة البريدية</span>
+					-
+					أخبار وتحديثات منصة لينكاتي، اعدك لن تكون مزعجة!
+				</label>
+			</div>
+
 		</div>
 		<div class="card-footer text-left">
 			<button class="btn btn-secondary" type="button" :disabled="submiting" @click="updateAccount">

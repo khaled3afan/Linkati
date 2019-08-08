@@ -39,7 +39,15 @@
 							</a>
 						</div>
 					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#projects" data-toggle="modal" data-target="#projects">
+							<i class="far fa-folder-open"></i>
+							{{ __('My Works') }}
+							<small class="badge badge-dark">قريبا</small>
+						</a>
+					</li>
 				</ul>
+
 			@endauth
 
 			<ul class="navbar-nav ml-auto">

@@ -19,9 +19,9 @@ Route::get('social/{provider}/callback', 'Auth\SocialiteController@handleProvide
 
 Route::get('/', 'HomeController@index')->name('home');
 
-Route::get('about', 'HomeController@index')->name('pages.about');
-Route::get('privacy', 'HomeController@index')->name('pages.privacy');
-Route::get('terms', 'HomeController@index')->name('pages.terms');
+Route::get('about', 'PageController@about')->name('pages.about');
+Route::get('privacy', 'PageController@privacy')->name('pages.privacy');
+Route::get('terms', 'PageController@terms')->name('pages.terms');
 
 Route::middleware('auth')->group(function () {
     Route::get('account', 'UserController@edit')->name('users.edit');

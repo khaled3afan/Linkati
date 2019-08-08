@@ -87,7 +87,7 @@
 
 	@stack('head')
 </head>
-<body>
+<body class="@stack('body-class')">
 <noscript>
 	<iframe src="https://www.googletagmanager.com/ns.html?id=GTM-T9PQLFL" height="0" width="0"
 	        style="display:none;visibility:hidden"></iframe>

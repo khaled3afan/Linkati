@@ -13,13 +13,17 @@ class CreateProjectsTable extends Migration
      */
     public function up()
     {
-        Schema::create('projects', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->unsignedBigInteger('profile_id');
-
-            $table->foreign('profile_id')->references('id')->on('profiles')->onDelete('cascade');
-            $table->timestamps();
-        });
+//        Schema::create('projects', function (Blueprint $table) {
+//            $table->bigIncrements('id');
+//            $table->unsignedBigInteger('profile_id');
+//            $table->string('name')->nullable();
+//            $table->string('slug')->index();
+//            $table->text('bio')->nullable();
+//            $table->integer('views')->default(0);
+//
+//            $table->foreign('profile_id')->references('id')->on('profiles')->onDelete('cascade');
+//            $table->timestamps();
+//        });
     }
 
     /**
