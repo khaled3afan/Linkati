@@ -2,6 +2,10 @@
 	<div class="card">
 		<div class="card-header font-weight-600">
 			تعديل الملف الشخصي
+			<small class="float-left font-weight-600 text-muted mt-1">
+				عدد الزيارات:
+				{{profile.views}}
+			</small>
 		</div>
 		<div class="card-body">
 			<div class="media">

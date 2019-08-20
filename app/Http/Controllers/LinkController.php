@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Link;
 use App\Models\Profile;
+use Hashids;
 use Illuminate\Http\Request;
 
 class LinkController extends Controller
@@ -100,13 +101,21 @@ class LinkController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Link $link
+     * @param $uid
      *
-     * @return \Illuminate\Http\Response
+     * @return void
      */
-    public function show(Link $link)
+    public function show($uid)
     {
-        //
+        $id = array_first(Hashids::decode($uid));
+
+        if ($id && $link = Link::find($id)) {
+            $link->clicked();
+
+            return redirect($link->url);
+        }
+
+        return redirect()->route('home');
     }
 
     /**
@@ -163,7 +172,7 @@ class LinkController extends Controller
         if ($link->delete()) {
             return response()->json([
                 'status' => 200,
-                'message' => __('Link Deleted!'),
+                'message' => __('Link Deleted! '),
                 'data' => $profile->fresh()
             ]);
         }

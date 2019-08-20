@@ -31,6 +31,12 @@
   border-color: $instagram;
 }
 
+.btn-google {
+  @extend .btn-primary;
+  background-color: $google;
+  border-color: $google;
+}
+
 .edit-avatar {
   label {
     cursor: pointer;

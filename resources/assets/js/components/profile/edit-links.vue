@@ -14,6 +14,10 @@
 						<i class="fas fa-sort handle" style="padding: 20px;margin: -8px -16px -8px 0;"></i>
 						<i class="mr-2" :class="link.icon"></i>
 						<span>{{ link.name }}</span>
+						<small class="float-left mt-2 badge badge-secondary font-weight-500" title="عدد النقرات" data-toggle="tooltip"
+						       data-placement="right">
+							{{link.clicks}}
+						</small>
 					</a>
 					<div class="collapse" :id="'link-'+ link.id">
 						<div class="card">

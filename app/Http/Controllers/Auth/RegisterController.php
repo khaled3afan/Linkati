@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Helpers\Helper;
 use App\Models\Profile;
 use App\Models\User;
 use App\Http\Controllers\Controller;
@@ -68,15 +69,12 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        $cookie = \Cookie::get('referral');
-        $referred_by = $cookie ? \Hashids::decode($cookie)[0] : null;
-
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
 //            'username' => $data['username'],
             'password' => Hash::make($data['password']),
-            'referred_by' => $referred_by,
+            'referred_by' => Helper::referredBy(),
             'settings' => [
                 'email' => [
                     'newsletter' => true

@@ -24,6 +24,7 @@ class Profile extends Model implements HasMedia
         'username',
         'location',
         'bio',
+        'views',
     ];
 
     protected $appends = [
@@ -88,6 +89,14 @@ class Profile extends Model implements HasMedia
     public function theme()
     {
         return $this->belongsTo(Theme::class);
+    }
+
+    /**
+     *
+     */
+    public function viewed()
+    {
+        $this->increment('views');
     }
 
     /**

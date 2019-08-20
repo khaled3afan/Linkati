@@ -2389,6 +2389,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2465,6 +2469,10 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
 //
 //
 //
@@ -41535,7 +41543,25 @@ var render = function() {
                   _vm._v(" "),
                   _c("i", { staticClass: "mr-2", class: link.icon }),
                   _vm._v(" "),
-                  _c("span", [_vm._v(_vm._s(link.name))])
+                  _c("span", [_vm._v(_vm._s(link.name))]),
+                  _vm._v(" "),
+                  _c(
+                    "small",
+                    {
+                      staticClass:
+                        "float-left mt-2 badge badge-secondary font-weight-500",
+                      attrs: {
+                        title: "عدد النقرات",
+                        "data-toggle": "tooltip",
+                        "data-placement": "right"
+                      }
+                    },
+                    [
+                      _vm._v(
+                        "\n\t\t\t\t\t\t" + _vm._s(link.clicks) + "\n\t\t\t\t\t"
+                      )
+                    ]
+                  )
                 ]
               ),
               _vm._v(" "),
@@ -41725,7 +41751,18 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "card" }, [
     _c("div", { staticClass: "card-header font-weight-600" }, [
-      _vm._v("\n\t\tتعديل الملف الشخصي\n\t")
+      _vm._v("\n\t\tتعديل الملف الشخصي\n\t\t"),
+      _c(
+        "small",
+        { staticClass: "float-left font-weight-600 text-muted mt-1" },
+        [
+          _vm._v(
+            "\n\t\t\tعدد الزيارات:\n\t\t\t" +
+              _vm._s(_vm.profile.views) +
+              "\n\t\t"
+          )
+        ]
+      )
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "card-body" }, [

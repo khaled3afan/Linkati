@@ -2732,6 +2732,7 @@ fieldset:disabled a.btn {
 }
 
 .btn-primary,
+.btn-google,
 .btn-instagram,
 .btn-twitter {
   color: #fff;
@@ -2740,6 +2741,7 @@ fieldset:disabled a.btn {
 }
 
 .btn-primary:hover,
+.btn-google:hover,
 .btn-instagram:hover,
 .btn-twitter:hover {
   color: #fff;
@@ -2748,18 +2750,22 @@ fieldset:disabled a.btn {
 }
 
 .btn-primary:focus,
+.btn-google:focus,
 .btn-instagram:focus,
 .btn-twitter:focus,
 .btn-primary.focus,
+.focus.btn-google,
 .focus.btn-instagram,
 .focus.btn-twitter {
   box-shadow: 0 0 0 0.2rem rgba(45, 69, 134, 0.5);
 }
 
 .btn-primary.disabled,
+.disabled.btn-google,
 .disabled.btn-instagram,
 .disabled.btn-twitter,
 .btn-primary:disabled,
+.btn-google:disabled,
 .btn-instagram:disabled,
 .btn-twitter:disabled {
   color: #fff;
@@ -2768,12 +2774,15 @@ fieldset:disabled a.btn {
 }
 
 .btn-primary:not(:disabled):not(.disabled):active,
+.btn-google:not(:disabled):not(.disabled):active,
 .btn-instagram:not(:disabled):not(.disabled):active,
 .btn-twitter:not(:disabled):not(.disabled):active,
 .btn-primary:not(:disabled):not(.disabled).active,
+.btn-google:not(:disabled):not(.disabled).active,
 .btn-instagram:not(:disabled):not(.disabled).active,
 .btn-twitter:not(:disabled):not(.disabled).active,
 .show > .btn-primary.dropdown-toggle,
+.show > .dropdown-toggle.btn-google,
 .show > .dropdown-toggle.btn-instagram,
 .show > .dropdown-toggle.btn-twitter {
   color: #fff;
@@ -2782,12 +2791,15 @@ fieldset:disabled a.btn {
 }
 
 .btn-primary:not(:disabled):not(.disabled):active:focus,
+.btn-google:not(:disabled):not(.disabled):active:focus,
 .btn-instagram:not(:disabled):not(.disabled):active:focus,
 .btn-twitter:not(:disabled):not(.disabled):active:focus,
 .btn-primary:not(:disabled):not(.disabled).active:focus,
+.btn-google:not(:disabled):not(.disabled).active:focus,
 .btn-instagram:not(:disabled):not(.disabled).active:focus,
 .btn-twitter:not(:disabled):not(.disabled).active:focus,
 .show > .btn-primary.dropdown-toggle:focus,
+.show > .dropdown-toggle.btn-google:focus,
 .show > .dropdown-toggle.btn-instagram:focus,
 .show > .dropdown-toggle.btn-twitter:focus {
   box-shadow: 0 0 0 0.2rem rgba(45, 69, 134, 0.5);
@@ -11206,6 +11218,11 @@ a.text-dark:focus {
 .btn-instagram {
   background-color: #3f729b;
   border-color: #3f729b;
+}
+
+.btn-google {
+  background-color: #DF4138;
+  border-color: #DF4138;
 }
 
 .edit-avatar label {

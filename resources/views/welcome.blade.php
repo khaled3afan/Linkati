@@ -47,13 +47,17 @@
 					<div class="card-header text-center">
 						<h4>{{ __('Create your account for free.') }}</h4>
 						<div class="btn-group">
-							<a href="{{ route('auth.social', 'instagram') }}" class="btn btn-instagram mt-2">
+							<a href="{{ route('auth.social', 'instagram') }}" class="btn btn-instagram mt-2"
+							   title="{{__('Sign up with Instagram')}}" data-toggle="tooltip" data-placement="bottom">
 								<i class="fab fa-instagram"></i>
-								{{__('Sign up with Instagram')}}
 							</a>
-							<a href="{{ route('auth.social', 'twitter') }}" class="btn btn-twitter mt-2">
+							<a href="{{ route('auth.social', 'google') }}" class="btn btn-google mt-2"
+							   title="{{__('Sign up with Google')}}" data-toggle="tooltip" data-placement="bottom">
+								<i class="fab fa-google"></i>
+							</a>
+							<a href="{{ route('auth.social', 'twitter') }}" class="btn btn-twitter mt-2"
+							   title="{{__('Sign up with Twitter')}}" data-toggle="tooltip" data-placement="bottom">
 								<i class="fab fa-twitter"></i>
-								{{__('Sign up with Twitter')}}
 							</a>
 						</div>
 					</div>

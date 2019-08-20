@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
 use App\Models\Profile;
 use App\Models\User;
@@ -12,7 +13,7 @@ use Socialite;
 class SocialiteController extends Controller
 {
     protected $supportedProviders = [
-        'facebook',
+        'instagram',
         'twitter',
         'google',
     ];
@@ -84,12 +85,7 @@ class SocialiteController extends Controller
 
         # Create new user if not existing.
         if ( ! $user) {
-            $username = explode('@', $socialite->getEmail());
-            if (User::withTrashed()->where('username', $username[0])->first()) {
-                $username = $username[0] . '_' . substr($socialite->getId(), -4);
-            } else {
-                $username = $username[0];
-            }
+            //  $username = $this->createUsername($socialite);
 
             $providers = [
                 $provider => [
@@ -103,24 +99,16 @@ class SocialiteController extends Controller
                 'providers' => $providers,
                 'name' => $socialite->getName(),
                 'email' => $socialite->getEmail(),
+                'referred_by' => Helper::referredBy(),
+                'settings' => [
+                    'email' => [
+                        'newsletter' => true
+                    ]
+                ]
             ]);
 
             if ($user) {
                 $user->profile()->save(new Profile([
-                    'settings' => [
-                        'comments' => true,
-                        'notices' => false,
-                        'newsletter' => true,
-                        'push' => [
-                            'follow' => true,
-                            'diary-like' => true,
-                            'comment' => true,
-                            'comment-reply' => true,
-                            'comment-mention' => true,
-                            'diary-mention' => true,
-                            'comment-like' => true,
-                        ],
-                    ]
                 ]));
             }
         }
@@ -196,5 +184,22 @@ class SocialiteController extends Controller
 //                             ->with('error',
 //                                 'يبدوا أن الحساب الذي تحاول الوصول إليه محظور، هل من خطأ؟ قم بمراسلتنا إذاً!');
 //        }
+    }
+
+    /**
+     * @param $socialite
+     *
+     * @return array|string
+     */
+    public function createUsername($socialite)
+    {
+        $username = explode('@', $socialite->getEmail());
+        if (User::withTrashed()->where('username', $username[0])->first()) {
+            $username = $username[0] . '_' . substr($socialite->getId(), -4);
+        } else {
+            $username = $username[0];
+        }
+
+        return $username;
     }
 }

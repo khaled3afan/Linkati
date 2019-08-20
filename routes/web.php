@@ -23,6 +23,8 @@ Route::get('about', 'PageController@about')->name('pages.about');
 Route::get('privacy', 'PageController@privacy')->name('pages.privacy');
 Route::get('terms', 'PageController@terms')->name('pages.terms');
 
+Route::get('l/{uid}', 'LinkController@show')->name('links.show');
+
 Route::middleware('auth')->group(function () {
     Route::get('account', 'UserController@edit')->name('users.edit');
     Route::patch('account', 'UserController@update');

@@ -80,6 +80,8 @@ class ProfileController extends Controller
 //            return redirect()->route('profiles.edit', $profile);
         }
 
+        $profile->viewed();
+
         return view('profiles.show', compact('profile'));
     }
 

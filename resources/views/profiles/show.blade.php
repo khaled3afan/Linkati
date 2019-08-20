@@ -46,7 +46,7 @@
 						<ul class="nav flex-column p-0">
 							@foreach($profile->links as $link)
 								<li class="nav-item mb-3">
-									<a href="{{$link->url}}" title="{{ $link->name }}"
+									<a href="{{$link->external_link}}" title="{{ $link->name }}"
 									   class="w-100 btn-lg text-right {{ $profile->theme->settings['button'] }}"
 									   rel="nofollow noopener noreferrer">
 										<i class="mr-2 {{ $link->icon}}"></i>

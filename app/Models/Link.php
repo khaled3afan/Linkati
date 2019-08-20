@@ -52,7 +52,8 @@ class Link extends Model
     ];
 
     protected $appends = [
-        'icon'
+        'icon',
+        'external_link'
     ];
 
     /**
@@ -73,5 +74,21 @@ class Link extends Model
         $explode = explode('.', $host);
 
         return isset($this->icons[$explode[0]]) ? $this->icons[$explode[0]] : $this->icons['default'];
+    }
+
+    /**
+     * @return string
+     */
+    public function getExternalLinkAttribute()
+    {
+        return route('links.show', \Hashids::encode($this->id));
+    }
+
+    /**
+     *
+     */
+    public function clicked()
+    {
+        $this->increment('clicks');
     }
 }

@@ -22,6 +22,8 @@ class CreateProfilesTable extends Migration
             $table->string('location')->nullable();
             $table->text('bio')->nullable();
             $table->integer('views')->default(0);
+
+            $table->softDeletes();
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
