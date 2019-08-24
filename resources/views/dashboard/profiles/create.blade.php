@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+@section('subtitle', 'انشاء ملف شخصي')
 @section('content')
 	<div class="container">
 		<div class="row justify-content-center">

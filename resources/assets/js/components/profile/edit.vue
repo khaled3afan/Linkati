@@ -100,7 +100,7 @@
             },
             updateProfile() {
                 this.submiting = true;
-                axios.put('/api/' + this.$store.state.profile.username + '/update', this.profile)
+                axios.put('/dashboard/api/' + this.$store.state.profile.username + '/update', this.profile)
                     .then(response => {
                         this.errors = {};
                         this.submiting = false;

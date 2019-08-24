@@ -52,7 +52,7 @@
         methods: {
             createLink: function () {
                 this.submiting = true;
-                axios.put('/api/' + this.profile.username + '/links/create', {
+                axios.put('/dashboard/api/' + this.profile.username + '/links/create', {
                     profile_id: this.profile.id,
                     name: this.link.name,
                     url: this.link.url,

@@ -96,7 +96,7 @@
             },
             createProfile() {
                 this.submiting = true;
-                axios.post('/api/profiles/create', this.profile)
+                axios.post('/dashboard/api/profiles/create', this.profile)
                     .then(response => {
                         this.errors = {};
                         this.submiting = false;

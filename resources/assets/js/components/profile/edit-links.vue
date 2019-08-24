@@ -14,10 +14,12 @@
 						<i class="fas fa-sort handle" style="padding: 20px;margin: -8px -16px -8px 0;"></i>
 						<i class="mr-2" :class="link.icon"></i>
 						<span>{{ link.name }}</span>
+						<!--
 						<small class="float-left mt-2 badge badge-secondary font-weight-500" title="عدد النقرات" data-toggle="tooltip"
 						       data-placement="right">
 							{{link.clicks}}
 						</small>
+						-->
 					</a>
 					<div class="collapse" :id="'link-'+ link.id">
 						<div class="card">
@@ -80,7 +82,7 @@
         },
         methods: {
             resort(event) {
-                axios.put('/api/' + this.profile.username + '/links/' + this.profile.links[event.newIndex].id + '/resort', {
+                axios.put('/dashboard/api/' + this.profile.username + '/links/' + this.profile.links[event.newIndex].id + '/resort', {
                     links: this.profile.links
                 }).then(response => {
                     this.$toasted.success(response.data.message);
@@ -92,7 +94,7 @@
             deleteLink(id, idx) {
                 if (confirm('هل انت متاكد؟')) {
                     this.submiting = true;
-                    axios.delete('/api/' + this.profile.username + '/links/' + id)
+                    axios.delete('/dashboard/api/' + this.profile.username + '/links/' + id)
                         .then(response => {
                             this.errors = {};
                             this.submiting = false;
@@ -108,7 +110,7 @@
             },
             updateLink(link) {
                 this.submiting = true;
-                axios.put('/api/' + this.profile.username + '/links/' + link.id, link)
+                axios.put('/dashboard/api/' + this.profile.username + '/links/' + link.id, link)
                     .then(response => {
                         this.errors = {};
                         this.submiting = false;

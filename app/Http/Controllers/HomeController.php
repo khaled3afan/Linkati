@@ -14,7 +14,7 @@ class HomeController extends Controller
     public function index()
     {
         if (auth()->check()) {
-            return redirect()->route('profiles.show', auth()->user()->profiles()->first());
+            return redirect()->route('dashboard.profiles.show', auth()->user()->profiles()->first());
         }
 
         return view('welcome');

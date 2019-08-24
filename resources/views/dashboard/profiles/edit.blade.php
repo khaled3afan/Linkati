@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+@section('subtitle', $profile->name)
 @section('content')
 	<div class="container">
 		<div class="row justify-content-center">

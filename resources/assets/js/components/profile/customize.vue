@@ -37,7 +37,7 @@
             },
             updateTheme(theme) {
                 this.submiting = true;
-                axios.put('/api/' + this.profile.username + '/theme/update', {
+                axios.put('/dashboard/api/' + this.profile.username + '/theme/update', {
                     chosenThem: theme
                 }).then(response => {
                     this.errors = {};

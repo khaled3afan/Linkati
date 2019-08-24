@@ -1982,7 +1982,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       this.submiting = true;
-      axios.put('/api/' + this.profile.username + '/links/create', {
+      axios.put('/dashboard/api/' + this.profile.username + '/links/create', {
         profile_id: this.profile.id,
         name: this.link.name,
         url: this.link.url
@@ -2232,7 +2232,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       this.submiting = true;
-      axios.post('/api/profiles/create', this.profile).then(function (response) {
+      axios.post('/dashboard/api/profiles/create', this.profile).then(function (response) {
         _this.errors = {};
         _this.submiting = false;
 
@@ -2298,7 +2298,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       this.submiting = true;
-      axios.put('/api/' + this.profile.username + '/theme/update', {
+      axios.put('/dashboard/api/' + this.profile.username + '/theme/update', {
         chosenThem: theme
       }).then(function (response) {
         _this.errors = {};
@@ -2393,6 +2393,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2411,7 +2413,7 @@ __webpack_require__.r(__webpack_exports__);
     resort: function resort(event) {
       var _this = this;
 
-      axios.put('/api/' + this.profile.username + '/links/' + this.profile.links[event.newIndex].id + '/resort', {
+      axios.put('/dashboard/api/' + this.profile.username + '/links/' + this.profile.links[event.newIndex].id + '/resort', {
         links: this.profile.links
       }).then(function (response) {
         _this.$toasted.success(response.data.message);
@@ -2425,7 +2427,7 @@ __webpack_require__.r(__webpack_exports__);
 
       if (confirm('هل انت متاكد؟')) {
         this.submiting = true;
-        axios["delete"]('/api/' + this.profile.username + '/links/' + id).then(function (response) {
+        axios["delete"]('/dashboard/api/' + this.profile.username + '/links/' + id).then(function (response) {
           _this2.errors = {};
           _this2.submiting = false;
           $('#link-' + id).collapse('hide');
@@ -2443,7 +2445,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this3 = this;
 
       this.submiting = true;
-      axios.put('/api/' + this.profile.username + '/links/' + link.id, link).then(function (response) {
+      axios.put('/dashboard/api/' + this.profile.username + '/links/' + link.id, link).then(function (response) {
         _this3.errors = {};
         _this3.submiting = false;
 
@@ -2573,7 +2575,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       this.submiting = true;
-      axios.put('/api/' + this.$store.state.profile.username + '/update', this.profile).then(function (response) {
+      axios.put('/dashboard/api/' + this.$store.state.profile.username + '/update', this.profile).then(function (response) {
         _this.errors = {};
         _this.submiting = false;
 
@@ -41543,25 +41545,7 @@ var render = function() {
                   _vm._v(" "),
                   _c("i", { staticClass: "mr-2", class: link.icon }),
                   _vm._v(" "),
-                  _c("span", [_vm._v(_vm._s(link.name))]),
-                  _vm._v(" "),
-                  _c(
-                    "small",
-                    {
-                      staticClass:
-                        "float-left mt-2 badge badge-secondary font-weight-500",
-                      attrs: {
-                        title: "عدد النقرات",
-                        "data-toggle": "tooltip",
-                        "data-placement": "right"
-                      }
-                    },
-                    [
-                      _vm._v(
-                        "\n\t\t\t\t\t\t" + _vm._s(link.clicks) + "\n\t\t\t\t\t"
-                      )
-                    ]
-                  )
+                  _c("span", [_vm._v(_vm._s(link.name))])
                 ]
               ),
               _vm._v(" "),

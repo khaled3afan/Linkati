@@ -23,14 +23,14 @@
 
 						<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
 							@foreach(auth()->user()->profiles as $profile)
-								<a class="dropdown-item" href="{{ route('profiles.show', $profile) }}">
+								<a class="dropdown-item" href="{{ route('dashboard.profiles.show', $profile) }}">
 									<img src="{{$profile->avatar_url}}" alt="{{$profile->name}}"
 									     class="rounded-circle mr-2" width="25px" height="25px">
 									{{ $profile->name }}
 								</a>
 							@endforeach
 							<div class="dropdown-divider"></div>
-							<a class="dropdown-item text-success" href="{{ route('profiles.create') }}">
+							<a class="dropdown-item text-success" href="{{ route('dashboard.profiles.create') }}">
 									<span class="border rounded-circle text-center d-inline-block"
 									      style="width: 25px;height: 25px">
 										<i class="fa fa-plus"></i>
@@ -53,11 +53,15 @@
 			<ul class="navbar-nav ml-auto">
 				@guest
 					<li class="nav-item">
-						<a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+						<a class="nav-link" href="{{ route('login') }}">
+							<button class="btn btn-light">{{ __('Login') }}</button>
+						</a>
 					</li>
 					@if (Route::has('register'))
-						<li class="nav-item">
-							<a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+						<li class="nav-item d-none">
+							<a class="nav-link" href="{{ route('register') }}">
+								<button class="btn btn-link">{{ __('Register') }}</button>
+							</a>
 						</li>
 					@endif
 				@else
