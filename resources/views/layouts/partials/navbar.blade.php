@@ -1,17 +1,18 @@
 <nav class="navbar navbar-expand-md navbar-light bg-white border-bottom _shadow-sm">
 	<div class="container">
-		<a class="navbar-brand" href="{{ url('/') }}">
-			<img src="/images/logo.png" width="170px" alt="{{ config('app.name', 'Laravel') }}">
+		<a class="navbar-brand mr-0" href="{{ url('/') }}" title="{{ config('app.name') }}">
+			<img src="/images/logo.png" width="170px" alt="{{ config('app.name') }}">
 		</a>
-		<button class="navbar-toggler" type="button" data-toggle="collapse"
-		        data-target="#navbarSupportedContent"
-		        aria-controls="navbarSupportedContent" aria-expanded="false"
-		        aria-label="{{ __('Toggle navigation') }}">
-			<span class="navbar-toggler-icon"></span>
-		</button>
 
-		<div class="collapse navbar-collapse" id="navbarSupportedContent">
-			@auth
+		@auth
+			<button class="navbar-toggler" type="button" data-toggle="collapse"
+			        data-target="#navbarSupportedContent"
+			        aria-controls="navbarSupportedContent" aria-expanded="false"
+			        aria-label="{{ __('Toggle navigation') }}">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				<ul class="navbar-nav mr-auto">
 					<li class="nav-item dropdown">
 						<a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
@@ -48,23 +49,7 @@
 					</li>
 				</ul>
 
-			@endauth
-
-			<ul class="navbar-nav ml-auto">
-				@guest
-					<li class="nav-item">
-						<a class="nav-link" href="{{ route('login') }}">
-							<button class="btn btn-light">{{ __('Login') }}</button>
-						</a>
-					</li>
-					@if (Route::has('register'))
-						<li class="nav-item d-none">
-							<a class="nav-link" href="{{ route('register') }}">
-								<button class="btn btn-link">{{ __('Register') }}</button>
-							</a>
-						</li>
-					@endif
-				@else
+				<ul class="navbar-nav ml-auto">
 					<li class="nav-item">
 						<a class="nav-link" href="#referrals" data-toggle="modal" data-target="#referrals">
 							{{ __('Refer a Friend') }}
@@ -101,8 +86,23 @@
 							</form>
 						</div>
 					</li>
-				@endguest
+				</ul>
+			</div>
+		@else
+			<ul class="navbar-nav mr-0 pr-0">
+				<li class="nav-item">
+					<a class="nav-link" href="{{ route('login') }}" title="{{ __('Login') }}">
+						<button class="btn btn-login">{{ __('Login') }}</button>
+					</a>
+				</li>
+				@if (Route::has('register'))
+					<li class="nav-item d-none">
+						<a class="nav-link" href="{{ route('register') }}" title="{{ __('Register') }}">
+							<button class="btn btn-link">{{ __('Register') }}</button>
+						</a>
+					</li>
+				@endif
 			</ul>
-		</div>
+		@endauth
 	</div>
 </nav>

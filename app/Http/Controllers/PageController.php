@@ -19,21 +19,24 @@ class PageController extends Controller
     public function about()
     {
         $content = $this->getContent('about');
+        $title = 'عن لينكاتي';
 
-        return view('pages.show', compact('content'));
+        return view('pages.show', compact('content', 'title'));
     }
 
     public function privacy()
     {
         $content = $this->getContent('privacy');
+        $title = 'سياسة الخصوصية';
 
-        return view('pages.show', compact('content'));
+        return view('pages.show', compact('content', 'title'));
     }
 
     public function terms()
     {
         $content = $this->getContent('terms');
+        $title = 'شروط الاستخدام';
 
-        return view('pages.show', compact('content'));
+        return view('pages.show', compact('content', 'title'));
     }
 }
