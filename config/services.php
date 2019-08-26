@@ -50,4 +50,22 @@ return [
         'redirect' => env('INSTAGRAM_REDIRECT_URI')
     ],
 
+    'facebook' => [
+        'client_id' => env('FACEBOOK_APP_ID'),
+        'client_secret' => env('FACEBOOK_APP_SECRET'),
+        'redirect' => config('app.url') . '/social/facebook/callback',
+    ],
+
+    'google' => [
+        'client_id' => env('GOOGLE_CLIENT_ID', ''),
+        'client_secret' => env('GOOGLE_CLIENT_SECRET', ''),
+        'redirect' => config('app.url') . '/social/google/callback',
+    ],
+
+    'twitter' => [
+        'client_id' => env('TWITTER_CONSUMER_KEY', ''),
+        'client_secret' => env('TWITTER_CONSUMER_SECRET', ''),
+        'redirect' => config('app.url') . '/social/twitter/callback',
+    ],
+
 ];

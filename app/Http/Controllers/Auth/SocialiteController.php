@@ -13,7 +13,7 @@ use Socialite;
 class SocialiteController extends Controller
 {
     protected $supportedProviders = [
-        'instagram',
+        'facebook',
         'twitter',
         'google',
     ];
@@ -50,6 +50,7 @@ class SocialiteController extends Controller
 
         try {
             $socialite = Socialite::driver($provider)->user();
+            dd($socialite);
         } catch (Exception $e) {
             \Log::error($e->getMessage());
 
