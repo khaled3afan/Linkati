@@ -86,7 +86,7 @@ class SocialiteController extends Controller
 
         # Create new user if not existing.
         if ( ! $user) {
-            //  $username = $this->createUsername($socialite);
+            $username = $this->createUsername($socialite);
 
             $providers = [
                 $provider => [
@@ -110,6 +110,8 @@ class SocialiteController extends Controller
 
             if ($user) {
                 $user->profile()->save(new Profile([
+                    'name' => $socialite->getName(),
+                    'username' => $username,
                 ]));
             }
         }

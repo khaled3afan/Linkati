@@ -1,0 +1,38 @@
+[
+  {
+    "name": "المدونة",
+    "url": "https://hussam3bd.com",
+    "type": 0,
+    "order": 0
+  },
+  {
+    "name": "Instagram",
+    "url": "https://www.instagram.com/hussam3bd",
+    "type": 0,
+    "order": 1
+  },
+  {
+    "name": "Twitter",
+    "url": "https://twitter.com/hussam3bd",
+    "type": 0,
+    "order": 2
+  },
+  {
+    "name": "Behance",
+    "url": "https://www.behance.net/Hussam3bd",
+    "type": 0,
+    "order": 3
+  },
+  {
+    "name": "Dribbble",
+    "url": "https://dribbble.com/hussam3bd",
+    "type": 0,
+    "order": 4
+  },
+  {
+    "name": "Linkedin",
+    "url": "https://www.linkedin.com/in/hussam3bd/",
+    "type": 0,
+    "order": 5
+  }
+]

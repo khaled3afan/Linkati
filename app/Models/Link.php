@@ -3,9 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Link extends Model
 {
+    use softDeletes;
+
     const TYPE_NORMAL = 0;
 
     protected $icons = [

@@ -24,5 +24,6 @@ class DatabaseSeeder extends Seeder
 //        }
 
         $this->call(ThemesTableSeeder::class);
+        $this->call(UsersTableSeeder::class);
     }
 }
