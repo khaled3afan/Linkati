@@ -74,7 +74,7 @@ class LinkController extends Controller
 
         return response()->json([
             'status' => 200,
-            'message' => __('Link Resorted!'),
+            'message' => __('Your links has been resorted!'),
             'data' => $profile->fresh()
         ]);
     }
@@ -98,7 +98,7 @@ class LinkController extends Controller
 
         return response()->json([
             'status' => 200,
-            'message' => __('Link Updated!'),
+            'message' => __('Link has been updated!'),
             'data' => $profile->fresh()
         ]);
     }
@@ -121,7 +121,7 @@ class LinkController extends Controller
         if ($link->delete()) {
             return response()->json([
                 'status' => 200,
-                'message' => __('Link Deleted! '),
+                'message' => __('The link has been deleted!'),
                 'data' => $profile->fresh()
             ]);
         }

@@ -96,6 +96,7 @@ class RegisterController extends Controller
         $user->profiles()->save(new Profile([
             'name' => $request->name,
             'username' => $request->username,
+            'theme_id' => 1,
         ]));
     }
 }

@@ -136,7 +136,7 @@ class ProfileController extends Controller
 
         return response()->json([
             'status' => 200,
-            'message' => __('Your Profile Has Been Updated!'),
+            'message' => __('Your profile has been updated!'),
             'data' => $profile
         ]);
     }

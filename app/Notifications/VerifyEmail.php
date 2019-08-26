@@ -6,28 +6,20 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
+use Illuminate\Auth\Notifications\VerifyEmail as VerifyEmailBase;
 
-class ResetPasswordNotification extends Notification
+class VerifyEmail extends VerifyEmailBase
 {
     use Queueable;
 
     /**
-     * The password reset token.
-     *
-     * @var string
-     */
-    public $token;
-
-    /**
-     * Create a notification instance.
-     *
-     * @param  string $token
+     * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct($token)
+    public function __construct()
     {
-        $this->token = $token;
+        //
     }
 
     /**
@@ -43,7 +35,7 @@ class ResetPasswordNotification extends Notification
     }
 
     /**
-     * Get the mail representation of the notification.
+     * Build the mail representation of the notification.
      *
      * @param  mixed $notifiable
      *
@@ -51,12 +43,18 @@ class ResetPasswordNotification extends Notification
      */
     public function toMail($notifiable)
     {
+        $verificationUrl = $this->verificationUrl($notifiable);
+
+        if (static::$toMailCallback) {
+            return call_user_func(static::$toMailCallback, $notifiable, $verificationUrl);
+        }
+
         return (new MailMessage)
-            ->subject(config('app.name') . trans('strings.restore-own-password'))
+            ->subject(__('Verify Email Address'))
             ->greeting(__('Hello!'))
-            ->line(trans('strings.we-received-order'))
-            ->action(trans('strings.restore-password'), url('password/reset', $this->token))
-            ->line(trans('strings.ignore'));
+            ->line(__('Please click the button below to verify your email address.'))
+            ->action(__('Verify Email Address'), $verificationUrl)
+            ->line(__('If you did not create an account, no further action is required.'));
     }
 
     /**
