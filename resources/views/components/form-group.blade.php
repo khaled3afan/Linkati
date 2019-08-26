@@ -16,7 +16,7 @@
 
 <div class="form-group {{ $errors->has($errorName) ? ' has-error has-danger' : '' }} {{ $class ?? null }}">
 	@if(isset($label) && ! in_array($type, ['checkbox', 'radio']))
-		{{ Form::label($name, trans('strings.'. $label) .' &nbsp;'. $labelPostfix, ['class' => 'control-label form-control-label'],false) }}
+		{{ Form::label($name, $label .'&nbsp;'. $labelPostfix, ['class' => 'control-label form-control-label'],false) }}
 	@endif
 
 	@if(isset($inputGroup))
@@ -55,11 +55,11 @@
 
 				@case('checkbox')
 				@case('radio')
-				<div class="custom-control custom-{{ $type }}">
+				<div class="form-check custom-{{ $type }}">
 					{!! Form::$type($name, $value ?? null, $checked ?? null,
-						array_merge(['class' => 'filled-in custom-control-input', 'id' => $name], $attributes ?? [])
+						array_merge(['class' => 'form-check-input', 'id' => $name], $attributes ?? [])
 					); !!}
-					{{ Form::label($name, isset($label) ? trans('strings.'. $label) .' &nbsp;' . $labelPostfix : ' ' . $labelPostfix, ['class' => '']) }}
+					{{ Form::label($name, isset($label) ? $label .' &nbsp;' . $labelPostfix : ' ' . $labelPostfix, ['class' => '']) }}
 				</div>
 				@break
 

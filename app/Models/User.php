@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Notifications\ResetPasswordNotification;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -10,6 +11,9 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class User extends Authenticatable implements MustVerifyEmail
 {
     use Notifiable, SoftDeletes;
+
+    const ROLE_USER = 0;
+    const ROLE_ADMIN = 1;
 
     /**
      * The attributes that are mass assignable.
@@ -23,6 +27,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'providers',
         'settings',
         'referred_by',
+        'role'
     ];
 
     /**
@@ -99,5 +104,17 @@ class User extends Authenticatable implements MustVerifyEmail
     public function referrals()
     {
         return $this->hasMany(User::class, 'referred_by', 'id');
+    }
+
+    /**
+     * Send the password reset notification.
+     *
+     * @param  string $token
+     *
+     * @return void
+     */
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new ResetPasswordNotification($token));
     }
 }

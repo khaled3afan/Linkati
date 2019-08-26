@@ -11506,5 +11506,12 @@ body.homepage .sidebar .iphone-demo img {
   left: 0;
   right: 0;
   margin-bottom: -120px;
+  -webkit-transition: all 0.3s cubic-bezier(0.65, 0.05, 0.36, 1);
+  transition: all 0.3s cubic-bezier(0.65, 0.05, 0.36, 1);
+}
+
+.form-check {
+  padding-left: inherit;
+  padding-right: 1.25rem;
 }
 

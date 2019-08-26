@@ -50,7 +50,6 @@ class SocialiteController extends Controller
 
         try {
             $socialite = Socialite::driver($provider)->user();
-            dd($socialite);
         } catch (Exception $e) {
             \Log::error($e->getMessage());
 
@@ -109,10 +108,17 @@ class SocialiteController extends Controller
             ]);
 
             if ($user) {
-                $user->profile()->save(new Profile([
+                $profile = [
                     'name' => $socialite->getName(),
                     'username' => $username,
-                ]));
+                ];
+
+                if ($provider == 'twitter') {
+                    $profile['location'] = $socialite->user['location'];
+                    $profile['bio'] = $socialite->user['description'];
+                }
+
+                $profile = $user->profile()->save(new Profile($profile));
             }
         }
 

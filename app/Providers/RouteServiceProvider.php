@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 
@@ -41,6 +42,8 @@ class RouteServiceProvider extends ServiceProvider
 
         $this->mapDashboardRoutes();
 
+        $this->mapAdminRoutes();
+
         //
     }
 
@@ -72,6 +75,22 @@ class RouteServiceProvider extends ServiceProvider
              ->name('dashboard.')
              ->prefix('dashboard')
              ->group(base_path('routes/dashboard.php'));
+    }
+
+    /**
+     * Define the "admin" routes for the application.
+     *
+     * These routes all receive session state, CSRF protection, etc.
+     *
+     * @return void
+     */
+    protected function mapAdminRoutes()
+    {
+        Route::middleware(['web', 'role:' . User::ROLE_ADMIN])
+             ->prefix('admin')
+             ->as('admin.')
+             ->namespace($this->namespace . '\Admin')
+             ->group(base_path('routes/admin.php'));
     }
 
     /**

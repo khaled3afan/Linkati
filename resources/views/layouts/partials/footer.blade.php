@@ -19,7 +19,8 @@
 				<p class="text-center text-md-right text-lg-right">
 					&copy; {{ date('Y') }}
 					لينكاتي، بواسطة
-					<a href="https://hussam3bd.com" target="_blank"
+					<a href="https://hussam3bd.com?utm_source=linkati.me&utm_medium=Links&utm_campaign=ProductsFooter"
+					   target="_blank"
 					   title="حسام عبد - عن تصميم تجربة المستخدم وتطوير والويب">
 						<u>حسام عبد</u>
 					</a>

@@ -7,6 +7,10 @@
   "Sign up with Twitter": "سجل عبر تويتر",
   "Sign up with Google": "سجل عبر جوجل",
   "Sign up with Facebook": "سجل عبر فيسبوك",
+  "Sign in with Instagram": "دخول عبر انستجرام",
+  "Sign in with Twitter": "دخول عبر تويتر",
+  "Sign in with Google": "دخول عبر جوجل",
+  "Sign in with Facebook": "دخول عبر فيسبوك",
   "Too Many Links?": "صاحب روابط كثيرة؟",
   "Famous?": "مشهور؟",
   "Designer Or Creator?": "مبدع او مصمم؟",
@@ -37,6 +41,11 @@
   "My Works": "أعمالي",
   "Name": "الاسم",
   "Password": "كلمة المرور",
+  "Confirm Password": "تأكيد كلمة المرور",
   "E-Mail Address": "البريد الإلكتروني",
-  "Username": "اسم المستخدم"
+  "Username": "اسم المستخدم",
+  "Remember Me": "تذكرني",
+  "Forgot Your Password?": "هل نسيت كلمة المرور؟",
+  "Reset Password": "إستعادة كلمة المرور",
+  "Send Password Reset Link": "أرسل معلومات الإستعادة"
 }
