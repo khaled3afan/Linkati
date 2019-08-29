@@ -109,6 +109,7 @@ class SocialiteController extends Controller
 
             if ($user) {
                 $profile = [
+                    'theme_id' => 1,
                     'name' => $socialite->getName(),
                     'username' => $username,
                 ];
@@ -118,7 +119,7 @@ class SocialiteController extends Controller
                     $profile['bio'] = $socialite->user['description'];
                 }
 
-                $profile = $user->profile()->save(new Profile($profile));
+                $profile = $user->profiles()->save(new Profile($profile));
             }
         }
 
