@@ -18,7 +18,7 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('email')->unique()->index();
             $table->unsignedInteger('referred_by')->nullable();
-            $table->string('password');
+            $table->string('password')->nullable();
             $table->json('providers')->nullable();
             $table->json('settings')->nullable();
             $table->integer('role')->default(0);
