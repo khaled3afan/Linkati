@@ -40793,7 +40793,7 @@ var render = function() {
                 type: "url",
                 name: "url",
                 dir: "ltr",
-                placeholder: "https://twitter.com/hussam3bd",
+                placeholder: "twitter.com/hussam3bd",
                 required: ""
               },
               domProps: { value: _vm.link.url },

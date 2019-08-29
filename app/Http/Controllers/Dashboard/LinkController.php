@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Dashboard;
 
+use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
 use App\Models\Link;
 use App\Models\Profile;
@@ -22,6 +23,10 @@ class LinkController extends Controller
      */
     public function store(Request $request, Profile $profile)
     {
+        $request->merge([
+            'url' => Helper::addScheme($request->url)
+        ]);
+
         $this->validate($request, [
             'profile_id' => 'required',
             'name' => 'required',
@@ -90,6 +95,15 @@ class LinkController extends Controller
      */
     public function update(Request $request, Profile $profile, Link $link)
     {
+        $request->merge([
+            'url' => Helper::addScheme($request->url)
+        ]);
+
+        $request->validate([
+            'name' => 'required',
+            'url' => 'required|url',
+        ]);
+
         if (auth()->id() != $profile->user_id) {
             return abort(403);
         }
