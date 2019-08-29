@@ -73,10 +73,14 @@ class Link extends Model
     public function getIconAttribute()
     {
         $url = parse_url($this->url);
-        $host = str_replace('www.', '', $url['host']);
-        $explode = explode('.', $host);
+        if (isset($url['host'])) {
+            $host = str_replace('www.', '', $url['host']);
+            $explode = explode('.', $host);
 
-        return isset($this->icons[$explode[0]]) ? $this->icons[$explode[0]] : $this->icons['default'];
+            return isset($this->icons[$explode[0]]) ? $this->icons[$explode[0]] : $this->icons['default'];
+        }
+
+        return $this->icons['default'];
     }
 
     /**
