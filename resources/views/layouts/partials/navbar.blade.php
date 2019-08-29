@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-md navbar-light bg-white border-bottom _shadow-sm">
+<nav class="navbar navbar-expand-md navbar-light bg-white border-bottom py-3">
 	<div class="container">
 		<a class="navbar-brand mr-0" href="{{ url('/') }}" title="{{ config('app.name') }}">
 			<img src="/images/logo.png" width="170px" alt="{{ config('app.name') }}">

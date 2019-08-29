@@ -14,6 +14,14 @@
 								<i class="far fa-copy"></i>
 							</span>
 						</div>
+						<div class="input-group-prepend" data-toggle="tooltip" data-placement="bottom"
+						     title="{{ __('Open') }}">
+							<span class="input-group-text rounded-0 border-left-0">
+								<a :href="profile.route" target="_blank">
+									<i class="fas fa-external-link-alt"></i>
+								</a>
+							</span>
+						</div>
 						<input type="text" class="form-control" dir="ltr" readonly disabled
 						       :value="profile.route">
 					</div>
