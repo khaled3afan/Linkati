@@ -203,7 +203,7 @@ class SocialiteController extends Controller
     public function createUsername($socialite)
     {
         $username = explode('@', $socialite->getEmail());
-        if (User::withTrashed()->where('username', $username[0])->first()) {
+        if (Profile::withTrashed()->where('username', $username[0])->first()) {
             $username = $username[0] . '_' . substr($socialite->getId(), -4);
         } else {
             $username = $username[0];
