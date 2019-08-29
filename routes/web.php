@@ -37,8 +37,8 @@ Route::middleware('auth')->group(function () {
 Route::get('email', function () {
     $user = \App\Models\User::first();
 
-//    Mail::to($request->email)->send(new Invitation($user));
-    return new \App\Mail\Invitation($user);
+    Mail::to($user)->send(new \App\Mail\Invitation($user, 'me@hussam3bd.com'));
+//    return new \App\Mail\Invitation($user);
 });
 
 Route::get('{profile}', 'ProfileController@show')->name('profiles.show');

@@ -12,7 +12,7 @@
 				@csrf
 
 				<div class="text-center">
-					<h4>شكرا لدعمك منصة لينكاتي 😻</h4>
+					<h4 class="mb-4">شكرا لدعمك منصة لينكاتي 😻</h4>
 					<p class="d-none">
 						عندما يسجل شخص عن طريقك سوف تحصل على ميزات الحساب المدفعة مجانا لمدة شهر 😎، ما
 						رئيك؟
@@ -22,13 +22,15 @@
 				@component('components.form-group', ['type' => 'email', 'name' => 'email'])
 					@slot('label', __('E-Mail Address'))
 					@slot('attributes', [
-						'placeholder' => 'سوف نرسل له دعوة',
-						'required'
+						'required',
+						'dir' => 'ltr'
 					])
+
+					سوف نرسل له دعوة
 				@endcomponent
 
 				<div class="form-group">
-					<label class="font-weight-600">أو عن طريق الرابط التالي</label>
+					<label class="font-weight-500">أو عن طريق الرابط التالي</label>
 					<input type="text" dir="ltr" class="form-control" readonly disabled
 					       value="{{auth()->user()->referral_link}}">
 				</div>

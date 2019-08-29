@@ -4,7 +4,7 @@
 لينكاتي هي منصة عربية تقدم خدمة إنشاء رابط يحتوي على جميع روابطك المهمة لاستخدامه في وصف حسابك في الشبكات الاجتماعية مثل انستجرام او تويتر.
 
 @component('mail::button', [
-	'url' => $user->referral_link ."&utm_source={$user['email']}&utm_medium=Links&utm_campaign=EmailInvitation",
+	'url' => $user->referral_link ."&utm_source={$email}&utm_medium=Links&utm_campaign=EmailInvitation",
 	'color' => 'primary'
 ])
 استكشف لينكاتي الآن

@@ -16,7 +16,7 @@
 
 <div class="form-group {{ $errors->has($errorName) ? ' has-error has-danger' : '' }} {{ $class ?? null }}">
 	@if(isset($label) && ! in_array($type, ['checkbox', 'radio']))
-		{{ Form::label($name, $label .'&nbsp;'. $labelPostfix, ['class' => 'control-label form-control-label'],false) }}
+		{{ Form::label($name, $label .'&nbsp;'. $labelPostfix, ['class' => 'font-weight-500'],false) }}
 	@endif
 
 	@if(isset($inputGroup))

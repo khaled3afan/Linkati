@@ -1,7 +1,5 @@
 @extends('layouts.master')
-
 @section('body')
-
 	@include('layouts.partials.navbar')
 
 	@if (session('verified'))
@@ -9,6 +7,15 @@
 			<div class="alert alert-success" role="alert">
 				{{ __('Your account has been activated successfully!') }}
 			</div>
+		</div>
+	@endif
+
+	@if(session()->has('status'))
+		<div class="alert alert-success alert-dismissible fade show text-center" role="alert">
+			{!! session('status') !!}
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			</button>
 		</div>
 	@endif
 

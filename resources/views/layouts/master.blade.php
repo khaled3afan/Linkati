@@ -2,7 +2,7 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}" dir="rtl">
 <head>
 	@if('route')
-		<title>@yield('title', config('app.name', 'Laravel')) - @yield('subtitle', @$settings->subtitle)</title>
+		<title>@yield('title', config('app.name')) - @yield('subtitle', @$settings->subtitle)</title>
 	@else
 		<title>@yield('subtitle', @$settings->subtitle) - @yield('title', config('app.name', 'Laravel'))</title>
 	@endif
@@ -106,5 +106,13 @@
 </div>
 
 @stack('scripts')
+
+@if(session()->has('script'))
+	<script type="text/javascript">
+        window.onload = function () {
+			{!! session('script') !!}
+        }
+	</script>
+@endif
 </body>
 </html>

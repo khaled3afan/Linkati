@@ -32,9 +32,6 @@ class Invitation extends Mailable
      */
     public function build()
     {
-        $me = '[name], invited you to try Linkait!';
-
-//        $this->user->name . '، قام بدعوتك لتجريب منصة لينكاتي!'
         return $this->markdown('emails.invitation')
                     ->subject(__(':name, invited you to try Linkait!', [
                         'name' => $this->user->name
