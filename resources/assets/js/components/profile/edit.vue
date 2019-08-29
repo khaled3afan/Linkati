@@ -107,7 +107,7 @@
                         this.$toasted.success(response.data.message);
                         this.$store.commit('setProfile', response.data.data);
 
-                        history.pushState({}, null, window.Linkati.domain + '/' + response.data.data.username);
+                        history.pushState({}, null, window.Linkati.domain + '/dashboard/' + response.data.data.username);
                     })
                     .catch(error => {
                         this.errors = error.response.data.errors;
