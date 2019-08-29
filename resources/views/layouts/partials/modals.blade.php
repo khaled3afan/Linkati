@@ -1,7 +1,7 @@
 <div class="modal fade" id="referrals" tabindex="-1" role="dialog" aria-labelledby="referralsLabel"
      aria-hidden="true">
 	<div class="modal-dialog" role="document">
-		<div class="modal-content">
+		<form action="{{ route('referral.invites') }}" method="post" class="modal-content">
 			<div class="modal-header">
 				<h5 class="modal-title" id="referralsLabel">دعوة صديق</h5>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -9,16 +9,24 @@
 				</button>
 			</div>
 			<div class="modal-body">
+				@csrf
+
 				<div class="text-center">
 					<h4>شكرا لدعمك منصة لينكاتي 😻</h4>
-					<p>عندما يسجل شخص عن طريقك سوف تحصل على ميزات الحساب المدفعة مجانا لمدة شهر 😎، ما
-					   رئيك؟</p>
+					<p class="d-none">
+						عندما يسجل شخص عن طريقك سوف تحصل على ميزات الحساب المدفعة مجانا لمدة شهر 😎، ما
+						رئيك؟
+					</p>
 				</div>
 
-				<div class="form-group">
-					<label class="font-weight-600">البريد الإلكتروني</label>
-					<input type="email" class="form-control" placeholder="سوف نرسل له دعوة" required>
-				</div>
+				@component('components.form-group', ['type' => 'email', 'name' => 'email'])
+					@slot('label', __('E-Mail Address'))
+					@slot('attributes', [
+						'placeholder' => 'سوف نرسل له دعوة',
+						'required'
+					])
+				@endcomponent
+
 				<div class="form-group">
 					<label class="font-weight-600">أو عن طريق الرابط التالي</label>
 					<input type="text" dir="ltr" class="form-control" readonly disabled
@@ -27,9 +35,9 @@
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-text text-danger" data-dismiss="modal">اغلاق</button>
-				<button type="button" class="btn btn-primary">ادعو صديق</button>
+				<button type="submit" class="btn btn-primary">ادعو صديق</button>
 			</div>
-		</div>
+		</form>
 	</div>
 </div>
 

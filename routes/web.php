@@ -29,6 +29,16 @@ Route::middleware('auth')->group(function () {
     Route::get('account', 'UserController@edit')->name('users.edit');
     Route::patch('account', 'UserController@update');
     Route::patch('account/password', 'UserController@changePassword');
+
+    Route::post('referral/invites', 'ReferralController@invites')->name('referral.invites');
+});
+
+
+Route::get('email', function () {
+    $user = \App\Models\User::first();
+
+//    Mail::to($request->email)->send(new Invitation($user));
+    return new \App\Mail\Invitation($user);
 });
 
 Route::get('{profile}', 'ProfileController@show')->name('profiles.show');

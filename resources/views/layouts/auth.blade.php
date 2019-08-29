@@ -32,7 +32,8 @@
 								<i class="mr-2 fab fa-twitter"></i>
 								{{__($type.' with Twitter')}}
 							</a>
-							<a href="{{ route('auth.socialite', 'facebook') }}" class="btn btn-facebook mt-4 w-100"
+							<a href="{{ route('auth.socialite', 'facebook') }}"
+							   class="btn btn-facebook mt-4 w-100 d-none"
 							   title="{{__($type.' with Facebook')}}">
 								<i class="mr-2 fab fa-facebook-f"></i>
 								{{__($type.' with Facebook')}}
