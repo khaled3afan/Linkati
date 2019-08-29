@@ -24,11 +24,11 @@
 	<meta name="csrf-token" content="{{ csrf_token() }}">
 
 	<!-- Scripts -->
-	<script src="{{ asset('js/app.js') }}" defer></script>
+	<script src="{{ mix('js/app.js') }}" defer></script>
 
 	<!-- Styles -->
-	<link href="{{ asset('css/app.css') }}" rel="stylesheet">
-	<link href="{{ asset('css/_bootstrap-rtl.css') }}" rel="stylesheet">
+	<link href="{{ mix('css/app.css') }}" rel="stylesheet">
+	<link href="{{ mix('css/_bootstrap-rtl.css') }}" rel="stylesheet">
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/all.css">
 
 	<!-- facebook open graph -->
