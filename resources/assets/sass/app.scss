@@ -193,6 +193,22 @@ a {
   }
 }
 
+.logo-text {
+  svg {
+    width: 90px;
+  }
+}
+
+.theme--dark {
+  .logo-text {
+    svg {
+      g {
+        fill: $gray-light;
+      }
+    }
+  }
+}
+
 .page-content {
   line-height: 2.2em;
 
@@ -212,6 +228,10 @@ a {
   }
 }
 
+.auth-form {
+  max-width: 535px;
+}
+
 body.homepage {
   background-color: #fff;
 
@@ -224,10 +244,19 @@ body.homepage {
   h1 {
     font-size: 38px;
     line-height: 1.4em;
+
+    @include media-breakpoint-down(sm) {
+      font-size: 26px;
+    }
   }
 
   p.lead {
     font-size: 18px;
+
+    @include media-breakpoint-down(sm) {
+      font-size: 16px;
+      margin-bottom: 0;
+    }
   }
 
   .divider {

@@ -32,7 +32,7 @@
 							<small class="text-muted d-block" dir="ltr">{{ '@'.$profile->username }}</small>
 
 							@if($profile->location)
-								<p class="card-text mb-1 font-weight-600">
+								<p class="card-text mb-1 font-weight-500">
 									<span class="d-block mb-2">
 										<i class="fas fa-map-marker-alt"></i>
 										{{ $profile->location }}
@@ -63,8 +63,8 @@
 	</section>
 
 	<footer class="profile-footer text-center">
-		<a class="m-auto" href="{{ url('/') }}" title="{{ config('app.name') }}">
-			<img src="{{ asset('/images/logo.png') }}" alt="{{ config('app.name') }}" width="150px">
+		<a class="m-auto logo-text" href="{{ url('/') }}" title="{{ config('app.name') }}">
+			@php(include(resource_path('/assets/images/linkati.svg')))
 		</a>
 	</footer>
 @endsection

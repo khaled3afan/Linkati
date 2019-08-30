@@ -36,7 +36,8 @@
 					   rel="nofollow noopener noreferrer" title="Twitter" class="nav-link nav-item">
 						<i class="fab fa-twitter"></i>
 					</a>
-					<a href="https://fb.com/linkatiapp" target="_blank" rel="nofollow noopener noreferrer"
+					{{--https://fb.com/linkatiapp--}}
+					<a href="http://bit.ly/2MKkxtd" target="_blank" rel="nofollow noopener noreferrer"
 					   title="Facebook" class="nav-link nav-item">
 						<i class="fab fa-facebook-f"></i>
 					</a>

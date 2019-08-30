@@ -6,7 +6,7 @@
 	<section class="pt-4">
 		<div class="container">
 			<div class="row">
-				<div class="col-md-5 col-sm-12">
+				<div class="auth-form col-md-6 col-sm-12">
 					@if (session('status'))
 						<div class="alert alert-success" role="alert">
 							{{ session('status') }}
@@ -62,32 +62,32 @@
 		<ul class="list-unstyled pl-0 pl-md-5">
 			<li class="media">
 				<div class="bg-white rounded mr-3 p-3">
-					<img src="/images/icons/robot@2x.png" class="img-fluid" alt="صاحب روابط كثيرة؟">
+					<img src="/images/icons/robot@2x.png" class="img-fluid" alt="ناشط على السوشال ميديا؟">
 				</div>
 				<div class="media-body font-weight-500">
-					<h5 class="mt-0 mb-2 text-primary font-weight-600">صاحب روابط كثيرة؟</h5>
-					سناب شات، توتير انستجرام؟ انشئ حسابك في لينكاتي واحصل على رابط واحد يحتوي على جميع روابطك الاخرى.
+					<h5 class="mt-0 mb-2 text-primary font-weight-600">ناشط على السوشال ميديا؟</h5>
+					اجمع روابط حساباتك على السوشال ميديا في مكان واحد! انستقرام؟ تويتر؟ سنابشات؟ اجمع كل شيء في صفحة
+					واحدة.
 				</div>
 			</li>
 
 			<li class="media">
 				<div class="bg-white rounded mr-3 p-3">
-					<img src="/images/icons/microphone-spotlight@2x.png" class="img-fluid" alt="مشهور؟">
+					<img src="/images/icons/microphone-spotlight@2x.png" class="img-fluid" alt="موسيقيّ؟">
 				</div>
 				<div class="media-body font-weight-500">
-					<h5 class="mt-0 mb-2 text-primary font-weight-600">مشهور؟</h5>
-					انغامي، سبوتيفاي، ايتونز ويوتيوب وفر لمعجبيك المكان الانسب لهم للاستمتاع بابداعك
+					<h5 class="mt-0 mb-2 text-primary font-weight-600">موسيقيّ؟</h5>
+					سبوتفاي؟ يوتيوب؟ ساوندكلاود؟ اسمح لمعجبيك بالوصول لكافة حساباتك على هذه الخدمات من مكان واحد.
 				</div>
 			</li>
 
 			<li class="media">
 				<div class="bg-white rounded mr-3 p-3">
-					<img src="/images/icons/gentleman@2x.png" class="img-fluid" alt="مبدع او مصمم؟">
+					<img src="/images/icons/gentleman@2x.png" class="img-fluid" alt="صانع محتوى؟">
 				</div>
 				<div class="media-body font-weight-500">
-					<h5 class="mt-0 mb-2 text-primary font-weight-600">مبدع او مصمم؟</h5>
-					هل منتجاتك تتوفر للبيع في اكثر من مكان؟ يمكنك الان نشر رابط واحد ودع عميلك يختار المكان المناسب له
-					للشراء!
+					<h5 class="mt-0 mb-2 text-primary font-weight-600">صانع محتوى؟</h5>
+					تعمل مع الكثير من المواقع أو المنصات؟ لا مشكلة! اجمع كافة أعمالك في مكان واحد.
 				</div>
 			</li>
 		</ul>

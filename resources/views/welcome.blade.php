@@ -1,8 +1,7 @@
 @extends('layouts.auth')
-@section('subtitle', 'الآن ما تحتاجه هو رابط واحد فقط! - انشاء رابط مختصر لحسابك في الشبكات الاجتماعية')
 @php($type = 'Sign up')
-@section('section-title', 'لديك فرصة واحدة لاستخدام الرابط، اجعلها اكثر!')
-@section('section-subtitle', 'هون الامر على متابعيك باستخدامك خدمة لينكاتي، واجمع كل روابطك في مكان واحد.')
+@section('section-title', 'لديك فرصة لمشاركة رابط واحد؟ ماذا لو استطعت تغيير هذا!')
+@section('section-subtitle', 'ساعد متابعيك في الوصول إلى منتجاتك وخدماتك وحساباتك الأخرى باستخدام صفحة بسيطة.')
 @section('form')
 	<form method="POST" action="{{ route('register') }}" class="mt-4">
 		@csrf

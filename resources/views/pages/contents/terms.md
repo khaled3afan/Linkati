@@ -7,5 +7,5 @@
 
 <small>
 آخر تعديل:
-August 4, 2019
+August 30, 2019
 </small>
