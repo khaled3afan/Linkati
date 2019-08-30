@@ -56,13 +56,12 @@
 							@endforeach
 						</ul>
 					</div><!-- /.card -->
-
 				</div>
 			</div>
 		</div>
 	</section>
 
-	<footer class="profile-footer text-center">
+	<footer class="profile-footer text-center position-static">
 		<a class="m-auto logo-text" href="{{ url('/') }}" title="{{ config('app.name') }}">
 			<svg width="236px" viewBox="0 0 236 99" version="1.1" xmlns="http://www.w3.org/2000/svg"
 			     xmlns:xlink="http://www.w3.org/1999/xlink">

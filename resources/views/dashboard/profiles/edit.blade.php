@@ -4,7 +4,7 @@
 	<div class="container">
 		<div class="row justify-content-center">
 			<div class="col-12 mb-5">
-				<div class="col-md-5 mx-auto">
+				<div class="col-lg-5 mx-auto">
 					<div class="input-group cursor-pointer"
 					     v-clipboard:success="copied"
 					     v-clipboard:copy="profile.route">
@@ -14,14 +14,12 @@
 								<i class="far fa-copy"></i>
 							</span>
 						</div>
-						<div class="input-group-prepend" data-toggle="tooltip" data-placement="bottom"
-						     title="{{ __('Open') }}">
+						<a class="input-group-prepend" data-toggle="tooltip" data-placement="bottom"
+						   title="{{ __('Open') }}" :href="profile.route" target="_blank">
 							<span class="input-group-text rounded-0 border-left-0">
-								<a :href="profile.route" target="_blank">
 									<i class="fas fa-external-link-alt"></i>
-								</a>
 							</span>
-						</div>
+						</a>
 						<input type="text" class="form-control" dir="ltr" readonly disabled
 						       :value="profile.route">
 					</div>
@@ -58,7 +56,7 @@
 				<div class="tab-content" id="v-pills-tabContent">
 					<div class="tab-pane fade show active" id="profile-preview">
 						<div class="row">
-							<div class="col-md-8 mx-auto">
+							<div class="col-lg-8 mx-auto">
 								<profile-card></profile-card>
 							</div>
 						</div>

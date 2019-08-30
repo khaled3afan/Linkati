@@ -4,7 +4,7 @@
 		<div class="card-body">
 			<h4 class="card-title font-weight-600 mb-2">{{ profile.name }}</h4>
 			<small class="text-muted d-block" dir="ltr">@{{ profile.username }}</small>
-			<p class="card-text mb-1 font-weight-600" v-if="profile.location">
+			<p class="card-text mb-1 font-weight-500" v-if="profile.location">
 				<i class="fas fa-map-marker-alt"></i>
 				{{ profile.location }}
 			</p>
