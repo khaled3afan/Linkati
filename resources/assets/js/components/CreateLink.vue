@@ -20,7 +20,7 @@
 							الرابط
 							<small class="text-danger">*</small>
 						</label>
-						<input type="url" name="url" dir="ltr" v-model="link.url" placeholder="twitter.com/hussam3bd"
+						<input type="url" name="url" dir="ltr" v-model="link.url" placeholder="twitter.com"
 						       class="form-control" :class="{'is-invalid': errors.url}" @keypress.enter="createLink" required>
 						<div class="invalid-feedback" v-if="errors.url">{{errors.url[0]}}</div>
 					</div>
