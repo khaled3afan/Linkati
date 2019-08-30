@@ -82,7 +82,6 @@ class SocialiteController extends Controller
                         ->first();
         }
 
-
         # Create new user if not existing.
         if ( ! $user) {
             $username = $this->createUsername($socialite);
