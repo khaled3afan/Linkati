@@ -3,6 +3,8 @@
 namespace App\Helpers;
 
 use Hashids;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Route;
 
 class Helper
 {
@@ -13,7 +15,7 @@ class Helper
     {
         $cookie = \Cookie::get('referral');
 
-        return array_first(Hashids::decode($cookie));
+        return Arr::first(Hashids::decode($cookie));
     }
 
     /**
@@ -25,5 +27,21 @@ class Helper
     public static function addScheme($url, $scheme = 'http://')
     {
         return parse_url($url, PHP_URL_SCHEME) === null ? $scheme . $url : $url;
+    }
+
+    /**
+     * @return bool
+     */
+    public static function isHome()
+    {
+        return self::routeName() == 'home';
+    }
+
+    /**
+     * @return mixed
+     */
+    public static function routeName()
+    {
+        return str_replace('.', '-', Route::currentRouteName());
     }
 }

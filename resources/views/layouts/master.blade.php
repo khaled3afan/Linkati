@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}" dir="rtl">
 <head>
-	@if('route')
-		<title>@yield('title', config('app.name')) - @yield('subtitle', @$settings->subtitle)</title>
+	@if(\App\Helpers\Helper::isHome())
+		<title>@yield('title', $settings->title) - @yield('subtitle', $settings->subtitle)</title>
 	@else
-		<title>@yield('subtitle', @$settings->subtitle) - @yield('title', config('app.name', 'Laravel'))</title>
+		<title>@yield('subtitle', $settings->subtitle) - @yield('title', $settings->title)</title>
 	@endif
 
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="description" content="@yield('description', @$settings->description)">
-	<meta name="keywords" content="@yield('keywords', @$settings->keywords)">
+	<meta name="description" content="@yield('description', $settings->description)">
+	<meta name="keywords" content="@yield('keywords', $settings->keywords)">
 
 	<link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png">
 	<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
@@ -34,29 +34,29 @@
 	<!-- facebook open graph -->
 	<meta property="og:type" content="website"/>
 	<meta property="og:site_name"
-	      content="@yield('title', @$settings->title) - @yield('subtitle', @$settings->subtitle)"/>
+	      content="@yield('title', $settings->title) - @yield('subtitle', $settings->subtitle)"/>
 	<meta property="og:url" content="{{ request()->url() }}"/>
-	<meta property="og:title" content="@yield('title', @$settings->title) - @yield('subtitle', @$settings->subtitle)"/>
-	<meta property="og:description" content="@yield('description', @$settings->description)"/>
+	<meta property="og:title" content="@yield('title', $settings->title) - @yield('subtitle', $settings->subtitle)"/>
+	<meta property="og:description" content="@yield('description', $settings->description)"/>
 	<meta property="og:image" content="@yield('og-image', url('/images/go.png'))"/>
 	<meta property="og:locale" content="ar_AR"/>
 	<!-- end facebook open graph -->
 
 	<!-- Schema MicroData (Google+,Google, Yahoo, Bing,) -->
-	<meta itemprop="name" content="@yield('title', @$settings->title) - @yield('subtitle', @$settings->subtitle)"/>
+	<meta itemprop="name" content="@yield('title', $settings->title) - @yield('subtitle', $settings->subtitle)"/>
 	<meta itemprop="url" content="{{ request()->url() }}"/>
 	<meta itemprop="image" content="@yield('og-image', url('/images/go.png'))">
-	<meta itemprop="description" content="@yield('description', @$settings->description)"/>
+	<meta itemprop="description" content="@yield('description', $settings->description)"/>
 	<!-- End Schema MicroData -->
 
 	<!-- twitter cards -->
 	<meta name="twitter:card" content="summary">
 	<meta name="twitter:site" content="@linkatiapp">
 	<meta name="twitter:creator" content="@linkatiapp">
-	<meta name="twitter:title" content="@yield('title', @$settings->title) - @yield('subtitle', @$settings->subtitle)">
+	<meta name="twitter:title" content="@yield('title', $settings->title) - @yield('subtitle', $settings->subtitle)">
 	<meta name="twitter:image" content="@yield('og-image', url('/images/go.png'))">
 	<meta name="twitter:image:src" content="@yield('og-image', url('/images/go.png'))">
-	<meta name="twitter:description" content="@yield('description', @$settings->description)">
+	<meta name="twitter:description" content="@yield('description', $settings->description)">
 
 	<script type="text/javascript">
         window.Linkati = {!! json_encode([
