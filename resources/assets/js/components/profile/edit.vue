@@ -8,7 +8,7 @@
 			</small>
 		</div>
 		<div class="card-body">
-			<div class="media d-sm-block d-md-flex">
+			<div class="media d-block d-md-flex">
 				<div class="edit-avatar text-center mr-md-4 mt-md-1 mb-3">
 					<label class="position-relative">
 						<img :src="profile.avatar_url" :alt="profile.name"
@@ -21,7 +21,7 @@
 						</strong>
 					</label>
 					<div class="invalid-feedback" v-if="errors.avatar">{{errors.avatar[0]}}</div>
-					<small class="d-sm-block d-md-none">اضغط لتعديل الصورة</small>
+					<small class="d-block d-md-none">اضغط لتعديل الصورة</small>
 				</div>
 
 				<form class="media-body" @submit="updateProfile">
