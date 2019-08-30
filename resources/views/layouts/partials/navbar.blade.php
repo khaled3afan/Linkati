@@ -18,7 +18,7 @@
 						<a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
 						   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
 							<i class="far fa-address-card mr-2"></i>
-							{{ isset($profile) ? $profile->name : __('Profiles') }}
+							{{ isset($profile) ? Str::limit($profile->name, 15) : __('Profiles') }}
 							<span class="caret"></span>
 						</a>
 
