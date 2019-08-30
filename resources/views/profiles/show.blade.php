@@ -18,7 +18,7 @@
 @endpush
 
 @section('body')
-	<section class="d-flex align-items-start align-items-md-center justify-content-center mh-100vh">
+	<section class="d-flex align-items-start align-items-md-center justify-content-center mh-93vh">
 		<div class="container">
 			<div class="row justify-content-center">
 				<div class="col-lg-5 col-md-6 col-sm-12">

@@ -26,6 +26,10 @@ a {
   min-height: 100vh;
 }
 
+.mh-93vh {
+  min-height: 93vh;
+}
+
 .btn-twitter {
   @extend .btn-primary;
   background-color: $twitter;
