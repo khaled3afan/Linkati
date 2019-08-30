@@ -8,7 +8,7 @@ return [
          * The name of this application. You can use this name to monitor
          * the backups.
          */
-        'name' => env('APP_NAME', 'laravel-backup'),
+        'name' => 'linkati-backup',
 
         'source' => [
 
@@ -156,7 +156,7 @@ return [
      */
     'monitor_backups' => [
         [
-            'name' => env('APP_NAME', 'laravel-backup'),
+            'name' => 'linkati-backup',
             'disks' => ['s3'],
             'health_checks' => [
                 \Spatie\Backup\Tasks\Monitor\HealthChecks\MaximumAgeInDays::class => 1,
