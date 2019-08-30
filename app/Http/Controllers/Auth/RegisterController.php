@@ -6,6 +6,7 @@ use App\Helpers\Helper;
 use App\Models\Profile;
 use App\Models\User;
 use App\Http\Controllers\Controller;
+use App\Rules\Username;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -55,7 +56,7 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'name' => ['required', 'string', 'min:3', 'max:60'],
             'email' => ['required', 'string', 'email:rfc,dns', 'max:255', 'unique:users'],
-            'username' => ['required', 'string', 'max:255', 'unique:profiles'],
+            'username' => ['required', 'string', 'max:255', 'unique:profiles', new Username],
             'password' => ['required', 'string', 'min:8'],
         ]);
     }

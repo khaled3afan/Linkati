@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
 use App\Models\Profile;
+use App\Rules\Username;
 use Illuminate\Http\Request;
 
 class ProfileController extends Controller
@@ -35,7 +36,8 @@ class ProfileController extends Controller
                 'string',
                 'min:3',
                 'max:255',
-                'unique:profiles,username'
+                'unique:profiles,username',
+                new Username,
             ],
         ]);
 
@@ -120,7 +122,8 @@ class ProfileController extends Controller
                 'string',
                 'min:3',
                 'max:255',
-                'unique:profiles,username,' . $profile->id
+                'unique:profiles,username,' . $profile->id,
+                new Username,
             ],
         ]);
 
