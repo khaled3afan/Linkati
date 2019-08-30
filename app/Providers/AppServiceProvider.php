@@ -14,7 +14,7 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         view()->composer('*', function ($view) {
-            cache()->forget('settings');
+//            cache()->forget('settings');
             $settings = cache()->rememberForever('settings', function () {
                 $path = resource_path('seeders/settings.json');
 
