@@ -93,10 +93,16 @@ class RegisterController extends Controller
      */
     protected function registered(Request $request, $user)
     {
-        $user->profiles()->save(new Profile([
+        $profile = $user->profiles()->save(new Profile([
             'name' => $request->name,
             'username' => $request->username,
             'theme_id' => 1,
         ]));
+
+//        __('Registered Successfully, plcas verify your email');
+        return redirect()
+            ->route('dashboard.profiles.show', $profile)
+            ->with('status',
+                'تم التسجيل بنجاح، قم بتفعيل حسابك عبر الرسالة التي أرسلناها لبريدك الإلكتروني كي تستطيع استخدام جميع ميزات منصة لينكاتي!');
     }
 }
