@@ -99,7 +99,6 @@ class RegisterController extends Controller
             'theme_id' => 1,
         ]));
 
-//        __('Registered Successfully, plcas verify your email');
         return redirect()
             ->route('dashboard.profiles.show', $profile)
             ->with('status',

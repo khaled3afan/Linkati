@@ -100,6 +100,7 @@ class SocialiteController extends Controller
                 'name' => $socialite->getName(),
                 'email' => $socialite->getEmail(),
                 'referred_by' => Helper::referredBy(),
+                'email_verified_at' => now(),
                 'settings' => [
                     'email' => [
                         'newsletter' => true
