@@ -120,6 +120,11 @@ class SocialiteController extends Controller
                 }
 
                 $profile = $user->profiles()->save(new Profile($profile));
+
+                $avatar = optional($socialite)->avatar_original ?? $socialite->getAvatar();
+                if ( ! empty($avatar)) {
+                    $profile->addMediaFromUrl($request->avatar)->toMediaCollection('avatar');
+                }
             }
         }
 
