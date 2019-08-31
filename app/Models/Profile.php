@@ -83,9 +83,7 @@ class Profile extends Model implements HasMedia
     /**
      * Get profile theme.
      *
-     * @param string $order
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function theme()
     {

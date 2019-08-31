@@ -44,4 +44,19 @@ class Helper
     {
         return str_replace('.', '-', Route::currentRouteName());
     }
+
+    /**
+     * @return mixed
+     * @throws \Exception
+     */
+    public static function settings()
+    {
+        # cache()->forget('settings');
+
+        return cache()->rememberForever('settings', function () {
+            $path = resource_path('seeders/settings.json');
+
+            return (object)json_decode(file_get_contents($path), true);
+        });
+    }
 }

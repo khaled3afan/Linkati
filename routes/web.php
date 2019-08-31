@@ -33,12 +33,6 @@ Route::middleware('auth')->group(function () {
     Route::post('referral/invites', 'ReferralController@invites')->name('referral.invites');
 });
 
-
-Route::get('email', function () {
-    $user = \App\Models\User::first();
-
-    Mail::to($user)->send(new \App\Mail\Invitation($user, 'me@hussam3bd.com'));
-//    return new \App\Mail\Invitation($user);
-});
+Route::get('sitemap.xml', 'SitemapController@sitemap')->name('sitemap');
 
 Route::get('{profile}', 'ProfileController@show')->name('profiles.show');
