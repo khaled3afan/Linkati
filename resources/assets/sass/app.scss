@@ -1,7 +1,7 @@
 // Variables
 @import 'variables';
 // Bootstrap
-@import '~bootstrap/scss/bootstrap';
+@import 'bootstrap';
 // Fonts
 @import 'fonts';
 
@@ -167,6 +167,7 @@ a {
 
   &--blue {
     background-image: linear-gradient(134deg, #005EFF 0%, #00A8FF 100%);
+
     #app {
       background-image: linear-gradient(134deg, #005EFF 0%, #00A8FF 100%);
     }
@@ -182,6 +183,7 @@ a {
 
   &--dark {
     background-image: linear-gradient(134deg, #000B1E 0%, #011154 100%);
+
     #app {
       background-image: linear-gradient(134deg, #000B1E 0%, #011154 100%);
     }
@@ -200,6 +202,7 @@ a {
 
     background-color: #FAACA8;
     background-image: linear-gradient(19deg, #FAACA8 0%, #DDD6F3 100%);
+
     #app {
       background-color: #FAACA8;
       background-image: linear-gradient(19deg, #FAACA8 0%, #DDD6F3 100%);
