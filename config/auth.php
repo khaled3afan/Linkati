@@ -100,4 +100,8 @@ return [
         ],
     ],
 
+    'verification' => [
+        'expire' => 10080, // one week
+    ]
+
 ];
