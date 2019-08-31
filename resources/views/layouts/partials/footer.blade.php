@@ -28,16 +28,15 @@
 			</div>
 			<div class="col-lg-4 col-sm-12">
 				<nav class="nav justify-content-center justify-content-md-end">
-					<a href="https://instagr.am/linkatiapp" target="_blank"
+					<a href="https://instagr.am/linkatico" target="_blank"
 					   rel="nofollow noopener noreferrer" title="Instagram" class="nav-link nav-item">
 						<i class="fab fa-instagram"></i>
 					</a>
-					<a href="https://twitter.com/linkatiapp" target="_blank"
+					<a href="https://twitter.com/linkatico" target="_blank"
 					   rel="nofollow noopener noreferrer" title="Twitter" class="nav-link nav-item">
 						<i class="fab fa-twitter"></i>
 					</a>
-					{{--https://fb.com/linkatiapp--}}
-					<a href="http://bit.ly/2MKkxtd" target="_blank" rel="nofollow noopener noreferrer"
+					<a href="https://fb.com/linkatico" target="_blank" rel="nofollow noopener noreferrer"
 					   title="Facebook" class="nav-link nav-item">
 						<i class="fab fa-facebook-f"></i>
 					</a>
