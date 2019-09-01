@@ -19,4 +19,4 @@
 
 التواصل مع مطور المنصة متاح عبر قنوات التواصل الرسمية على فيسبوك، تويتر، وانستاغرام، او عبر البريد الالكتروني: hussam(at)linkati.co
 
-> [حمل ادوات الصحافة](https://linkati.s3-eu-west-1.amazonaws.com/static/press-kit.zip)، تحتوي على هوية لينكاتي وفيديو تعريفي لالية العمل
+> [حمل المواد الصحفية](https://linkati.s3-eu-west-1.amazonaws.com/static/press-kit.zip)، تتضمن الهوية البصرية لمنصة لينكاتي
