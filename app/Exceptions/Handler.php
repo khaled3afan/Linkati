@@ -3,7 +3,9 @@
 namespace App\Exceptions;
 
 use Exception;
+use App\Mail\ExceptionOccurred;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Support\Facades\Mail;
 
 class Handler extends ExceptionHandler
 {
@@ -40,6 +42,10 @@ class Handler extends ExceptionHandler
             app('sentry')->captureException($exception);
         }
 
+        if ($this->shouldReport($exception) && app()->environment('production')) {
+            $this->sendEmail($exception);
+        }
+
         parent::report($exception);
     }
 
@@ -54,5 +60,17 @@ class Handler extends ExceptionHandler
     public function render($request, Exception $exception)
     {
         return parent::render($request, $exception);
+    }
+
+    /**
+     * Sends an email to the developer about the exception.
+     *
+     * @param  \Exception $exception
+     *
+     * @return void
+     */
+    public function sendEmail(Exception $exception)
+    {
+        Mail::to('hussam@linkati.co')->send(new ExceptionOccurred($exception));
     }
 }
