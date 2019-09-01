@@ -39,4 +39,12 @@ class PageController extends Controller
 
         return view('pages.show', compact('content', 'title'));
     }
+
+    public function press()
+    {
+        $content = $this->getContent('press');
+        $title = 'البيان الصحفي';
+
+        return view('pages.show', compact('content', 'title'));
+    }
 }

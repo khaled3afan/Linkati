@@ -7,6 +7,9 @@
 						<a class="nav-item nav-link" href="{{ route('pages.about') }}" title="عن لينكاتي">
 							عن لينكاتي
 						</a>
+						<a class="nav-item nav-link" href="{{ route('pages.press') }}" title="البيان الصحفي">
+							البيان الصحفي
+						</a>
 						<a class="nav-item nav-link" href="{{ route('pages.privacy') }}" title="سياسة الخصوصية">
 							سياسة الخصوصية
 						</a>

@@ -22,6 +22,7 @@ Route::get('/', 'HomeController@index')->name('home');
 Route::get('about', 'PageController@about')->name('pages.about');
 Route::get('privacy', 'PageController@privacy')->name('pages.privacy');
 Route::get('terms', 'PageController@terms')->name('pages.terms');
+Route::get('press', 'PageController@press')->name('pages.press');
 
 Route::get('l/{uid}', 'LinkController@show')->name('links.show');
 
