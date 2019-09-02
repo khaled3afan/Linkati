@@ -68,6 +68,10 @@ class ProfileController extends Controller
      */
     public function show(Profile $profile)
     {
+        if ($profile->user_id != auth()->id()) {
+            return abort(404);
+        }
+
         return view('dashboard.profiles.edit', compact('profile'));
     }
 
