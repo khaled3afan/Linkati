@@ -68,7 +68,7 @@
 	        'auth' => auth()->user(),
         ]) !!};
 
-		@if(isset($profile))
+		@if(isset($profile) && \App\Helpers\Helper::routeName() != 'profiles.show')
             window.Linkati.profile = {!! $profile !!};
 
         window.Linkati.themes = {!! \App\Models\Theme::all() !!};

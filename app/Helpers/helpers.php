@@ -42,7 +42,8 @@ class Helper
      */
     public static function routeName()
     {
-        return str_replace('.', '-', Route::currentRouteName());
+//        return str_replace('.', '-', Route::currentRouteName());
+        return Route::currentRouteName();
     }
 
     /**
