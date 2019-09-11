@@ -42,9 +42,9 @@ class Handler extends ExceptionHandler
             app('sentry')->captureException($exception);
         }
 
-        if ($this->shouldReport($exception) && app()->environment('production')) {
-            $this->sendEmail($exception);
-        }
+//        if ($this->shouldReport($exception) && app()->environment('production')) {
+//            $this->sendEmail($exception);
+//        }
 
         parent::report($exception);
     }

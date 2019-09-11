@@ -40,6 +40,8 @@ class Link extends Model
         'apps' => 'fab fa-app-store',
         'apple' => 'fab fa-apple',
         'blogger' => 'fab fa-blogger-b',
+        'snapchat' => 'fab fa-snapchat-ghost',
+        'whatsapp' => 'fab fa-whatsapp',
     ];
 
     /**
@@ -74,12 +76,12 @@ class Link extends Model
      */
     public function getIconAttribute()
     {
-        $url = parse_url($this->url);
+        $url = parse_url(strtolower($this->url));
         if (isset($url['host'])) {
-            $host = str_replace('www.', '', $url['host']);
-            $explode = explode('.', $host);
+            $explode = explode('.', $url['host']);
+            $icon = count($explode) >= 3 ? $explode[1] : $explode[0];
 
-            return isset($this->icons[$explode[0]]) ? $this->icons[$explode[0]] : $this->icons['default'];
+            return isset($this->icons[$icon]) ? $this->icons[$icon] : $this->icons['default'];
         }
 
         return $this->icons['default'];
