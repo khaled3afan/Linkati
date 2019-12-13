@@ -18,7 +18,6 @@ Route::get('social/{provider}', 'Auth\SocialiteController@redirectToProvider')->
 Route::get('social/{provider}/callback', 'Auth\SocialiteController@handleProviderCallback');
 
 Route::get('/', 'HomeController@index')->name('home');
-
 Route::get('about', 'PageController@about')->name('pages.about');
 Route::get('privacy', 'PageController@privacy')->name('pages.privacy');
 Route::get('terms', 'PageController@terms')->name('pages.terms');
@@ -27,6 +26,8 @@ Route::get('press', 'PageController@press')->name('pages.press');
 Route::get('l/{uid}', 'LinkController@show')->name('links.show');
 
 Route::middleware('auth')->group(function () {
+    Route::view('subscribe', 'subscribe');
+
     Route::get('account', 'UserController@edit')->name('users.edit');
     Route::patch('account', 'UserController@update');
     Route::patch('account/password', 'UserController@changePassword');
