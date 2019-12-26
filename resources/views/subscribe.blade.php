@@ -16,7 +16,7 @@
 
 						<script src="https://gumroad.com/js/gumroad.js"></script>
 						<a class="gumroad-button"
-						   href="https://gum.co/KbhzX?wanted=true&url_params[email]=hussam3bd@gmail.com&url_params[user_id]=1"
+						   href="https://gum.co/KbhzX?wanted=true&email={{ auth()->user()->email }}&user_id={{auth()->id()}}"
 						   target="_blank">
 							اشترك الان
 						</a>
