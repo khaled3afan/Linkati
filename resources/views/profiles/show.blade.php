@@ -28,19 +28,20 @@
 						     class="rounded-circle mx-auto" width="90px" height="90px">
 
 						<div class="card-body">
-							<h1 class="h4 card-title font-weight-600 mb-2">{{ $profile->name }}</h1>
+							<h1 class="h4 card-title font-weight-600 mb-2" dir="auto">{{ $profile->name }}</h1>
 							<small class="text-muted d-block" dir="ltr">{{ '@'.$profile->username }}</small>
 
 							@if($profile->location)
 								<p class="card-text mb-1 font-weight-500">
-									<span class="d-block mb-2">
+									<span class="d-block mb-2" dir="auto">
 										<i class="fas fa-map-marker-alt"></i>
 										{{ $profile->location }}
 									</span>
 								</p>
 							@endif
 
-							<p class="card-text mb-0 {{ empty($profile->bio) ? 'd-none' : '' }}">{{ $profile->bio }}</p>
+							<p class="card-text mb-0 {{ empty($profile->bio) ? 'd-none' : '' }}"
+							   dir="auto">{{ $profile->bio }}</p>
 						</div>
 
 						<ul class="nav flex-column p-0">
