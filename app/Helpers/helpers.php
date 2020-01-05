@@ -60,4 +60,19 @@ class Helper
             return (object)json_decode(file_get_contents($path), true);
         });
     }
+
+    /**
+     * [percent description]
+     *
+     * @param $total
+     * @param $amount
+     *
+     * @return string [type]         [description]
+     */
+    public static function percent($total, $amount)
+    {
+        $count = $total != 0 ? ($amount / $total) * 100 : $total;
+
+        return number_format($count, 0);
+    }
 }
