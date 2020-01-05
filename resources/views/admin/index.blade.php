@@ -15,7 +15,7 @@
 
 					<div class="widget-detail-1" dir="auto">
 						<h2 class="p-t-10 m-b-0">
-							<span class="text-success">({{ $verified }})</span>
+							<span class="text-success">({{ $verified }})</span>/{{ $users }}
 						</h2>
 					</div>
 				</div>
@@ -50,17 +50,17 @@
 
 		<div class="col-lg-6">
 			<div class="card-box">
-				<h4 class="header-title m-t-0 m-b-30">Last 30 Days Profiles</h4>
+				<h4 class="header-title m-t-0 m-b-30">Last 30 Days Users</h4>
 
-				<canvas id="lineChart" height="160"></canvas>
+				<canvas id="UsersChart" height="160"></canvas>
 			</div>
 		</div><!-- end col-->
 
 		<div class="col-lg-6">
 			<div class="card-box">
-				<h4 class="header-title m-t-0 m-b-30">Last 30 Days Users</h4>
+				<h4 class="header-title m-t-0 m-b-30">Last 30 Days Profiles</h4>
 
-				<canvas id="UsersChart" height="160"></canvas>
+				<canvas id="lineChart" height="160"></canvas>
 			</div>
 		</div><!-- end col-->
 

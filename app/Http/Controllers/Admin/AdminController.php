@@ -24,7 +24,7 @@ class AdminController extends Controller
                            ->groupBy(DB::raw('day(created_at)'))
                            ->get()
                            ->mapWithKeys(function ($value) {
-                               return [$value->created_at->format('M-d-Y') => $value->count];
+                               return [$value->created_at->format('d-m-Y') => $value->count];
                            }),
             'profiles' => Profile::where('created_at', '>=', now()->subDays(30))
                                  ->select(DB::raw('count(id) as count'), 'created_at')
@@ -32,7 +32,7 @@ class AdminController extends Controller
                                  ->groupBy(DB::raw('day(created_at)'))
                                  ->get()
                                  ->mapWithKeys(function ($value) {
-                                     return [$value->created_at->format('M-d-Y') => $value->count];
+                                     return [$value->created_at->format('d-m-Y') => $value->count];
                                  }),
         ];
 
