@@ -15,7 +15,7 @@
 
 					<div class="widget-detail-1" dir="auto">
 						<h2 class="p-t-10 m-b-0">
-							<span class="text-success">({{ $verified }})</span>/{{ $users }}
+							{{ $users }}/<span class="text-success">{{ $verified }}</span>
 						</h2>
 					</div>
 				</div>
