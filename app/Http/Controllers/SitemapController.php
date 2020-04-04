@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Helpers\Helper;
 use App\Models\Profile;
+use Laravelium\Sitemap\Sitemap;
 
 class SitemapController extends Controller
 {
@@ -32,6 +33,7 @@ class SitemapController extends Controller
      */
     public function sitemap()
     {
+        /** @var Sitemap $sitemap */
         $sitemap = app()->make('sitemap');
 
         // cache the sitemap for one hour
@@ -42,17 +44,31 @@ class SitemapController extends Controller
 //            $sitemap->add(route('blog.index'), '', '1.0', 'daily');
 
             # Pages
-            $sitemap->add(route('pages.about'), '2019-08-30 12:00:00', '0.9', 'monthly');
-            $sitemap->add(route('pages.privacy'), '2019-08-30 12:00:00', '0.9', 'monthly');
-            $sitemap->add(route('pages.terms'), '2019-08-30 12:00:00', '0.9', 'monthly');
+            $sitemap->add(route('login'), '2019-08-30 12:00:00', '0.80', 'monthly', [], 'تسجيل الدخول');
+            $sitemap->add(route('register'), '2019-08-30 12:00:00', '0.80', 'monthly', [], 'حساب جديد');
+            $sitemap->add(route('pages.about'), '2019-08-30 12:00:00', '0.80', 'monthly', [], 'عن لينكاتي');
+            $sitemap->add(route('pages.press'), '2019-08-30 12:00:00', '0.80', 'monthly', [], 'البيان الصحفي');
+            $sitemap->add(route('pages.privacy'), '2019-08-30 12:00:00', '0.80', 'monthly', [], 'سياسة الخصوصية');
+            $sitemap->add(route('pages.terms'), '2019-08-30 12:00:00', '0.80', 'monthly', [], 'شروط الاستخدام');
+            $sitemap->add(
+                route('password.request'),
+                '2019-08-30 12:00:00',
+                '0.80',
+                'monthly',
+                [],
+                'إستعادة كلمة المرور'
+            );
 
             $profiles = Profile::latest()->get();
+            /** @var Profile $profile */
             foreach ($profiles as $profile) {
                 $sitemap->add(
                     $profile->route,
                     $profile->updated_at,
-                    '0.5',
-                    'daily'
+                    '0.50',
+                    'daily',
+                    [],
+                    $profile->name
                 );
             }
         }
