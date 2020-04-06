@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Str;
 
 class Link extends Model
 {
@@ -79,12 +80,16 @@ class Link extends Model
      */
     public function getIconAttribute()
     {
-        $url = parse_url(strtolower($this->url));
-        if (isset($url['host'])) {
-            $explode = explode('.', $url['host']);
-            $icon = count($explode) >= 3 ? $explode[1] : $explode[0];
+        if (Str::is('*/maps?*', $this->url)) {
+            return $this->icons['maps'];
+        } else {
+            $url = parse_url(strtolower($this->url));
+            if (isset($url['host'])) {
+                $explode = explode('.', $url['host']);
+                $icon = count($explode) >= 3 ? $explode[1] : $explode[0];
 
-            return isset($this->icons[$icon]) ? $this->icons[$icon] : $this->icons['default'];
+                return isset($this->icons[$icon]) ? $this->icons[$icon] : $this->icons['default'];
+            }
         }
 
         return $this->icons['default'];
