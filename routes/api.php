@@ -23,3 +23,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::post('gumroad', function (Request $request) {
     Log::info($request->all());
 });
+
+Route::post('paddle', function (Request $request) {
+    Log::info($request->all());
+});

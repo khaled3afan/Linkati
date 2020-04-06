@@ -7,9 +7,10 @@
 require('./bootstrap');
 
 window.Vue = require('vue');
-import Vuex from 'vuex';
+import Vuex, {mapActions, mapState} from 'vuex';
 import VueClipboard from 'vue-clipboard2';
 import Toasted from 'vue-toasted';
+import store from './store/index';
 
 Vue.use(VueClipboard);
 
@@ -54,9 +55,6 @@ Vue.component('change-password', require('./components/ChangePassword.vue').defa
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-import store from './store/index';
-import {mapState, mapActions} from 'vuex';
-
 const app = new Vue({
     el: '#app',
     computed: {
@@ -83,5 +81,26 @@ const app = new Vue({
 });
 
 $(function () {
-    $('[data-toggle="tooltip"]').tooltip()
+    $('[data-toggle="tooltip"]').tooltip();
+
+    if (window.Paddle) {
+        Paddle.Setup({vendor: 21507});
+
+        // @https://developer.paddle.com/reference/paddle-js/parameters
+        function openCheckout() {
+            Paddle.Checkout.open({
+                product: 587554,
+                // title: 'الخطة الشهرية من لينكاتي',
+                message: 'الخطة الشهرية من لينكاتي',
+                country: 'TR',
+                locale: window.Linkati.locale,
+                email: window.Linkati.auth.email,
+                passthrough: JSON.stringify({
+                    user_id: window.Linkati.auth.id
+                })
+            });
+        }
+
+        $('#buy').click(openCheckout);
+    }
 });
