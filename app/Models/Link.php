@@ -42,6 +42,9 @@ class Link extends Model
         'blogger' => 'fab fa-blogger-b',
         'snapchat' => 'fab fa-snapchat-ghost',
         'whatsapp' => 'fab fa-whatsapp',
+        'wa' => 'fab fa-whatsapp',
+        'telegram' => 'fab fa-telegram-plane',
+        't' => 'fab fa-telegram-plane',
     ];
 
     /**
