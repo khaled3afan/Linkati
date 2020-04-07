@@ -3,16 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Models\Profile;
-use Illuminate\Http\Request;
 
 class ProfileController extends Controller
 {
     /**
      * Display the specified resource.
      *
-     * @param  \App\Profile $profile
+     * @param \App\Models\Profile $profile
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function show(Profile $profile)
     {
