@@ -69,6 +69,22 @@ class Profile extends Model implements HasMedia
     }
 
     /**
+     * @return mixed
+     */
+    public function getKeywordsAttribute()
+    {
+        $keywords = $this->links
+            ->map(function ($link) {
+                return "{$link->name} {$this->name}";
+            })
+            ->toArray();
+
+        $keywords[] = $this->name;
+
+        return implode(',', $keywords);
+    }
+
+    /**
      * Get all of the profile's links.
      *
      * @param string $order
