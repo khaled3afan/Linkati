@@ -9,6 +9,7 @@ Link in Bio system in Laravel. (Linktree clone)
 - Profiles Themes
 
 # Demo
+All the content in Arabic RTL
 
 ### Landing Page
 ![Landing Page](https://github.com/Hussam3bd/Linkati/blob/master/resources/assets/images/screenshots/home.png?raw=true)
