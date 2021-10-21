@@ -2,7 +2,6 @@
 
 namespace App\Helpers;
 
-use Hashids;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Route;
 
