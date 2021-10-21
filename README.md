@@ -1,6 +1,13 @@
 # Linkati
 Link in Bio system in Laravel. (Linktree clone)
 
+# Features
+- Links management
+- Social media authentication
+- Profile customization
+- Multi Profiles
+- Profiles Themes
+
 # Demo
 
 ### Landing Page
